@@ -27,6 +27,8 @@ scp root@1.2.3.4:/root/pcfilename.rar ./
 
 sudo -u postgres psql
 
+sudo -u user_name psql db_name
+
 create database sla ;
 
 create user admin with encrypted password '0231asdf';
