@@ -1,0 +1,4 @@
+gunicorn -c index/gunicorn_conf.py index.wsgi    
+
+#جای رانسرور جنگو، با جی یونیکورن سرور رو بالا میاریم
+#gunicorn_conf.py رو ایجاد می کنیم 
