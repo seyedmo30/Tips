@@ -19,9 +19,13 @@ docker stop id
 ایستاپ کردن کانتینر 
 
 docker start id
+  
+  
 برای استارت کانتینر استاپ شده 
 
 sudo docker rmi
+  
+  
 پاک کردن ایمیج
 sudo docker container prune
 تمامی کانتینر ها پاک میشن 
