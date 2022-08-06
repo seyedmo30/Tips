@@ -20,6 +20,10 @@ sudo docker ps -a
 
 sudo docker rm <id>
   
+
+docker rm $(docker ps -a -q)
+
+  
   
 پاک کردن کانتینر
 docker stop id
@@ -37,6 +41,12 @@ sudo docker rmi
   
 پاک کردن ایمیج
 sudo docker container prune
+
+  
+پاک کردن ایمیج های بدون تگ یا آویزان
+  
+docker image prune --filter="dangling=true"
+  
   
 تمامی کانتینر ها پاک میشن 
 
