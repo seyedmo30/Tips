@@ -99,7 +99,7 @@ sudo docker network create mynetwork
   می تونیم بدون استفاده از داکر کامپوز ، داکر فایل رو بسازیم و از اون بیلد بگیریم
   
   
-  docker build -t <name>:<version> <directory>
+  docker build -t <<name>>:<<version>> <<directory>>
   
   
   docker build -t food:1.0 ~/test/
