@@ -18,7 +18,7 @@ sudo docker ps -a
 
 لاگ تمام کانتینر ها 
 
-sudo docker rm <id>
+sudo docker rm  id
   
 
 docker rm $(docker ps -a -q)
@@ -80,7 +80,7 @@ sudo docker network create mynetwork
   sudo docker run --rm  --name resis -p6379:6379 redis 
 
 
-  sudo docker exec -it <id> <bash>
+  sudo docker exec -it id bash
 می ره دستور بش رو داخل کانتینر اجرا می کنه
 آی تی داخل اون می مونه 
 
@@ -99,7 +99,7 @@ sudo docker network create mynetwork
   می تونیم بدون استفاده از داکر کامپوز ، داکر فایل رو بسازیم و از اون بیلد بگیریم
   
   
-  docker build -t <<name>>:<<version>> <<directory>>
+  docker build -t name:version directory
   
   
   docker build -t food:1.0 ~/test/
