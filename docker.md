@@ -91,3 +91,18 @@ sudo docker network create mynetwork
 
 تو پروژه ها بهتره هر جا آی پی یا لوکال هاست بود
 اسم کانتینری که دادیم رو بزاریم
+
+  
+  
+  
+  
+  می تونیم بدون استفاده از داکر کامپوز ، داکر فایل رو بسازیم و از اون بیلد بگیریم
+  
+  
+  docker build -t <name>:<version> <directory>
+  
+  
+  docker build -t food:1.0 ~/test/
+  
+  
+  
