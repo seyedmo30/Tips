@@ -1,6 +1,56 @@
 postgres 
 
 
+
+configure
+
+برای پیکر بندی بعد از نصب باید با دستور زیر ون رو استارت کرد
+
+pg_ctlcluster 14 main start
+
+
+پس از این باید بایوزر دیفالت وارد شد
+
+sudo -i -u postgres
+
+سپس رمز برای یوزر پستگرس ست می کنیم
+
+ALTER USER postgres PASSWORD 'salam';
+
+
+بعد می توانیم برای ریموت زدن ، فایل ها رو تنظیم کنیم
+
+/etc/postgresql/14/main/pg_hba.conf
+
+
+host all all 0.0.0.0/0 md5
+
+
+/etc/postgresql/14/main/postgresql.conf
+
+
+listen_addresses = '*'
+
+
+
+listen_addresses = 'localhost,192.168.13.14'
+
+
+
+
+
+
+و در نهایت با دستور زیر ریموت بزنیم
+
+psql -h 192.168.13.14 -p 5432 -d postgres -U postgres
+
+
+secure
+
+
+https://www.atlantic.net/vps-hosting/how-to-secure-postgresql-server/
+
+
 role vs user 
 
 
