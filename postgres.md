@@ -14,6 +14,8 @@ pg_ctlcluster 14 main start
 
 sudo -i -u postgres
 
+دستور بالا را فقط باید تو ssh یا تو لوکال زد ، و شبیه bash هست ، و برای این که وارد شویم باید در آخرش psql  گذاشت
+
 سپس رمز برای یوزر پستگرس ست می کنیم
 
 ALTER USER postgres PASSWORD 'salam';
