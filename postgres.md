@@ -54,6 +54,9 @@ secure
 https://www.atlantic.net/vps-hosting/how-to-secure-postgresql-server/
 
 
+
+برای ریموت باید ابتدا یوزر پسورد رو توی pgpass گذاشت برای راحتی و استفاده از کرون تب   
+
 role vs user 
 
 
