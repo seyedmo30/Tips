@@ -1,3 +1,13 @@
+
+pg_dump -h 192.168.13.29 -U amir_sh  -Fc -f /var/backups/db/tootia-$(date +%Y-%m-%d).sql reports_csf
+
+
+
+
+
+
+
+
 The most simple case is dumping and restoring on the same server:
 $ pg_dump -h localhost -Fc test > /home/postgres/dump.sql
 
