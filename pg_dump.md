@@ -12,7 +12,7 @@ The most simple case is dumping and restoring on the same server:
 
 $ pg_dump -h localhost -Fc test > /home/postgres/dump.sql
 
-$ pg_restore -h localhost test < /home/postgres/dump.sql
+$ pg_restore -h localhost -d test < /home/postgres/dump.sql
 
 
 pg_dump -h 192.168.13.29 -U postgres -t threats_plancode  -Fc -f /var/backups/db/t10 reports_csf
