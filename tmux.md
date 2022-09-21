@@ -22,3 +22,11 @@ Switch                    s
 
 Detach (exit)             d
 
+Create window             c
+
+Destroy window            x
+
+Split horizontally        %
+
+Split vertically          "
+
