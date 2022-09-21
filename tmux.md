@@ -18,15 +18,15 @@ tmux ls
 
 # cntr + b
 
-Switch                    s
+Switch          &nbsp;&nbsp;&nbsp;          s
 
-Detach (exit)             d
+Detach (exit)      &nbsp;&nbsp;&nbsp;       d
 
-Create window             c
+Create window       &nbsp;&nbsp;&nbsp;      c
 
-Destroy window            x
+Destroy window      &nbsp;&nbsp;&nbsp;      x
 
-Split horizontally        %
+Split horizontally    &nbsp;&nbsp;&nbsp;    %
 
-Split vertically          "
+Split vertically     &nbsp;&nbsp;&nbsp;     "
 
