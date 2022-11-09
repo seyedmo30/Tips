@@ -1,3 +1,97 @@
+
+# ۱ با احتیاط از مقدار دهی سریع استفاده کنیم
+
+گاهی ممکن است یک داده چند بار مفدار دهی شود، بهتر است در این شرایط از مقدار دهی سریع استفاده نکینم
+
+
+```
+var client *http.Client ❶
+if tracing {
+ client, err := createClientWithTracing() ❷
+ if err != nil {
+ return err
+ }
+ log.Println(client)
+} else {
+ client, err := createDefaultClient() ❸
+ if err != nil {
+ return err
+ }
+ log.Println(client)
+}
+```
+
+کد زیر بهتر است
+
+```
+var client *http.Client
+var err error ❶
+if tracing {
+ client, err = createClientWithTracing() ❷
+ if err != nil {
+ return err
+ }
+} else {
+ // Same logic
+}
+
+```
+
+
+
+
+
+
+# ۲ برای خوانایی کد، بهتر است از کد های تو در تو پرهیز کنیم
+
+در صورتی که امکان دارد می توانیم بجای استفاده از ایف و الس ، تنها از ایف استفاده کنیم
+
+
+```
+func join(s1, s2 string, max int) (string, error) {
+ if s1 == "" {
+ return "", errors.New("s1 is empty")
+ } else {
+ if s2 == "" {
+ return "", errors.New("s2 is empty")
+ } else {
+ concat, err := concatenate(s1, s2) 
+ if err != nil {
+ return "", err
+ } else {
+ if len(concat) > max {
+ return concat[:max], nil
+ } else {
+ return concat, nil
+ }
+ }
+ }
+ }
+}
+```
+به شکل زیربنویسیم
+
+```
+func join(s1, s2 string, max int) (string, error) {
+ if s1 == "" {
+ return "", errors.New("s1 is empty")
+ }
+ if s2 == "" {
+ return "", errors.New("s2 is empty")
+ }
+ concat, err := concatenate(s1, s2)
+ if err != nil {
+ return "", err
+ }
+ if len(concat) > max {
+ return concat[:max], nil
+ }
+ return concat, nil
+}
+```
+
+
+
 # ۳ باید با دقت از تابع اینیت استفاده کنیم ، زیرا چند مشکل احتمال دارد به وجود بیاید
 
 الف ـ اینیت همیشه اجرا می شود و شاید کد ما در جایی که انتظار نداشته باشیم یا نیاز نباشد ، فرا خوانی شود و نا خواسته اینیت اجرا شود
