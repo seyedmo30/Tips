@@ -7,3 +7,38 @@
 ج ـ اینیت حتی در تست هم اجرا می شود ، در حالی که شاید ما می خواهیم با استفده از یونیت تست بخش کوچکی رو تست کنیم و اینیت رو نیاز نداریم اما اجرا می شود و شاید پنیک دهد
 
 د ـ تابع اینیت چون نمی توان چیزی ریترن کرد ، می بایست در یک گلوبال وریبل داده خود را بریزد ، و این خود مشکل ساز می توان باشد زیرا هم توابع دیگر می توانند این وریبل را تغییر دهند ، هم در صورتی که یک تست بخواهد از این وریبل استفاده کند ، دیگر اوزوله نیست( یونیت نیست)
+
+کدی که از اینیت بد استفاده کرده
+
+```
+var db *sql.DB
+func init() {
+ dataSourceName :=
+ os.Getenv("MYSQL_DATA_SOURCE_NAME") 
+ d, err := sql.Open("mysql", dataSourceName)
+ if err != nil {
+ log.Panic(err)
+ }
+ err = d.Ping()
+ if err != nil {
+ log.Panic(err)
+ }
+ db = d 
+}
+```
+
+و اصلاح آن
+
+```
+func createClient(dsn string) (*sql.DB, error) { 
+ db, err := sql.Open("mysql", dsn)
+ if err != nil {
+ return nil, err 
+ }
+ if err = db.Ping(); err != nil {
+ return nil, err
+ }
+ return db, nil
+}
+```
+
