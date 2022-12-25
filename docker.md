@@ -105,4 +105,19 @@ sudo docker network create mynetwork
   docker build -t food:1.0 ~/test/
   
   
+------------------------------------------------------------------------------------------------------
+
+# postgres
+
+برای ران کردن حتما باید پسورد داده شود
+
+docker run -itd -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=salam -p 5432:5432 -v /data:/var/lib/postgresql/data --name postgresql postgres:15-alpine
+
+سپس درونش اگزک می کنیم
+
+sudo docker exec -it 98d7a843febd sh
+
+به جای ورود متداول اینجوری می ریم توی پستگرس
+
+PGPASSWORD=salam psql -U postgres
   
