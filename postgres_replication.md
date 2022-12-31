@@ -26,6 +26,10 @@ select * from pg_catalog.pg_publication;
 
 select * from pg_catalog.pg_subscription;
 
+\dRs+
+
+
+
 select * from pg_replication_slots ;
 
 
