@@ -41,5 +41,23 @@ DROP SUBSCRIPTION booksub;
 
 DROP publication bookpub ;
 
+
+---------------------------------------------------------
+
+postgresql.conf
+
+wal_level = logical
+max_replication_slots = 5
+max_wal_senders = 10
+
+
+SELECT * FROM pg_create_logical_replication_slot('replication_slot', 'pgoutput');
+
+
+SELECT * FROM pg_replication_slots;
+
+
+psql "dbname=postgres replication=database" -U postgres -h 192.168.13.248 -c "CREATE_REPLICATION_SLOT my_slot3 LOGICAL pgoutput;"
+
 psql "dbname=phonebook replication=database" -U postgres -h 192.168.13.248 -c "IDENTIFY_SYSTEM;"
 
