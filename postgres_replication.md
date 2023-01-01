@@ -40,3 +40,6 @@ DROP SUBSCRIPTION booksub;
 
 
 DROP publication bookpub ;
+
+psql "dbname=phonebook replication=database" -U postgres -h 192.168.13.248 -c "IDENTIFY_SYSTEM;"
+
