@@ -32,6 +32,7 @@ select * from pg_catalog.pg_subscription;
 
 select * from pg_replication_slots ;
 
+select pg_drop_replication_slot('booksub');
 
 
 ALTER SUBSCRIPTION booksub DISABLE;
