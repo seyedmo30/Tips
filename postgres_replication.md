@@ -12,6 +12,9 @@ host    sampledb    replicauser     192.168.10.10/32   scram-sha-256
 
 CREATE PUBLICATION bookpub FOR TABLE book;
 
+CREATE PUBLICATION my_publication FOR ALL TABLES;
+
+
 
 CREATE SUBSCRIPTION booksub CONNECTION 'dbname=sampledb host=192.168.10.5 user=replicauser password=12345 port=5432' PUBLICATION bookpub
 
