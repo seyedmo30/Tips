@@ -65,3 +65,6 @@ psql "dbname=postgres replication=database" -U postgres -h 192.168.13.248 -c "CR
 
 psql "dbname=phonebook replication=database" -U postgres -h 192.168.13.248 -c "IDENTIFY_SYSTEM;"
 
+
+postgres://pglogrepl:secret@127.0.0.1/pglogrepl?replication=database
+
