@@ -68,3 +68,10 @@ psql "dbname=phonebook replication=database" -U postgres -h 192.168.13.248 -c "I
 
 postgres://pglogrepl:secret@127.0.0.1/pglogrepl?replication=database
 
+
+pg_receivewal (for physical replication)
+https://www.postgresql.org/docs/current/app-pgreceivewal.html
+
+
+ pg_recvlogical (for logical replication).
+ https://www.postgresql.org/docs/current/app-pgrecvlogical.html
