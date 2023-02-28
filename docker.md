@@ -121,3 +121,37 @@ sudo docker exec -it 98d7a843febd sh
 
 PGPASSWORD=salam psql -U postgres
   
+
+--------------------------------------------------------------------------------------------------------
+
+# Dockerfile
+
+
+FROM alpine:3.17
+
+همیشه باید از یک ایمیج شروع کنیم به ساختن
+
+FROM golang:1.20-rc-alpine as builder
+
+
+
+RUN mkdir /app
+
+دستورات رو اینجوری درون ایمیج میزنیم
+
+
+WORKDIR /app
+
+چنج دایرکتوری درون ایمیج
+
+
+COPY . /app
+
+کپی از سرور (آدرس اول ) به ایمیج (آدرس دوم) 
+
+
+CMD /app/salam
+
+اجرای دستور نهایی 
+
+
