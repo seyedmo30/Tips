@@ -76,6 +76,7 @@ sudo docker network create mynetwork
   
   -v /var/volume/sla/django:/data
 
+نکته مهم والیوم : توجه شود در صورتی که داکر به صورت عادی ران شود ، دایرکتوری درون کانتینر پاک شده و دایرکتوری تعریف شده سیستم جای آن می نشیند 
   
   sudo docker run --rm  --name resis -p6379:6379 redis 
 
