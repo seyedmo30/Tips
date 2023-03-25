@@ -34,3 +34,5 @@ https://refactoring.guru/design-patterns/observer/go/example
 کانتکست ، گرفتن اسم متد مشخص از کلاینت و اجرای متد های پیاده سازی شده
 
 کلاینت یا متد اصلی
+
+https://refactoring.guru/design-patterns/strategy/go/example
