@@ -36,3 +36,15 @@ https://refactoring.guru/design-patterns/observer/go/example
 کلاینت یا متد اصلی
 
 https://refactoring.guru/design-patterns/strategy/go/example
+
+# iterator
+
+در صورتی که تعدادی داده داشته باشیم و بخواهیم آن را پیمایش کنیم از این دیزاین پترن استفاده می کنیم .
+
+گاهی ساختار کالکشن داده ی ما به سادگی لیست نیست ، مثلا درختی است ، در این صورت می توانیم نحوه ی پیمایش درختی دلخواه خود را پیاده کنیم ( مثلا بر اساس عمق درخت پیمایش کند یا فرزند خوشه )
+
+
+مثلا مجموعه ای سطر از دیتابیس گرفته ( به صورت پیور) و حال می خواهیم آن را پیمایش کنیم .
+
+
+https://refactoring.guru/design-patterns/iterator/go/example
