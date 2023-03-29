@@ -1,1 +1,22 @@
+<b> first_class_functions</b>
+
 بعضی زبان های برنامه نویسی قابلیتی دارند که می توان، فانکشن را درون یک متغییر ریخت ، به قابلیت فرس کلاس فانکشن می گوند
+
+
+https://golangbot.com/first-class-functions/
+
+
+ <hr>
+
+<b> Higher Order Functions</b>
+
+
+
+ تابعی که بتوان  یک تابع به عنوان پارامتر بگیرد ، یا بتوان خروجی اش یک تابع باشد، از این قابلیت برخوردار است
+ 
+ https://www.golangprograms.com/higher-order-functions-in-golang.html
+ 
+ <hr>
+ 
+ 
+ 
