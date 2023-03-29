@@ -13,6 +13,7 @@ https://golangbot.com/first-class-functions/
 
 
  تابعی که بتوان  یک تابع به عنوان پارامتر بگیرد ، یا بتوان خروجی اش یک تابع باشد، از این قابلیت برخوردار است
+ توجه : این به این معنی نیست که تابع مقدار دهی شده ( کانکریت) در ورودی یا خروجی استفاده شود ، این یعنی تایپ آن فانکشن است
  
  https://www.golangprograms.com/higher-order-functions-in-golang.html
  
