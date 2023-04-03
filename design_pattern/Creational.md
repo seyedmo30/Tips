@@ -24,3 +24,10 @@ https://refactoring.guru/design-patterns/factory-method
 
 https://refactoring.guru/design-patterns/singleton/go/example
 
+# Prototype
+
+این الگو ما را ملزم می کند که هر شی که ایجاد می کنیم ، بتوان آن را با تمام ویژگی ها ( پراپرتی ها و متد ها ) بتوان کپی کرد.
+
+درحقیق یک اینترفیس وجود دارد که باید متد  clone را پیاده سازی کرد که خروجی این متد ، تایپ استراکت است .
+
+https://refactoring.guru/design-patterns/prototype/go/example#example-0
