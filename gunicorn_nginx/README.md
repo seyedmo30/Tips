@@ -6,8 +6,4 @@
 
 gunicorn -c index/gunicorn_conf.py index.wsgi    
 
-# systemd
 حال باید پروژه با ۳ ورکر ران شود
-
-#جای رانسرور جنگو، با جی یونیکورن سرور رو بالا میاریم
-#gunicorn_conf.py رو ایجاد می کنیم 
