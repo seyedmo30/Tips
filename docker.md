@@ -86,6 +86,11 @@ sudo docker network create mynetwork
 آی تی داخل اون می مونه 
 
 
+docker run -ti project_web bash
+
+در صورتی که کانتینر در حالت اگزیت است و یا هر بار ران می گیریم ، می خوابه ، می تونیم اینجوری رانش کنیم و ببینیم چشه؟
+
+
   docker login -u seyedmo30 -p 12345
 لاگیدن در داکر هاب و گرفتن ایمیج تا ۲۰۰ تا
 
