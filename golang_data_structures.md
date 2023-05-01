@@ -9,6 +9,8 @@ https://blog.faradars.org/%D8%B3%D8%A7%D8%AE%D8%AA%D9%85%D8%A7%D9%86-%D8%AF%D8%A
 
 https://www.developer.com/languages/linked-list-go/
 
+https://www.golangprograms.com/golang-program-for-implementation-of-linked-list.html
+
 # Stack
 
 این داده‌ها به صورتی ذخیره می‌شوند که آخرین داده ذخیره شده اول نمایش داده می‌شود.LIFO 
