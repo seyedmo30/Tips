@@ -30,6 +30,49 @@ https://refactoring.guru/design-patterns/factory-method
 همچنین دیگر کاربر نمی تواند داده را تغییر دهد و نیاز به تخصیص حافظه بیش از حد به این شی نیست ( در صورتی که از این الگو استفاده نکنیم )
 
 برای این کار باید ابتدا تایپ مورد نظر را تعریف کنیم ( کلاس را بنویسیم ) سپس یک اینستنس از آن بسازیم و با متد گیرنده ، آن را در اختیار تمام پروژه قرار دهیم
+    
+    
+    package main
+
+    var once sync.Once
+
+    type DriverPg struct {
+     conn string
+    }
+
+    // variavel Global
+    var instance *DriverPg
+
+    func Connect() *DriverPg {
+
+     once.Do(func() {
+
+      instance = &DriverPg{conn: "DriverConnectPostgres"}
+     })
+
+     return instance
+    }
+
+    func main() {
+
+     // chamada
+     go func() {
+      time.Sleep(time.Millisecond * 600)
+      fmt.Println(*Connect())
+     }()
+
+     // 100 goroutine
+     for i := 0; i < 100; i++ {
+
+      go func(ix int) {
+       time.Sleep(time.Millisecond * 60)
+       fmt.Println(ix, " = ", Connect().conn)
+      }(i)
+     }
+
+     fmt.Scanln()
+    }
+
 
 https://refactoring.guru/design-patterns/singleton/go/example
 
