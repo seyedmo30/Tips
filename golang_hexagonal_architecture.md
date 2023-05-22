@@ -29,22 +29,9 @@
 
 - دریون ها یا آداپتور ثانویه ( سکندری ) - این کلاس ها نیاز های بیزینس به ابزار های بک اندی را پیاده سازی می کند مانند متد هایی که برای ارتباط با دیتا بیس نیاز است
 
-├── cmd
-├── pkg
-└── internal
-    ├── core
-    │   ├── domain
-    │   │   ├── game.go
-    │   │   └── board.go
-    │   ├── ports
-    │   │   ├── repositories.go
-    │   │   └── services.go
-    │   └── services
-    │       └── gamesrv
-    │           └── service.go
-    ├── handlers
-    └── repositories
     
+    
+![Uploading Screenshot from 2023-05-22 14-58-58.png…]()
 
 
 https://medium.com/@matiasvarela/hexagonal-architecture-in-go-cfd4e436faa3
