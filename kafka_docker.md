@@ -23,6 +23,9 @@ sudo docker exec  -it 69078a9693f0 kafka-topics  --bootstrap-server localhost:90
 
 sudo docker exec  -it 69078a9693f0 kafka-console-producer  --topic hafizium_178_exploit --bootstrap-server localhost:9092       
 
+خواندن پیام در تاپیک
+
+sudo docker exec  -it 69078a9693f0 kafka-console-consumer  --topic hafizium_178_exploit --bootstrap-server localhost:9092
 
 ساخت تاپیک جدید                
  kafka-topics --create --topic quickstart-events --bootstrap-server localhost:9092         
