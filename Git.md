@@ -4,6 +4,6 @@
 jetbrain : 
 روی ریپازیتوری یا دایرکتوری پروژه کلیک راست کرده :
 
-click right > git > show history
+right click  > git > show history
 
-و این جا میشه دو تا کامیت رو سلکت کرد و کامپیر کرد
+و این جا میشه دو تا commit رو select کرد و compare کرد
