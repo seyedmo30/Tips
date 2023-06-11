@@ -62,9 +62,9 @@ kafka-topics --delete --topic hafizium_178_exploit --bootstrap-server localhost:
 
 تعداد مسیج در تاپیک
 
-sudo docker exec -it 69078a9693f0 kafka-run-class kafka.tools.GetOffsetShell \\
- --bootstrap-server localhost:9092 \\
-  --topic hafizium_178_exploit \\
+sudo docker exec -it 69078a9693f0 kafka-run-class kafka.tools.GetOffsetShell 
+ --bootstrap-server localhost:9092 
+  --topic hafizium_178_exploit 
   | awk -F  ":" '{sum += $3} END {print sum}'
   
   
