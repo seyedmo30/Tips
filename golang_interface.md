@@ -20,13 +20,13 @@
 در حقیقت مجبوریم شی بسازیم که dataStore را ایمپلمنت کرده باشد
 
 
-type DataStore interface {
-	GetLastIdList() (uint32, error)
-	List(ctx context.Context) chan types.SeedLink
-	Migration(ctx context.Context) error
-	Store(ctx context.Context, ggg chan types.ggg) error
-
-}
+		type DataStore interface {
+			GetLastIdList() (uint32, error)
+			List(ctx context.Context) chan types.SeedLink
+			Migration(ctx context.Context) error
+			Store(ctx context.Context, ggg chan types.ggg) error
+		
+		}
 
 
  # ddd
