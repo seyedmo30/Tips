@@ -30,6 +30,6 @@
 
 و در نهایت کلاینت باید با توجه به سیگنیچر های اینترفیس آن را پیاده سازی کند
 
- # ddd
+ # Pass an Interface as an argument to a function
 
  ss
