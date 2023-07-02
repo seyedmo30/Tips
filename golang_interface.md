@@ -2,6 +2,7 @@
 
 str, ok := interfaceVar.(string)
 
+if msg, ok := rawMsg.(*pgproto3.CopyData); ok {
 
 موارد مصرف اینترفیس :
 
