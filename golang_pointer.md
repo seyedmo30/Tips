@@ -52,3 +52,11 @@ x = px
 https://medium.com/swlh/use-pointer-of-for-range-loop-variable-in-go-3d3481f7ffc9
 
 https://levelup.gitconnected.com/go-for-range-slice-bug-lessons-learned-fa401d5d8c9a
+
+
+# Method Receiver - Pointer v/s Value
+
+در رسیور های یک استراکت می توانیم ازپروپرتی ها یا فیلد های استراکت هم استفاده کنیم ، برای این منظور از رسیور استفاده می کنیم ، همچنین برای مشخص کردن متد های ایمپلمنت شده برای اینترفیس هم از آن استفاده می شود 
+
+تفاوت رسیور با پونتر و مقدار :
+
