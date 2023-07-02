@@ -26,3 +26,29 @@ px := new(int)
 
 x = px
 
+
+# Pointer of for Range Loop Variable
+
+
+دقت شود در صورتی که حلقه بر روی دیتا استراکچر ها زده می شود ، المنت پیمایش شده  بر روی یک خانه ی حافظه ذخیره می شود 
+
+در نتیجه شاید با پرینت آن وریبل ، تغییر کند ، اما آدرس یکسان است :)
+
+حال اگر ما به جای value المنت ، آدرس آن را استفاده کنیم ، در تمام پیمایش ها آدرس یکسان است در نتیجه تمامی لیست خروجی یکسان است .
+
+    Dog with name <{Ghost}> and pointer: <0xc000010200>
+    Dog with name <{Bruno}> and pointer: <0xc000010200>
+    Dog with name <{Lucky}> and pointer: <0xc000010200>
+
+
+راه حل :)
+
+
+    for k := range src {
+        key := k
+        dst = append(dst, &key)
+    }
+
+https://medium.com/swlh/use-pointer-of-for-range-loop-variable-in-go-3d3481f7ffc9
+
+https://levelup.gitconnected.com/go-for-range-slice-bug-lessons-learned-fa401d5d8c9a
