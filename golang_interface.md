@@ -1,4 +1,11 @@
+برای مشخص شدن تایپ اینترفیس :
+
+str, ok := interfaceVar.(string)
+
+
 موارد مصرف اینترفیس :
+
+
 
 # Embedding interfaces in structs
 
