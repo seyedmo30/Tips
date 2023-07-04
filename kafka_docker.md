@@ -76,19 +76,19 @@ sudo docker exec  -it 69078a9693f0 kafka-console-producer  --topic hafizium_178_
 sudo docker exec  -it 69078a9693f0 kafka-console-consumer  --topic hafizium_178_exploit --bootstrap-server localhost:9092
 
 ساخت تاپیک جدید                
- kafka-topics --create --topic quickstart-events --bootstrap-server localhost:9092         
+sudo docker exec  -it 69078a9693f0 kafka-topics --create --topic quickstart-events --bootstrap-server localhost:9092         
 
 
 
 حذف تاپیک
 
-kafka-topics --delete --topic hafizium_178_exploit --bootstrap-server localhost:9092
+sudo docker exec  -it 69078a9693f0 kafka-topics --delete --topic hafizium_178_exploit --bootstrap-server localhost:9092
 
 تعداد مسیج در تاپیک
 
-sudo docker exec -it 69078a9693f0 kafka-run-class kafka.tools.GetOffsetShell 
- --bootstrap-server localhost:9092 
-  --topic hafizium_178_exploit 
-  | awk -F  ":" '{sum += $3} END {print sum}'
+sudo docker exec -it 69078a9693f0 kafka-run-class kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic hafizium_178_exploit | awk -F  ":" '{sum += $3} END {print sum}'
   
+  جزییات ، تعداد پارتیشن ، رپلیکا و لیدر :
+
+sudo docker exec -it 69078a9693f0 kafka-topics  --describe --topic hafizium_178_exploit --bootstrap-server localhost:9092
   
