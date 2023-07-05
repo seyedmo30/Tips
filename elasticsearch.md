@@ -28,3 +28,9 @@ curl -POST 'localhost:9200/exploit/_doc' -H 'Content-Type: application/json' -d'
         "admin": false
 } '
 
+curl -X PUT "localhost:9200/exploit/_bulk?pretty" -H 'Content-Type: application/json' -d'
+{ "create": { } }
+{ "@timestamp": "2099-05-07T16:24:32.000Z", "event": { "original": "192.0.2.242 - - [07/May/2020:16:24:32 -0500] \"GET /images/hm_nbg.jpg HTTP/1.0\" 304 0" } }
+{ "create": { } }
+{ "@timestamp": "2099-05-08T16:25:42.000Z", "event": { "original": "192.0.2.255 - - [08/May/2099:16:25:42 +0000] \"GET /favicon.ico HTTP/1.0\" 200 3638" } }
+'
