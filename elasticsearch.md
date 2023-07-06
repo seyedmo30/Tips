@@ -34,3 +34,7 @@ curl -X PUT "localhost:9200/exploit/_bulk?pretty" -H 'Content-Type: application/
 { "create": { } }
 { "@timestamp": "2099-05-08T16:25:42.000Z", "event": { "original": "192.0.2.255 - - [08/May/2099:16:25:42 +0000] \"GET /favicon.ico HTTP/1.0\" 200 3638" } }
 '
+
+مرتب بر اساس آیدی
+
+http://192.168.13.248:9200/exploit/_search/?size=1000&pretty=true&sort=_id
