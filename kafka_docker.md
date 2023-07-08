@@ -97,4 +97,7 @@ sudo docker exec -it 69078a9693f0 kafka-run-class kafka.tools.GetOffsetShell --b
   جزییات ، تعداد پارتیشن ، رپلیکا و لیدر :
 
 sudo docker exec -it 69078a9693f0 kafka-topics  --describe --topic hafizium_178_exploit --bootstrap-server localhost:9092
-  
+
+مشاهده ی آفست های یک تاپیگ در زوکیپر :
+
+sudo docker exec -it 69078a9693f0 kafka-run-class kafka.tools.GetOffsetShell  --bootstrap-server localhost:9092 -topic hafizium_178_exploit --time -1
