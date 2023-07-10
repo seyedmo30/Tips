@@ -75,3 +75,7 @@ https://www.kelche.co/blog/go/zap/
       
       	return instance
       }
+
+نکته : اگر در اجرای داکری سرویس از دستور زیر استفاده کنیم ، تمام لاگ ها مستقیم درون فایل لاگ ریخته میشود و هیچ لاگی در صفحه سیستم عامل پرینت نمی شود ، و در نهایت نتیجه می گیریم لاگ های داکری همیشه خالی است .
+
+CMD /app/postgres_tailer >> /app/logs/log_tailer.log 2>>/app/logs/error.log
