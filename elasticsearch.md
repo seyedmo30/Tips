@@ -30,7 +30,7 @@ http://192.168.13.196:9200/exploit/_search/?size=1000&pretty=true
 
 http://localhost:9200/_cat/indices?v=true
 
-# query
+# mget
 
 اگر بخوایم مشخص کنیم چه فیلد هایی می خواییم و چه فیلد هایی نمی خواییم :
 
@@ -40,11 +40,18 @@ GET /_mget
           "docs": [              
             {
               "_index": "my-index-000001",               مشخص می کنیم بر روی کدام ایندکس
-              "_id": "1"                مشخص می کنیم بر روی کدام ایدی
+              "_id": "1",                                 مشخص می کنیم بر روی کدام ایدی
+              "_source": [ "field3", "field4" ],           مشخص می کنیم  کدام فیلد ها رو می خوایم  
             },
             {
               "_index": "my-index-000001",
-              "_id": "2"
+              "_id": "2",
+                        "_source": {
+                        "include": [ "user" ],                       مشخص می کنیم  کدام فیلد ها رو می خوایم         
+                        "exclude": [ "user.location" ]                مشخص می کنیم  کدام فیلد ها رو نمی خوایم
+                        "stored_fields": [ "field1", "field2" ]         ترتیب
+                        "routing": "key2"                               انتخاب شارد
+                      }
             }
           ]
         }
