@@ -14,13 +14,21 @@ DELETE  http://192.168.13.248:9200/exploit
 
 http://192.168.13.248:9200/exploit/_doc/5
 
+گرفتن داکیومنت بدون متا دیتا
+
+http://192.168.13.248:9200/exploit/_source/5
+
+گرفتن  مالتی داکیومنت ( مطالعه شود mget )
+
+http://192.168.13.248:9200/exploit/_mget
+
 لیست داکیومنت
 
 http://192.168.13.196:9200/exploit/_search/?size=1000&pretty=true
 
 لیست ایندکس ها 
 
-http://localhost:9200/_cat/indices
+http://localhost:9200/_cat/indices?v=true
 
 
 اینسرت تکی
