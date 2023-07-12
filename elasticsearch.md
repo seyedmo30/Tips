@@ -131,6 +131,39 @@ must_not ----
 نباید این شرط ها درون نتیجه باشد .
 
 
+        POST exploit/_search
+        {
+          "size": 10,
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "match": {
+                    "type": {
+                      "query": "Linux Kernel",
+                      "operator": "and"
+                    }
+                  }
+                },
+                {
+                  "match": {
+                    "platform": {
+                      "query": "Linux mac",
+                      "operator": "or"
+                    }
+                  }
+                }
+              ],
+              "filter": [
+                {
+                  "range": {
+                    "date": { "gte" : "2007-12-29T00:00:00Z", "lte" : "2023-12-29T00:00:00Z" } 
+                  }
+                }
+              ]
+            }
+          }
+        }
 
 
 
