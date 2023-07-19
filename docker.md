@@ -119,7 +119,13 @@ sudo docker logs -f id_container
   docker build  --output type=tar,dest=out.tar  -t project:1.0.0 .
   
   
-  
+  می توانیم همچنین از ایمیج هامون خروجی بگیریم 
+
+  sudo docker save -o ~/ngin nginx:1.0.0
+
+  و فایل های خروجی را در ایمیج ها لود یا بارگزاری کنیم
+
+  sudo docker load < ngin
   
 ------------------------------------------------------------------------------------------------------
 
