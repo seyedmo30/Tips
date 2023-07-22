@@ -26,6 +26,7 @@ px := new(int)
 
 x = px
 
+# توجه شود به هیچ وجه از پوینتر اینترفیس ( interface{} * ) استفاده نشود  .
 
 # Pointer of for Range Loop Variable
 
