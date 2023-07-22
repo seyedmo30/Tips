@@ -25,7 +25,7 @@ px := new(int)
 *px = 30
 
 x = px
- توجه شود به هیچ وجه از پوینتر اینترفیس ( {} interface * ) استفاده نشود  .
+ توجه شود به هیچ وجه از پوینتر اینترفیس ( *interface{} ) استفاده نشود  .
 
 # Pointer of for Range Loop Variable
 
