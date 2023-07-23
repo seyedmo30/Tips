@@ -14,27 +14,27 @@ type Buffer struct {
     lastRead readOp // last read operation, so that Unread* can work correctly.
 }
 
-func (*bytes.Buffer).Bytes() []byte                                                     یک خروجی بایت می ده
-func (*bytes.Buffer).Cap() int                                                ظرفیت
-func (*bytes.Buffer).Grow(n int)                                         می تونیم به ظرفیت بیفزاییم
-func (*bytes.Buffer).Len() int                                             طول 
-func (*bytes.Buffer).Next(n int) []byte           اون تعداد که مشخص می کنیم از بافر ور می داره  در یه اسلایس می ریزه و خروجی می ده  
-func (*bytes.Buffer).Read(p []byte) (n int, err error)                      
-func (*bytes.Buffer).ReadByte() (byte, error)
-func (*bytes.Buffer).ReadBytes(delim byte) (line []byte, err error)
-func (*bytes.Buffer).ReadFrom(r io.Reader) (n int64, err error)
-func (*bytes.Buffer).ReadRune() (r rune, size int, err error)
-func (*bytes.Buffer).ReadString(delim byte) (line string, err error)
-func (*bytes.Buffer).Reset()
-func (*bytes.Buffer).String() string                            خروجی استرینگ می ده
-func (*bytes.Buffer).Truncate(n int)
-func (*bytes.Buffer).UnreadByte() error
-func (*bytes.Buffer).UnreadRune() error
-func (*bytes.Buffer).Write(p []byte) (n int, err error)            ورودی بایت گرفته و به سلایس می افزاید
-func (*bytes.Buffer).WriteByte(c byte) error
-func (*bytes.Buffer).WriteRune(r rune) (n int, err error)
-func (*bytes.Buffer).WriteString(s string) (n int, err error)                                  ورودی استرینگ گرفته و به سلایس می افزاید
-func (*bytes.Buffer).WriteTo(w io.Writer) (n int64, err error)                     
+Bytes() []byte                                                     یک خروجی بایت می ده
+Cap() int                                                ظرفیت
+Grow(n int)                                         می تونیم به ظرفیت بیفزاییم
+Len() int                                             طول 
+Next(n int) []byte           اون تعداد که مشخص می کنیم از بافر ور می داره  در یه اسلایس می ریزه و خروجی می ده  
+Read(p []byte) (n int, err error)                      
+ReadByte() (byte, error)
+ReadBytes(delim byte) (line []byte, err error)
+ReadFrom(r io.Reader) (n int64, err error)
+ReadRune() (r rune, size int, err error)
+ReadString(delim byte) (line string, err error)
+Reset()
+String() string                            خروجی استرینگ می ده
+Truncate(n int)
+UnreadByte() error
+UnreadRune() error
+Write(p []byte) (n int, err error)            ورودی بایت گرفته و به سلایس می افزاید
+WriteByte(c byte) error
+WriteRune(r rune) (n int, err error)
+WriteString(s string) (n int, err error)             ورودی استرینگ گرفته و به سلایس می افزاید
+WriteTo(w io.Writer) (n int64, err error)                     
 ```
 
 یک مثال 
