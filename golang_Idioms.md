@@ -14,6 +14,9 @@ Slice - Array - Map - Channels
 ایمیوتیبل : 
 Boolean - Int - Float - Pointers - String - Interfaces
 
+اگر شک دارید که عدد ایمیوتیبل است ، لینک مظالعه شود : 
+https://stackoverflow.com/questions/71589811/go-ints-and-strings-are-immutable-or-mutable/71590289#71590289
+
 
 type casting اگر بخواهیم تایپ یک ظرف(وریبل) را تغییر دهیم - مثلا اینت به فلوت- که گو ندارد
 
