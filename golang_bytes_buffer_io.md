@@ -4,7 +4,7 @@
 
  کتاب خونه bytes ، برای دستکاری ( manipulation ) روی اسلایس بایت ها متد های زیادی داره . 
 
- در حقیقت بافر یک استراکت است که اسلایس باید  و طول آن را در خود ذخیره می کند و تعداد متد برای راحتی کار با اسلایس فراهم کرده است ، استراکت بافر :
+ در حقیقت بافر یک استراکت شامل اسلایس بایت ، طول اسلایس و تعداد متد برای راحتی کار با اسلایس فراهم کرده است ، استراکت بافر :
 
 
 ```
@@ -14,27 +14,27 @@ type Buffer struct {
     lastRead readOp // last read operation, so that Unread* can work correctly.
 }
 
-func (*bytes.Buffer).Bytes() []byte
-func (*bytes.Buffer).Cap() int
-func (*bytes.Buffer).Grow(n int)
-func (*bytes.Buffer).Len() int
-func (*bytes.Buffer).Next(n int) []byte
-func (*bytes.Buffer).Read(p []byte) (n int, err error)
+func (*bytes.Buffer).Bytes() []byte                                                     یک خروجی بایت می ده
+func (*bytes.Buffer).Cap() int                                                ظرفیت
+func (*bytes.Buffer).Grow(n int)                                         می تونیم به ظرفیت بیفزاییم
+func (*bytes.Buffer).Len() int                                             طول 
+func (*bytes.Buffer).Next(n int) []byte           اون تعداد که مشخص می کنیم از بافر ور می داره  در یه اسلایس می ریزه و خروجی می ده  
+func (*bytes.Buffer).Read(p []byte) (n int, err error)                      
 func (*bytes.Buffer).ReadByte() (byte, error)
 func (*bytes.Buffer).ReadBytes(delim byte) (line []byte, err error)
 func (*bytes.Buffer).ReadFrom(r io.Reader) (n int64, err error)
 func (*bytes.Buffer).ReadRune() (r rune, size int, err error)
 func (*bytes.Buffer).ReadString(delim byte) (line string, err error)
 func (*bytes.Buffer).Reset()
-func (*bytes.Buffer).String() string
+func (*bytes.Buffer).String() string                            خروجی استرینگ می ده
 func (*bytes.Buffer).Truncate(n int)
 func (*bytes.Buffer).UnreadByte() error
 func (*bytes.Buffer).UnreadRune() error
-func (*bytes.Buffer).Write(p []byte) (n int, err error)
+func (*bytes.Buffer).Write(p []byte) (n int, err error)            ورودی بایت گرفته و به سلایس می افزاید
 func (*bytes.Buffer).WriteByte(c byte) error
 func (*bytes.Buffer).WriteRune(r rune) (n int, err error)
-func (*bytes.Buffer).WriteString(s string) (n int, err error)
-func (*bytes.Buffer).WriteTo(w io.Writer) (n int64, err error)
+func (*bytes.Buffer).WriteString(s string) (n int, err error)                                  ورودی استرینگ گرفته و به سلایس می افزاید
+func (*bytes.Buffer).WriteTo(w io.Writer) (n int64, err error)                     
 ```
 
 یک مثال 
@@ -54,6 +54,7 @@ func (*bytes.Buffer).WriteTo(w io.Writer) (n int64, err error)
    func main() {
    //Creating buffer variable to hold and manage the string data
    	var strBuffer bytes.Buffer          تعریف متغیر
+    strBuffer.Grow(64)           به صورت دیفالت ظرفیت بافر ۶۴ است ، بعد اون ۸۰ ولی می تونیم با این همون اول ظرفیتشو مشخص کنیم
     fmt.Fprintf(&strBuffer, "It is number: %d, This is a string: %v\n", 10, "Bridge")           افزودن به بافر
     strBuffer.Write([]byte("Hello "))         افزودن به بافر
    	strBuffer.WriteString("Ranjan")              افزودن به بافر
