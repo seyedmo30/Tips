@@ -40,3 +40,7 @@ Top(): اولین عنصر صف را باز می‌گرداند (بدون حذف
 
 https://www.tutorialspoint.com/golang-program-to-implement-the-queue-data-structure
 
+نکات :
+
+اگر مپ ایجاد کنیم اما مقدار اولیه ندیم ، به صورت پیش فرض ۸ است .
+
