@@ -25,9 +25,9 @@ ReadBytes(delim byte) (line []byte, err error)
 ReadFrom(r io.Reader) (n int64, err error)
 ReadRune() (r rune, size int, err error)
 ReadString(delim byte) (line string, err error)
-Reset()
+Reset()               بافر رو خالی می کنه
 String() string                            خروجی استرینگ می ده
-Truncate(n int)
+Truncate(n int)                   یک عدد می گیره و به همون تعداد نگه می دار بقیه رو پاک می کنه
 UnreadByte() error
 UnreadRune() error
 Write(p []byte) (n int, err error)            ورودی بایت گرفته و به سلایس می افزاید
