@@ -19,7 +19,7 @@ Cap() int                                                ظرفیت
 Grow(n int)                                         می تونیم به ظرفیت بیفزاییم
 Len() int                                             طول 
 Next(n int) []byte           اون تعداد که مشخص می کنیم از بافر ور می داره  در یه اسلایس می ریزه و خروجی می ده  
-Read(p []byte) (n int, err error)                      
+Read(p []byte) (n int, err error)      خیلی شبیه نکست هست ، از بافر می خونه و روی اسلایس ورودی می ریزه ، دقت کنید اضافه نمی کنه                 
 ReadByte() (byte, error)
 ReadBytes(delim byte) (line []byte, err error)
 ReadFrom(r io.Reader) (n int64, err error)
