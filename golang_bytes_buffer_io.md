@@ -6,6 +6,8 @@
 
  در حقیقت بافر یک استراکت است که اسلایس باید  و طول آن را در خود ذخیره می کند و تعداد متد برای راحتی کار با اسلایس فراهم کرده است ، استراکت بافر :
 
+
+```
 type Buffer struct {
     buf      []byte // contents are the bytes buf[off : len(buf)]
     off      int    // read at &buf[off], write at &buf[len(buf)]
@@ -33,7 +35,9 @@ func (*bytes.Buffer).WriteByte(c byte) error
 func (*bytes.Buffer).WriteRune(r rune) (n int, err error)
 func (*bytes.Buffer).WriteString(s string) (n int, err error)
 func (*bytes.Buffer).WriteTo(w io.Writer) (n int64, err error)
+```
 
+یک مثال 
 
 
 
