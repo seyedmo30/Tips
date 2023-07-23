@@ -10,7 +10,10 @@ mutable data types  داده هایی که با تغییر مقدار آن ، م
 
 داده های میوتیبل : 
 Slice - Array - Map - Channels 
- 
+
+ایمیوتیبل : 
+Boolean - Int - Float - Pointers - String - Interfaces
+
 
 type casting اگر بخواهیم تایپ یک ظرف(وریبل) را تغییر دهیم - مثلا اینت به فلوت- که گو ندارد
 
