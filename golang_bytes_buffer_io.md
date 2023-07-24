@@ -11,6 +11,28 @@ byt := make([]byte, 0, 50)                     اینیت
 
 ```
 
+# Reader
+
+ریدر در مفهوم گولنگ ، یک اینترفیس است که باید پروتوتایپ زیر را پیاده کند . اصولا در کانکریت ، یک استراکتی وجود دارد که متدی به نام رید دارد که است فیلد های استراکت برمی دارد و بر روی اسلایس ورودی میریزد .
+
+```
+type Reader interface {
+	Read(p []byte) (n int, err error)
+}
+```
+
+# Writer
+
+رایتر یک انترفیس است که متدی به نام رایت باید پیاده سازی کند که از اسلایس ورودی بخواند و به زیر لایه بریزد ، ( در استراکت خود اصولا فیلدی هست که بر روی آن بیفزاید ) 
+
+```
+type Writer interface {
+	Write(p []byte) (n int, err error)
+}
+```
+
+در مثال های زیر ریدر و رایتر پیاده سازی شدند
+
 # Buffer
 
  کتاب خونه bytes ، برای دستکاری ( manipulation ) روی اسلایس بایت ها متد های زیادی داره . 
@@ -76,3 +98,35 @@ WriteTo(w io.Writer) (n int64, err error)
     strBuffer.WriteTo(os.Stdout)            مثل پرینت
    }
 ```
+
+
+در بافر ، رید وجود دارد ، در زیر یک مثال از strings می بینیم که ریدر را پیاده سازی کرده . و متد رید دارد : 
+
+
+
+ریدر یک استراکت شامل یک استرینگ ، طول رشته است که چند متد دارد ، در حقیقت شبیه با بافر است ، با این فرق که بافر درون خود اسلایس بایت دارد و ریدر استرینگ .
+
+```
+type Reader struct {
+	s        string
+	i        int64 // current reading index
+	prevRune int   // index of previous rune; or < 0
+}
+
+
+
+Len() int                 طول استرینگ
+Read(b []byte) (n int, err error)        از استرینگ می خونه و روی سلایس ورودی میریزه        
+ReadAt(b []byte, off int64) (n int, err error)
+ReadByte() (byte, error)
+ReadRune() (ch rune, size int, err error)
+Reset(s string)
+Seek(offset int64, whence int) (int64, error)
+Size() int64
+UnreadByte() error
+UnreadRune() error
+WriteTo(w io.Writer) (n int64, err error)
+
+```
+
+توجه شود اینترفیس ریدر و استراکت ریدر در پکیج استرینگ قاطی نشود :)
