@@ -70,34 +70,14 @@ WriteString(s string) (n int, err error)             ورودی استرینگ �
 WriteTo(w io.Writer) (n int64, err error)                     
 ```
 
-یک مثال 
 
 
 
- 
-```
-   package main
-   import (
-   	"fmt"
-   )
-   //importing the bytes package so that buffer can be used
-   import (
-   	"bytes"
-   )
-   func main() {
-   //Creating buffer variable to hold and manage the string data
-   	var strBuffer bytes.Buffer          تعریف متغیر
-    strBuffer.Grow(64)           به صورت دیفالت ظرفیت بافر ۶۴ است ، بعد اون ۸۰ ولی می تونیم با این همون اول ظرفیتشو مشخص کنیم
-    fmt.Fprintf(&strBuffer, "It is number: %d, This is a string: %v\n", 10, "Bridge")           افزودن به بافر
-    strBuffer.Write([]byte("Hello "))         افزودن به بافر
-   	strBuffer.WriteString("Ranjan")              افزودن به بافر
-   	strBuffer.WriteString("Kumar")
-    bugstr := strBuffer.String()                  گرفتن خروجی استرینگ
-   	fmt.Println("The string buffer output is",bugstr)
 
-    strBuffer.WriteTo(os.Stdout)            مثل پرینت
-   }
-```
+# NewReader (strings)
+
+توجه شود اینترفیس ریدر و استراکت ریدر در پکیج استرینگ قاطی نشود :)
+
 
 
 در بافر ، رید وجود دارد ، در زیر یک مثال از strings می بینیم که ریدر را پیاده سازی کرده . و متد رید دارد : 
@@ -129,4 +109,30 @@ WriteTo(w io.Writer) (n int64, err error)
 
 ```
 
-توجه شود اینترفیس ریدر و استراکت ریدر در پکیج استرینگ قاطی نشود :)
+
+# example 
+
+ 
+```
+   package main
+   import (
+   	"fmt"
+   )
+   //importing the bytes package so that buffer can be used
+   import (
+   	"bytes"
+   )
+   func main() {
+   //Creating buffer variable to hold and manage the string data
+   	var strBuffer bytes.Buffer          تعریف متغیر
+    strBuffer.Grow(64)           به صورت دیفالت ظرفیت بافر ۶۴ است ، بعد اون ۸۰ ولی می تونیم با این همون اول ظرفیتشو مشخص کنیم
+    fmt.Fprintf(&strBuffer, "It is number: %d, This is a string: %v\n", 10, "Bridge")           افزودن به بافر
+    strBuffer.Write([]byte("Hello "))         افزودن به بافر
+   	strBuffer.WriteString("Ranjan")              افزودن به بافر
+   	strBuffer.WriteString("Kumar")
+    bugstr := strBuffer.String()                  گرفتن خروجی استرینگ
+   	fmt.Println("The string buffer output is",bugstr)
+
+    strBuffer.WriteTo(os.Stdout)            مثل پرینت
+   }
+```
