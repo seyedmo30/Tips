@@ -39,13 +39,17 @@ type Writer interface {
 اینا ورودی یا خروجی ، تایپ نمی گیرن ، بلکه اینترفیس رایتر یا ریدر می گیرن ، حالا شما می تونید هر چی که رید یا رایت داره رو بدید به اینا مثل :
 
 ```
-	stdout := os.Stdout
+stdout := os.Stdout
 
-	fmt.Fprintf(stdout, "$$$$$$$$$$$$$$")
+fmt.Fprintf(stdout, "$$$$")
 
-	bt := bytes.NewBuffer([]byte("123456789"))
+bt := bytes.NewBuffer([]byte("123456789"))
 
-	fmt.Fprintf(bt, "#############")
+fmt.Fprintf(bt, "####")
+
+f := new(os.File)
+
+fmt.Fprintf(f, "@@@@")
 
 
 ```
