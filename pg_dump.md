@@ -1,6 +1,8 @@
+گرفتن بکآپ 
 
 pg_dump -h 192.168.13.29 -U amir_sh  -Fc -f /var/backups/db/tootia-$(date +%Y-%m-%d).sql reports_csf
 
+ریستور 
 
 pg_restore  -h localhost -p 5435 -U postgres -d exploit < ./exploit-2023-03-27.sql
 
