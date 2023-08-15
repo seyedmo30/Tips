@@ -59,9 +59,15 @@ Composite literals در صورتی که یک دیتا استراکچر تعری�
       gg := struct{ name string }{name : "ali"}  ------------ gg := struct{}{} 
 
 
-### empty struct موارد مصرفی
+#### empty struct موارد مصرفی
 + لیستی از داده ها ، به جای آرایه یا اسلایس می توانیم از مپ زیر استفاده کنیم ، یکی از کاربرد های این ، سرچ سریع در مپ و گرفتن وجود یا عدم وجود است :
   
          map_obj := make(map[string]struct{})
 
 + ارسال سیگنال به چنل ها البته بهتر است از کانتکست استفاده کنیم
+
+#### different GoPATH and GoROOT  
+The GoPATH determines the root of the workspace whereas the GoROOT determines the location of Go SDK .
+
+      export GOROOT=/usr/local/go
+      export GOPATH=/path/to/mygo
