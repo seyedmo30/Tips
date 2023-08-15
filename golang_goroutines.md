@@ -23,3 +23,7 @@ type SafeCounter struct {
 ### Directional
 + send-only - chan<- - از دید کلاینت ، فقط می توان به چنل داده فرستاد
 + recevie-only - <-chan - از دید کلاینت ، فقط می توان از چنل داده دریافت کرد
+
+سوالات خوب مصاحبه :
+
+https://www.tutorialspoint.com/articles/category/go-programming
