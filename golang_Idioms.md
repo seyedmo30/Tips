@@ -53,7 +53,7 @@ Variadic Functions - یک فانکشن می توان صفر یا بی نهایت
 Composite literals در صورتی که یک دیتا استراکچر تعریف کنیم و مقدار دهی اولیه کنیم ، در حقیقت آن را لیترال تعریف کرده ایم ، کار بردش زمانی است که می دانیم ظرفیت داده چقدر است .
 
 در بیشتر دیتا استراکچر ها در داخل پرانتز بعد اینیت ، مشخص می شود
-
-s:=S{name:"Michał", age:0}  -------  [3]string{“foo”, “bar”} --------  map[string]int{“euler”: 2, “pi”: 9}
-
-gg := struct{ name string }{name : "ali"}  ------------ gg := struct{}{} 
+      
+      s:=S{name:"Michał", age:0}  -------  [3]string{“foo”, “bar”} --------  map[string]int{“euler”: 2, “pi”: 9}
+      
+      gg := struct{ name string }{name : "ali"}  ------------ gg := struct{}{} 
