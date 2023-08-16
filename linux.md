@@ -4,4 +4,5 @@ scp root@1.2.3.4:/root/pcfilename.rar ./
 
 مشاهده پرت های باز tcp udp 
 
+    sudo apt install net-tools
     netstat -tulpn
