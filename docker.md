@@ -31,13 +31,22 @@ docker stop id
 ایستاپ کردن کانتینر 
 
 docker start id
-  
+
+
+ایمیج های دنگلینگ را پاک می کند : 
+  docker image prune 
+
+
+کانتینر هایی که اگزیت شدن پاک می کنه : 
+  docker container prune
   
   
 برای استارت کانتینر استاپ شده 
 
 sudo docker rmi
-  
+
+اطلاعات کلی از فضای ایمیج ، کانتینر و والیوم : 
+  sudo docker system df
   
 پاک کردن ایمیج
 sudo docker container prune
