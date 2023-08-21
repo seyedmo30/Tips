@@ -26,6 +26,34 @@ type SafeCounter struct {
 + send-only - chan<- - از دید کلاینت ، فقط می توان به چنل داده فرستاد
 + recevie-only - <-chan - از دید کلاینت ، فقط می توان از چنل داده دریافت کرد
 
+### receive data from chan
+به طور کلی به ۳ روش می توان از چنل داده برداشت کرد :
++ ساده
+  
+
+		 x := <-ch 
+		 fmt.Println(x)
+	  
++ انتخاب بین چند چنل
+
+	      for {
+	        select {
+	        case x, ok := <-ch1:
+	            if ok {
+	                fmt.Println("Received from ch1:", x)
+	            } else {
+	                fmt.Println("ch1 closed")
+	                ch1 = nil // set ch1 to nil to stop receiving from it
+	            }
+	        case x, ok := <-ch2:
+	  
+
++ در حلقه ی 
+
+		for i := range ch {
+		    fmt.Println(i)
+		}
+
 سوالات خوب مصاحبه :
 
 https://www.tutorialspoint.com/articles/category/go-programming
