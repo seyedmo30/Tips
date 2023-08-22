@@ -10,3 +10,7 @@ scp root@1.2.3.4:/root/pcfilename.rar ./
 مشاهده سایز فولدر 
 
     sudo du -hs volumes
+
+پیدا کردن گنده ترین فایل ها
+
+    find -type f -exec du -Sh {} + | sort -rh | head -n 5
