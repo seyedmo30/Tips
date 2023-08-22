@@ -6,3 +6,7 @@ scp root@1.2.3.4:/root/pcfilename.rar ./
 
     sudo apt install net-tools
     netstat -tulpn
+
+مشاهده سایز فولدر 
+
+    sudo du -hs volumes
