@@ -33,29 +33,36 @@ docker stop id
 docker start id
 
 
-ایمیج های دنگلینگ را پاک می کند : 
-  docker image prune 
+ایمیج های دنگلینگ را پاک می کند :
+
+docker image prune 
 
 
-کانتینر هایی که اگزیت شدن پاک می کنه : 
-  docker container prune
+کانتینر هایی که اگزیت شدن پاک می کنه :
+
+docker container prune
   
   
-برای استارت کانتینر استاپ شده 
+با این ایمیج می شه پاک کرد :
 
 sudo docker rmi
 
 اطلاعات کلی از فضای ایمیج ، کانتینر و والیوم : 
+
   sudo docker system df
   
 پاک کردن ایمیج
+
 sudo docker container prune
 
   
 پاک کردن ایمیج های بدون تگ یا آویزان
   
 docker image prune --filter="dangling=true"
-  
+
+می توان والیوم هایی که در لوکال آدرس دهی شده ،( دستی آدرس نداده باشیم ) و به هیچ کانتینری مربوط نیست را پاک کنیم :
+
+sudo docker volume prune
   
 تمامی کانتینر ها پاک میشن 
 
