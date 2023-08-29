@@ -147,7 +147,11 @@ sudo docker exec -it 98d7a843febd sh
 
 PGPASSWORD=salam psql -U postgres
   
+یکی از راه های ساختن تیبل در اینیت کردن دیتا بیس اینه که DDL ها رو توی فایل ریخته و با دستور زیر فایل اجرا شود :
 
+    psql -U postgres -d news_fetcher -h localhost -p 5432 -a -f init-sql.sql
+
+در فایل init-sql.sql می توان مشخصات تیبل ها رو ریخت
 --------------------------------------------------------------------------------------------------------
 
 # Dockerfile
