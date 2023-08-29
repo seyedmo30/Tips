@@ -152,6 +152,7 @@ PGPASSWORD=salam psql -U postgres
     psql -U postgres -d news_fetcher -h localhost -p 5432 -a -f init-sql.sql
 
 در فایل init-sql.sql می توان مشخصات تیبل ها رو ریخت
+
 --------------------------------------------------------------------------------------------------------
 
 # Dockerfile
