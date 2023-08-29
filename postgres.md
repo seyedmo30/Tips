@@ -47,7 +47,11 @@ listen_addresses = '*'
 listen_addresses = 'localhost,192.168.13.14'
 
 
+یکی از راه های ساختن تیبل در اینیت کردن دیتا بیس اینه که DDL ها رو توی فایل ریخته و با دستور زیر فایل اجرا شود :
 
+    psql -U postgres -d news_fetcher -h localhost -p 5432 -a -f init-sql.sql
+
+در فایل init-sql.sql می توان مشخصات تیبل ها رو ریخت
 
 
 
