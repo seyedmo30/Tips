@@ -33,6 +33,10 @@ docker stop id
 docker start id
 
 
+بعد از ران یا استارت کردن کانتینر ، اگر بخواهیم اطلاعات آن را ( مانند داکر کامپوز که همه چی رو لاگ میندازه) ببینیم ، می تونیم attach  کنیم :
+
+sudo docker attach id
+
 ایمیج های دنگلینگ را پاک می کند :
 
 docker image prune 
