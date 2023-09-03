@@ -36,3 +36,10 @@
 + do_xcom_push پیام ها رو توی یه تیبل میریزه - بولیین
 + command
 + mounts - مانند ، والیوم است ،  سورس و تارگت می گیرد
+  ```
+          mounts=[Mount(
+			source="/usr/local/projects/news_fetcher/config.json",
+			target="/app/config.json",
+			type="bind")]
+    ```
++ network_mode - توجه شود در صورتی که بخوهایم از شبکه ی داکر کامپوز استفاده کنیم ، ابتدا باید لیست نتورک های داکر را گرفت ، سپس اونی که  شبیه به اسم دایرکتوری است را  بزاریم
