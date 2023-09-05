@@ -51,11 +51,10 @@
 
 توجه شود باید کانکشنی  ست کنیم که در نتورک خود ایرفلو باشد . و در نهایت نام کانکشن باید در اوپراتور داده شود :
 
-‍‍```
 
+	‍‍```
 	remove_expire_link = PostgresOperator(
-        task_id="news_postgres",
+	task_id="news_postgres",
 		postgres_conn_id="postgres_default",
-        sql="""
-
-```
+	sql="""
+	```
