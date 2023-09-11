@@ -6,5 +6,5 @@ application/json - application/x-www-form-urlencoded - multipart/form-data - tex
 + application/x-www-form-urlencoded : مانند کوییری پارام در متد گت می ماند ، بعد از افزودن کلید و مقدار ، آنرا در بادی شبیه به کوییری کرده
 + multipart/form-data : با یک ریکوست هم می توان فایل باینری فرستاد ، هم تکست بادی
 
-### request
-application/json - text/html - text/plain - image/jpeg, image/png - audio/mpeg - video/mp4 - multipart/mixed
+### response
+application/json - text/html - text/plain - image/jpeg, image/png - audio/mpeg - video/mp4 - multipart/mixed - application/octet-stream
