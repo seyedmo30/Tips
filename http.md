@@ -8,3 +8,5 @@ application/json - application/x-www-form-urlencoded - multipart/form-data - tex
 
 ### response
 application/json - text/html - text/plain - image/jpeg, image/png - audio/mpeg - video/mp4 - multipart/mixed - application/octet-stream
+
+در صورتی که ریکویست حاوی چند فرم دیتا و چند فایل باینریی باید ، می بایست از multipart/form-data استفاده شود ، در این صورت فرم دیتا ها را تنها می توان مانند x-www-form-urlencoded در url  ارسال کرد و نمی توان json فرستاد زیرا در  body باید فایل های باینری قرار داده شود.
