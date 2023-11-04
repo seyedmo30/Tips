@@ -15,7 +15,8 @@ application/json - text/html - text/plain - image/jpeg, image/png - audio/mpeg -
 ### http client
 
 در پایتون یا گو ، وقتی ریکویستی می سازیم ، می توانیم اطلاعات علاوه بر متد یا url یا header به درخواست بدهیم . 
-+ httptrace ـ مثلا می توانیم درخواست را با DNS ست کنیم
++ httptrace
+ ـ مثلا می توانیم درخواست را با DNS ست کنیم
 
         req, _ := http.NewRequest("GET", "http://example.com", nil)
         trace := &httptrace.ClientTrace{
