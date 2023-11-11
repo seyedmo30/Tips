@@ -1,6 +1,15 @@
+
+
+        sudo lsof -t -i:8000    //مشاهده PID روی پورت
+
+        ls -l /proc/<PID>/cwd //یافتن دایرکتوری کامند برای اجرا       /usr/local/projects/data-aggrigator/cmd/server
+
+        ls -l /proc/<PID>/exe //یافتن دایرکتوری فایل اگزکیوت        /tmp/go-build2963007683/b001/exe/main
+        
+
 sudo kill -9 $(sudo lsof -t -i:8000)
 
-sudo lsof -i -P -n | grep 8000
+
 
 scp root@1.2.3.4:/root/pcfilename.rar ./
 
