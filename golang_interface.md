@@ -1,5 +1,7 @@
 برای مشخص شدن تایپ اینترفیس :
 
+type assertion  interface conversion
+
 str, ok := interfaceVar.(string)
 
 if msg, ok := rawMsg.(*pgproto3.CopyData); ok {
