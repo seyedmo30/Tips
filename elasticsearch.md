@@ -66,7 +66,33 @@ http://localhost:9200/_cat/indices?v=true
     { "create": {"_id": "7", "_index": "index1"} }
     { "my_field": "foo" }
     { "create": {"_index": "index1"} }
-    { "my_field": "foo2" }      
+    { "my_field": "foo2" } 
+    
+### bulk update
+    POST _bulk
+    { "update" : {"_id" : "1", "_index" : "index1", "retry_on_conflict" : 3} }
+    { "doc" : {"field" : "value"} }
+    { "update" : { "_id" : "0", "_index" : "index1", "retry_on_conflict" : 3} }
+    { "script" : { "source": "ctx._source.counter += params.param1", "lang" : "painless", "params" : {"param1" : 1}}, "upsert" : {"counter" : 1}}
+
+### update without id
+در این صورت چون ایدی برای آپدیت مهم نیست باید کوییری بزنیم و سپس فیلد مورد نظر را آپدیت کنیم
+
+    POST feeds/_update_by_query
+    {"script": {
+          "source":"ctx._source.title_fa = 'salam1243';ctx._source.sentiment.negative = '0.47';ctx._source.summary_fa ='salam1234';",
+          "lang": "painless"
+        },
+        "query": {
+          "term": {
+                "common_key.keyword": "b9e0c6de-9613-404d-9377-bdc43175d3b1"
+          }
+        }
+        }
+
+
+
+    
 # mget
 
 اگر بخوایم مشخص کنیم چه فیلد هایی می خواییم و چه فیلد هایی نمی خواییم :
