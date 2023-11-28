@@ -60,7 +60,13 @@ http://localhost:9200/_cat/indices?v=true
           }
         }
 
-  
+### bulk create
+    
+    POST /_bulk
+    { "create": {"_id": "7", "_index": "index1"} }
+    { "my_field": "foo" }
+    { "create": {"_index": "index1"} }
+    { "my_field": "foo2" }      
 # mget
 
 اگر بخوایم مشخص کنیم چه فیلد هایی می خواییم و چه فیلد هایی نمی خواییم :
