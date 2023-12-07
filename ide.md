@@ -8,3 +8,4 @@ Paste JSON as Code --- ext install quicktype.quicktype
 
 Prettier - Code formatter --- ext install esbenp.prettier-vscode
 
+bookmarks - برای علامت زدن روی کدی که مهمه در یه فایل بزرگ
