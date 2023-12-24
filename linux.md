@@ -5,8 +5,13 @@
         ls -l /proc/<PID>/cwd //یافتن دایرکتوری کامند برای اجرا       /usr/local/projects/data-aggrigator/cmd/server
 
         ls -l /proc/<PID>/exe //یافتن دایرکتوری فایل اگزکیوت        /tmp/go-build2963007683/b001/exe/main
-        
 
+ip route __ مشاهده دیفالت گیت وی
+
+nslookup __  مشاهده اینکه DNS درست کار می کند ، پیدا کردن IP هاست نیم ها
+
+
+        
 sudo kill -9 $(sudo lsof -t -i:8000)
 
 
