@@ -1,4 +1,4 @@
-
+# network
 
         sudo lsof -t -i:8000    //مشاهده PID روی پورت
 
@@ -6,22 +6,24 @@
 
         ls -l /proc/<PID>/exe //یافتن دایرکتوری فایل اگزکیوت        /tmp/go-build2963007683/b001/exe/main
 
-ip route __ مشاهده دیفالت گیت وی
+        ip route // مشاهده دیفالت گیت وی
 
-nslookup __  مشاهده اینکه DNS درست کار می کند ، پیدا کردن IP هاست نیم ها
+        nslookup //  مشاهده اینکه DNS درست کار می کند ، پیدا کردن IP هاست نیم ها
 
++ مشاهده پرت های باز tcp udp 
+        
+            sudo apt install net-tools
+            netstat -tulpn
+  
++ با دستور ifconfig می توان اطلاعات کلی ماشین مانند default gateway , netmask ,inet  را دید همچنین شبکه اصلی ماشین enp4s0 را دید همچنین شبکه های محلی مانند داکر هم قابل رویت است
 
+                ifconfig
         
 sudo kill -9 $(sudo lsof -t -i:8000)
 
 
 
 scp root@1.2.3.4:/root/pcfilename.rar ./
-
-مشاهده پرت های باز tcp udp 
-
-    sudo apt install net-tools
-    netstat -tulpn
 
 مشاهده سایز فولدر 
 
