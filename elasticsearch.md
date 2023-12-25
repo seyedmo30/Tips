@@ -60,6 +60,19 @@ http://localhost:9200/_cat/indices?v=true
           }
         }
 
+اگر یک فیلد تکست را ‌خیره کنیم ، احتمالا الستیک به شکل زیر ، آن را ذخیره کند :
+    
+    "description": {
+        "type": "text",
+        "fields": {
+            "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+            }
+        }
+    }
+تایپ text برای فول تکست سرچ است ، و درون این فیلد با تایپ keyword هم ذخیره می کنیم که برای exact matching و aggregations استفاده می شود همچنین  keyword کل فیلد را یک عبارت می بیند و آن را نمیشکند
+
 ### bulk create
     
     POST /_bulk
