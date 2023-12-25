@@ -1,95 +1,96 @@
-sudo docker run یا pull نام ایمیج
+    sudo docker run یا pull نام ایمیج
 
 دانلود و اجرای ایمیج 
 
-docker run -d nginx
+    docker run -d nginx
 
 اگر بخواهیم بدون تی ماکس برنامه دی اتچ کار کنه 
 
-sudo docker images
+    sudo docker images
 
 لیست ایمیج ها 
 
-sudo docker ps
+    sudo docker ps
 
 تمام کانتر هایی که در حال اجرا هستند 
 
-sudo docker ps -a
+    sudo docker ps -a
 
 لاگ تمام کانتینر ها 
 
-sudo docker rm  id
+    sudo docker rm  id
   
 
-docker rm $(docker ps -a -q)
+    docker rm $(docker ps -a -q)
 
   
   
 پاک کردن کانتینر
-docker stop id
+
+    docker stop id
   
 ایستاپ کردن کانتینر 
 
-docker start id
+    docker start id
 
 
 بعد از ران یا استارت کردن کانتینر ، اگر بخواهیم اطلاعات آن را ( مانند داکر کامپوز که همه چی رو لاگ میندازه) ببینیم ، می تونیم attach  کنیم :
 
-sudo docker attach id
+    sudo docker attach id
 
 ایمیج های دنگلینگ را پاک می کند :
 
-docker image prune 
+    docker image prune 
 
 
 کانتینر هایی که اگزیت شدن پاک می کنه :
 
-docker container prune
+    docker container prune
   
   
 با این ایمیج می شه پاک کرد :
 
-sudo docker rmi
+    sudo docker rmi
 
 اطلاعات کلی از فضای ایمیج ، کانتینر و والیوم : 
 
-  sudo docker system df
+    sudo docker system df
   
 پاک کردن ایمیج
 
-sudo docker container prune
+    sudo docker container prune
 
   
 پاک کردن ایمیج های بدون تگ یا آویزان
   
-docker image prune --filter="dangling=true"
+    docker image prune --filter="dangling=true"
 
 می توان والیوم هایی که در لوکال آدرس دهی شده ،( دستی آدرس نداده باشیم ) و به هیچ کانتینری مربوط نیست را پاک کنیم :
 
-sudo docker volume prune
+    sudo docker volume prune
   
 تمامی کانتینر ها پاک میشن 
 
+    
+    --rm اتماتیک بعد از باز شدن ریموو می شه
   
-  --rm اتماتیک بعد از باز شدن ریموو می شه
-
+    
+    -it می گه توش بمون 
   
-  -it می گه توش بمون 
-
+    
+    -p6379:6379 میگه از پورت داخل شبکه داکر ، رو پورت سیستم عامل هم نشون بده
   
-  -p6379:6379 میگه از پورت داخل شبکه داکر ، رو پورت سیستم عامل هم نشون بده
-
+    
+    --name redis نام کانتینر تو داکر
   
-  --name redis نام کانتینر تو داکر
-
+    
+    --network mynetwork
   
-  --network mynetwork
-
-  
-  -w /var/ مکان دایرکتوری در شروع
-  
-  
-  -v /var/volume/sla/django:/data
+    
+    -w /var/ مکان دایرکتوری در شروع
+    
+    
+    -v /var/volume/sla/django:/data
 
 نکته مهم والیوم : توجه شود در صورتی که داکر به صورت عادی ران شود ، دایرکتوری درون کانتینر پاک شده و دایرکتوری تعریف شده سیستم جای آن می نشیند 
 
@@ -114,12 +115,12 @@ volumes:
           - ./nginx.conf:/etc/nginx/nginx.conf:ro
 
   
-  sudo docker run --rm  --name resis -p6379:6379 redis 
+    sudo docker run --rm  --name resis -p6379:6379 redis 
 
 
 بعد از اگزیت شدن ، کانتینر و پاک می کنه: 
 
-  sudo docker exec -it id bash
+    sudo docker exec -it id bash
   
 
 ### troubleshoot
@@ -140,7 +141,7 @@ volumes:
 
 
 
-  docker login -u seyedmo30 -p 12345
+    docker login -u seyedmo30 -p 12345
 لاگیدن در داکر هاب و گرفتن ایمیج تا ۲۰۰ تا
 
 
@@ -154,24 +155,24 @@ volumes:
   می تونیم بدون استفاده از داکر کامپوز ، داکر فایل رو بسازیم و از اون بیلد بگیریم
   
   
-  docker build -t name:version directory
+    docker build -t name:version directory
   
   
-  docker build -t food:1.0 ~/test/
+    docker build -t food:1.0 ~/test/
   
   همچنین می تونیم داکر فایل بیلد شده را زیپ کرده و خروجی اش را بگیریم ( تنها آدرس داکر فایل را می دهیم و پیش فرض در آن دایرکتوری زیپ می سازد )
   
   
-  docker build  --output type=tar,dest=out.tar  -t project:1.0.0 .
+    docker build  --output type=tar,dest=out.tar  -t project:1.0.0 .
   
   
   می توانیم همچنین از ایمیج هامون خروجی بگیریم 
 
-  sudo docker save -o ~/ngin nginx:1.0.0
+    sudo docker save -o ~/ngin nginx:1.0.0
 
   و فایل های خروجی را در ایمیج ها لود یا بارگزاری کنیم
 
-  sudo docker load < ngin
+    sudo docker load < ngin
   
 ------------------------------------------------------------------------------------------------------
 
@@ -179,15 +180,15 @@ volumes:
 
 برای ران کردن حتما باید پسورد داده شود
 
-docker run -itd -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=salam -p 5432:5432 -v /data:/var/lib/postgresql/data --name postgresql postgres:15-alpine
+    docker run -itd -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=salam -p 5432:5432 -v /data:/var/lib/postgresql/data --name postgresql postgres:15-alpine
 
 سپس درونش اگزک می کنیم
 
-sudo docker exec -it 98d7a843febd sh
+    sudo docker exec -it 98d7a843febd sh
 
 به جای ورود متداول اینجوری می ریم توی پستگرس
 
-PGPASSWORD=salam psql -U postgres
+    PGPASSWORD=salam psql -U postgres
   
 یکی از راه های ساختن تیبل در اینیت کردن دیتا بیس اینه که DDL ها رو توی فایل ریخته و با دستور زیر فایل اجرا شود :
 
@@ -200,30 +201,30 @@ PGPASSWORD=salam psql -U postgres
 # Dockerfile
 
 
-FROM alpine:3.17
+    FROM alpine:3.17
 
 همیشه باید از یک ایمیج شروع کنیم به ساختن
 
-FROM golang:1.20-rc-alpine as builder
+    FROM golang:1.20-rc-alpine as builder
 
 
 
-RUN mkdir /app
+    RUN mkdir /app
 
 دستورات رو اینجوری درون ایمیج میزنیم
 
-
-WORKDIR /app
+  
+    WORKDIR /app
 
 چنج دایرکتوری درون ایمیج
 
 
-COPY . /app
+    COPY . /app
 
 کپی از سرور (آدرس اول ) به ایمیج (آدرس دوم) 
 
-
-CMD /app/salam
+    
+    CMD /app/salam
 
 اجرای دستور نهایی 
 
@@ -235,7 +236,9 @@ CMD /app/salam
 
   
 ساخت شبکه - 
-sudo docker network create mynetwork
+
+    sudo docker network create mynetwork
+
 
  دو نوع شبکه متداول داریم :
  
