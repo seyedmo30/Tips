@@ -25,3 +25,11 @@ git reset --soft HEAD~1          _____   با این دستور می توان آ
 
 git reset --hard HEAD~1          _____  با این دستور می توان کامیت را باز کرد و تغییرات رو هم حذف کرد
 
+اگر بخواهیم فایلی که add کردیم و در stage است را دوباره unstage کنیم ، باید دستور زیر را بزنیم : 
+
+        git reset HEAD <file>
+اگر بخواهیمفایل را untrack کنیم :
+
+        git rm --cached <file>
+
+    
