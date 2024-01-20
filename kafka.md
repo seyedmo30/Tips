@@ -95,6 +95,10 @@ sudo docker exec  -it 69078a9693f0 kafka-console-consumer  --topic hafizium_178_
 sudo docker exec  -it 69078a9693f0 kafka-topics --create --topic quickstart-events --bootstrap-server localhost:9092         
 
 
+reset groupID
+
+sudo docker exec -it kafka-docker-kafka-1-1 kafka-consumer-groups  --bootstrap-server localhost:9092 --group news_information_extraction_112  --reset-offsets --to-earliest --execute --topic ai_tagger_topic 
+
 
 حذف تاپیک
 
