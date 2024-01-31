@@ -39,3 +39,9 @@ Create window       &nbsp;&nbsp;&nbsp;      c
 
 
 
+### config
+
+اسم سوزر که لاگین کرده رو بالا می نویسه
+
+tmux set -g pane-border-status top
+

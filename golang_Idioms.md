@@ -62,6 +62,9 @@ Composite literals در صورتی که یک دیتا استراکچر تعری�
       totalRandom := struct {total int	;	mtx   sync.Mutex}{total: 10, mtx: sync.Mutex{}}
 
 #### empty struct موارد مصرفی
+
+دقت شود placeholder هیچ جایی در حافظه نمی گیرد
+
 + لیستی از داده ها ، به جای آرایه یا اسلایس می توانیم از مپ زیر استفاده کنیم ، یکی از کاربرد های این ، سرچ سریع در مپ و گرفتن وجود یا عدم وجود است :
   
          map_obj := make(map[string]struct{})
@@ -73,5 +76,20 @@ The GoPATH determines the root of the workspace whereas the GoROOT determines th
 
 گو روت فایل نصبی است و درون bin آن ، باینری است که با آن کار می کنیم . اما GOPATH متغییر محیطی است ( go env بزنیم ) و مواردی چون پکیج ها و کامند های کامپلر شده ( مانند swag )  را درون خود دارد . 
 
-      export GOROOT=/usr/local/go
-      export GOPATH=$HOME/go
+
+###   export GOPATH=$HOME/go
+مثلا هر پکیجی که نصب می کنیم در GOPATH می رود :
+
+      /home/seyed/go/pkg/mod/github.com/gin-gonic/
+
+و در صورتی که پکیج کامپایل شود در آدرس زیر می رود
+
+      /home/seyed/go/bin/swag
+
+###   export GOROOT=/usr/local/go
+ فایل اصلی گو که کد را کامپایل می کند 
+
+      /usr/local/go/bin/go
+ پکیج های بیلتین
+
+      /usr/local/go/src/fmt/
