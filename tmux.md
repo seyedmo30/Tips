@@ -41,7 +41,8 @@ Create window       &nbsp;&nbsp;&nbsp;      c
 
 ### config
 
-اسم سوزر که لاگین کرده رو بالا می نویسه
+sudo nano ~/.tmux.conf
 
-tmux set -g pane-border-status top
+set -g mouse
 
+set -g set-titles on
