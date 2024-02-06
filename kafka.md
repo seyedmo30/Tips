@@ -81,37 +81,51 @@ flush :
 
 
 مشاهده لیست تاپیک ها  
-sudo docker exec  -it 69078a9693f0 kafka-topics  --bootstrap-server localhost:9092 --list
+    
+    sudo docker exec  -it 69078a9693f0 kafka-topics  --bootstrap-server localhost:9092 --list
 
 نوشتن پیام در تاپیک            
 
-sudo docker exec  -it 69078a9693f0 kafka-console-producer  --topic hafizium_178_exploit --bootstrap-server localhost:9092       
+    
+    sudo docker exec  -it 69078a9693f0 kafka-console-producer  --topic hafizium_178_exploit --bootstrap-server localhost:9092       
 
 خواندن پیام در تاپیک
 
-sudo docker exec  -it 69078a9693f0 kafka-console-consumer  --topic hafizium_178_exploit --bootstrap-server localhost:9092
+    
+    sudo docker exec  -it 69078a9693f0 kafka-console-consumer  --topic hafizium_178_exploit --bootstrap-server localhost:9092
 
 ساخت تاپیک جدید                
-sudo docker exec  -it 69078a9693f0 kafka-topics --create --topic quickstart-events --bootstrap-server localhost:9092         
+    
+    sudo docker exec  -it 69078a9693f0 kafka-topics --create --topic quickstart-events --bootstrap-server localhost:9092         
 
 
 reset groupID
 
-sudo docker exec -it kafka-docker-kafka-1-1 kafka-consumer-groups  --bootstrap-server localhost:9092 --group news_information_extraction_112  --reset-offsets --to-earliest --execute --topic ai_tagger_topic 
+    
+    sudo docker exec -it kafka-docker-kafka-1-1 kafka-consumer-groups  --bootstrap-server localhost:9092 --group news_information_extraction_112  --reset-offsets --to-earliest --execute --topic ai_tagger_topic 
 
 
 حذف تاپیک
 
-sudo docker exec  -it 69078a9693f0 kafka-topics --delete --topic hafizium_178_exploit --bootstrap-server localhost:9092
+    
+    sudo docker exec  -it 69078a9693f0 kafka-topics --delete --topic hafizium_178_exploit --bootstrap-server localhost:9092
 
 تعداد مسیج در تاپیک
 
-sudo docker exec -it 69078a9693f0 kafka-run-class kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic hafizium_178_exploit | awk -F  ":" '{sum += $3} END {print sum}'
+    
+    sudo docker exec -it 69078a9693f0 kafka-run-class kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic hafizium_178_exploit | awk -F  ":" '{sum += $3} END {print sum}'
   
   جزییات ، تعداد پارتیشن ، رپلیکا و لیدر :
 
-sudo docker exec -it 69078a9693f0 kafka-topics  --describe --topic hafizium_178_exploit --bootstrap-server localhost:9092
+    
+    sudo docker exec -it 69078a9693f0 kafka-topics  --describe --topic hafizium_178_exploit --bootstrap-server localhost:9092
+
+می توان گروپ آیدی را داد و جزییاتی مانند اطلاعات کانسیومر ها CONSUMER-ID , HOST ,CLIENT-ID را مشاهده کرد
+
+    
+    sudo docker exec -it hafizium-kafka-1-1 kafka-consumer-groups  --bootstrap-server localhost:9092 --describe --group feeds_group
 
 مشاهده ی آفست های یک تاپیگ در زوکیپر :
 
-sudo docker exec -it 69078a9693f0 kafka-run-class kafka.tools.GetOffsetShell  --bootstrap-server localhost:9092 -topic hafizium_178_exploit --time -1
+    
+    sudo docker exec -it 69078a9693f0 kafka-run-class kafka.tools.GetOffsetShell  --bootstrap-server localhost:9092 -topic hafizium_178_exploit --time -1
