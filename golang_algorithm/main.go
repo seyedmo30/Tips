@@ -29,21 +29,21 @@ func main() {
 			select {
 
 			case <-listPerson[0]:
-				reserve(0)
+				go reserve(0)
 
 			case <-listPerson[1]:
-				reserve(1)
+				go reserve(1)
 
 			case <-listPerson[2]:
-				reserve(2)
+				go reserve(2)
 
 			case <-listPerson[3]:
-				reserve(3)
+				go reserve(3)
 
 			case <-listPerson[4]:
-				reserve(4)
+				go reserve(4)
 			default:
-				fmt.Println("no body si not hungry")
+				fmt.Println("no body is not hungry")
 				time.Sleep(time.Second)
 
 			}
@@ -100,6 +100,7 @@ func eat(person int) {
 
 	fmt.Println("eating person", person)
 	time.Sleep(time.Second * time.Duration(rand.Intn(5)))
+	// time.Sleep(time.Second * time.Duration(rand.Intn(5)))
 	fmt.Println("finish eat  person", person)
 	listForks[firstFork] <- struct{}{}
 	listForks[secondFork] <- struct{}{}

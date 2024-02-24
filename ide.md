@@ -2,6 +2,8 @@
 
 Git Graph  ----   ext install mhutchie.git-graph
 
+git lens
+
 Error Lens  ---   ext install usernamehw.errorlens
 
 Paste JSON as Code --- ext install quicktype.quicktype
@@ -12,7 +14,7 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
 
 ## keymap shortcuts
 
-+ go to definition (ctrl + click)
++ go to definition (ctrl + shit + click)
 
 میره جایی که تابع تعریف شده
 

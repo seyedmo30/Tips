@@ -74,6 +74,13 @@ First Offset: 271905  Last Offset: 271908  Size: 3
 flush :
  یکی از ابزار هایی برای پابلیشر هست برای این که مطمعن شود تمام پیام ها ارسال شده ، زیرا پابلیشر در کافکا یک صف دارد و همیشه داده را تک تک نمی فرستد ، در صورتی که بخواهیم برنامه را اگزیت کنیم این دستور به کار می آید
 
+
+commit mewssage :
+
+می توان بعد از خوانده پیام آن را کامیت کرد ، در این صورت کافکا متوجه میشود پیام خوانده شده
+
+پس commit به صورت دیفالت auto commit است اما اگر بخواهیم داده را چک کنیم و در صورت موفقیت آن را کامیت کنیم
+
 نکات :
 
 هر تاپیک حداقل یک پارتیشن دارد ، اما اگر بخواهیم حجم داده از سمت پابلیشر را افزایش دهیم ، برای این کار پارتیشن های تاپیک را به نصبت پالیشر ها افزایش می دهیم تا راحت تر پابلیشر ها داده را در کافکا قرار دهند
@@ -134,3 +141,19 @@ reset groupID
 
     
     sudo docker exec -it 69078a9693f0 kafka-run-class kafka.tools.GetOffsetShell  --bootstrap-server localhost:9092 -topic hafizium_178_exploit --time -1
+
+
+### confluent-kafka-go
+
+موارد زیر نیاز است
+
+
+        RUN apk update && apk add --no-cache gcc musl-dev make librdkafka
+
+برای اجرای کانفلونس در اوبونتو با apt
+
+        apt-get install librdkafka-dev
+
+ولی در کل پکیج زیر تمامی نیاز ها را نصب می کند
+
+        sudo apt-get install build-essential
