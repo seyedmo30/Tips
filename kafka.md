@@ -79,7 +79,15 @@ commit mewssage :
 
 می توان بعد از خوانده پیام آن را کامیت کرد ، در این صورت کافکا متوجه میشود پیام خوانده شده
 
-پس commit به صورت دیفالت auto commit است اما اگر بخواهیم داده را چک کنیم و در صورت موفقیت آن را کامیت کنیم
+واقعن نفهمیدم به چه دردی می خوره
+
+
+peek :
+
+کافکا به صورت پیش فرض همچین چیزی نداره ، اما میشه مکان آفست رو تغییر داد .
+
+پس ابتدا آفست رو ذخیره می کنیم ، سپس مسیج رو کانسیوم می کنیم و در انتها آفست رو به مکان قبلی انتقال می دیم
+
 
 نکات :
 
@@ -143,6 +151,15 @@ reset groupID
     sudo docker exec -it 69078a9693f0 kafka-run-class kafka.tools.GetOffsetShell  --bootstrap-server localhost:9092 -topic hafizium_178_exploit --time -1
 
 
+گاهی اوقات از kafka به عنوان request , response غیر همزمان استفاده می کنیم .
+در این صورت نیاز است تشخیص دهیم کدام پاسخ برای کدام جواب است و امکان دارد دو درخواست کاملن یکسان باشند اما جواب ها متفاوت باشند . 
+
+همچنین در صورتی که سرویس درخواست کننده منتظر باشد باید یک شناسه برای جواب خود داشته باشد .
+
+بهترین راه قرار دادن unix timestamp micro است . 
+
+همچنین درخواست کنند منتظر می ماند که جوابی با شناسه همان تایم استمپ ارسال شود.
+
 ### confluent-kafka-go
 
 موارد زیر نیاز است
@@ -157,3 +174,50 @@ reset groupID
 ولی در کل پکیج زیر تمامی نیاز ها را نصب می کند
 
         sudo apt-get install build-essential
+
+
+
+### برای بالا آوردن روی لوکال هاست
+
+خیلی ساده با یه پارتیشن
+
+```
+
+version: '2'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    restart: always
+    network_mode: "host"
+
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ZOOKEEPER_CONNECT: localhost:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    depends_on:
+      - zookeeper
+    network_mode: "host"
+    
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: localhost:9092
+    restart: always
+    depends_on:
+      - kafka
+    network_mode: "host"
+
+```
