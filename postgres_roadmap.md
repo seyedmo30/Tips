@@ -16,6 +16,9 @@
 
 + Polymorphism - می توان توابعی نوشت که هر تایپی را میگیرد یا خروجی دهد، anyelement
 
+##  Transactions
+
+
 ### اسید
 
 + اتمیک
@@ -34,22 +37,74 @@
 
 تضمین میکنه با خرابی سیستم عامل یا قطعی برق ، داده نپره
 
-مثال : تغییر لول ایزولیشن در مای اسکیول
- Set isolation level read uncommited
-در این لول یه ترنساکشن حتی میتونه زمانی که یه ترنس اکشن دیگه کامیت نشده هم اون رو بخونه 
-خیلی بی خود
 
- Set isolation level read uncommited
 
-در این حالت تا زمانی که ترنساکشن کامیت نشده ، داده های قدیمی رو میخونه
-
- Set isolation level repeatable read
+ 
 تو این لول حتی اگر داخل ترنساکشن ، یه ترنساکشن دیگه داده ها رو آپدیت کرد ، ما فرض میکنیم داده های قدیمی هنوز هستن 
 
 توی ترنساکشن ها می تونیم در انتهای در خواست یه در اصطلاح برای خود ترنساکشن ها استفاده کنیم
 Select * from balance where id =4 for update 
 این به این معناست کهکه حتی اگر یه ترنساکشن دیگه خواست موجودی بگیره ، واسته تا این ترنساکشن کامیت بشه
 
+
+### execute
+
+شامل دستورات اصلی مانند begin , commit , rollback میشود
+
++ Savepoint
+
+درصورت رول بک ، میتوانیم بگیم از کجای ترنساکشن دوباره شروع کند
+
+        SAVEPOINT my_savepoint; 
+
+        ROLLBACK TO my_savepoint;
+
+### Concurrency Control _ TRANSACTION ISOLATION LEVEL
+می توان سطح مشاهده داده همزمان چند ترنس اکشن را مدیریت کرد 
+
++  READ UNCOMMITTED 
+
+ در این حالت ، میتوان تغییرات قبل از کامیت را مشاهده کرد
+
+در این لول یه ترنساکشن حتی میتونه زمانی که یه ترنس اکشن دیگه کامیت نشده هم اون رو بخونه 
+خیلی بی خود
+
+        SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED 
+
+
+
++  READ COMMITTED 
+
+ داده راتنها بعد از کامیت میتوان دید
+
+در این حالت تا زمانی که ترنساکشن کامیت نشده ، داده های قدیمی رو میخونه
+
+
+        SET TRANSACTION ISOLATION LEVEL READ COMMITTED 
+
++ repeatable read
+
+تو این لول حتی اگر داخل ترنساکشن ، یه ترنساکشن دیگه داده ها رو آپدیت کرد ، ما فرض میکنیم داده های قدیمی هنوز هستن 
+
+        SET TRANSACTION ISOLATION LEVEL repeatable read
+
+
+#### Locking transaction
+
+این قابلیت جلوگیری میکند از تغییرات همزمان و ترناکشن ها بر روی چند شارد ، انواع مود ها : 
+
+FOR UPDATE, FOR NO KEY UPDATE, FOR SHARE,  FOR KEY SHARE
+
+توی ترنساکشن ها می تونیم در انتهای در خواست یه در اصطلاح برای خود ترنساکشن ها استفاده کنیم
+
+Select * from balance where id =4 for update 
+
+این به این معناست کهکه حتی اگر یه ترنساکشن دیگه خواست موجودی بگیره ، واسته تا این ترنساکشن کامیت بشه
+
+
+        BEGIN; 
+        SELECT * FROM my_table WHERE id = 1 FOR UPDATE;
+        COMMIT;
 
 #### Schema
 برای دسته بندی کردن  و مرتب سازی حجم بالای تیبل ها و فانکشن ها استفاده میشود، همچنین برای سطح دسترسی به یوزر ها می توان از اسکیما استفاده کرد
@@ -187,38 +242,6 @@ SELECT, FROM, WHERE, HAVING
 Cte ها یک جدول موقت هستند در حالی که subquery یک سلکت است و می توان خروجی یک سلکت ، عدد ، استرینگ ، سطر ، ستون یا تیبل باشد 
 همچنین 
 
-####  Transactions
-با استفاده از ترنساکشن ها می توان چندین درخواست را اگزکیوت کرد ، همچنین از اسید پیروی میکند
-
-++ Control
-
-شامل دستورات اصلی مانند begin , commit , rollback میشود
-
-+ Savepoint
-
-درصورت رول بک ، میتوانیم بگیم از کجای ترنساکشن دوباره شروع کند
-
-        SAVEPOINT my_savepoint; 
-
-        ROLLBACK TO my_savepoint;
-
-+ Concurrency Control _ TRANSACTION ISOLATION LEVEL
-می توان سطح مشاهده داده همزمان چند ترنس اکشن را مدیریت کرد 
-
-++  READ UNCOMMITTED _ در این حالت ، میتوان تغییرات قبل از کامیت را مشاهده کرد
-++  READ COMMITTED _ داده راتنها بعد از کامیت میتوان دید
-
-        SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED 
-
-+ Locking transaction
-
-این قابلیت جلوگیری میکند از تغییرات همزمان و ترناکشن ها بر روی چند شارد ، انواع مود ها : 
-
-FOR UPDATE, FOR NO KEY UPDATE, FOR SHARE,  FOR KEY SHARE
-
-        BEGIN; 
-        SELECT * FROM my_table WHERE id = 1 FOR UPDATE;
-        COMMIT;
 
 ### Write ahead logging
 مزایای استفاده از wal 
