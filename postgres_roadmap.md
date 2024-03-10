@@ -109,89 +109,118 @@ Select * from balance where id =4 for update
 
 + pg_ctlcluster -  برای دستورات کامندی برای کلاستر ها می باشد
 
+### concept
 
-Data Definition Language_ ddl
++ Data Definition Language_ ddl
+
 تغییر در ساختار دیتا بیس مانند create , drop  در جدول یا دیتا بیس یا constraint ها و مثال عملی ، همون کوییری هستش ، مثلا یه کویری که ران می کنیم ، یه ddl هست
 
-Dml _ Data Manipulation Language
++ Dml _ Data Manipulation Language
+
 Crud بر روی سطر های جداول است
 دستورات و کوییری ها ، ۴نوع: insert, delete, update, select
 
-COPY TABLE
++ COPY TABLE
+
 می توان با این روش ، داده را مثلا از روی فایل با فرمت csv خواند و بر روی تیبل ریخت ، همچنین برعکس هم میشه
 
-Varchar , char
++ Varchar , char
+
 اگر سایز varchar را بزرگ درنظر گرفت اما سایز داده ها کوچک بود ، به اندازه سایز داده ، حافظه اشغال میشود
 
-Uncommon types 
+#### Uncommon types 
+
 پستگرس علاوه بر تایپ هایی که میشناسیم ، دیتا 
 تایپ های دیگری هم داره:
 
-Network Address Types
++ Network Address Types
+
 Cidr , Inet آی پی ورژن ۴ یا ۶ و سابنت مسک را ذخیره میکنه
  Macaddr مک آدرس سخت افزار ها را ذخیره میکنه
 
-Geometric Types
++ Geometric Types
+
 Point طول و عرض رو ذخیره میکنه ، مختصات نقطه
 Line  دو تا نقطه رو ذخیره میکنه ، نقطه شروع و پایان
 Polygon چند نقطه رو ذخیره میکنه
 
-Common Table Expressions _ CTE
+####  Common Table Expressions _ CTE
 می توان یک کوییری موقت ایجاد کرد و بر روی آن تیبل موقت ، کوییری زد، در حقیقت اگر بخواهیم از نتیجه ی یک کوییری مانند سلکت ایتفاده کنیم ، و یا نتایج یک تیبل سلکت را به صورت موقت ذخیره کنیم
 
-Recursive CTE
++ Recursive CTE
+
 می توان تعداد زیاد جدول موقت ایجاد کرد و از جدول ایجاد شده، استفاده کرد و دوباره جدول جدید ساخت
 
-## subquery
+####  subquery
 سابکوییری ، کوییری تو در تو درون یک کوییری است. همچنین می توان، برای مقدار دستورات زیر استفاده کرد:
 SELECT, FROM, WHERE, HAVING
 
  انواع:
-Scalar Subqueries _ سابکوییری یک مقدار بر میگردونه ، مانند avg , sum ، می تونه یا عدد باشه یا استرینگ  ) درکل یه کالمن(
-WHERE employees.salary > (SELECT AVG(salary)
++ Scalar Subqueries 
 
-Row Subqueries _ یه سطر با چندین کالمن بر میگردونه
+ سابکوییری یک مقدار بر میگردونه ، مانند avg , sum ، می تونه یا عدد باشه یا استرینگ  ) درکل یه کالمن(
 
-WHERE (order_id, total) = (SELECT order_id, total FROM order)
+        WHERE employees.salary > (SELECT AVG(salary)
 
-Column Subqueries _ چندین سطر فقط یک کالمن
-بیشتر برای موارد استفاده میشهIN, ALL, ANY.   
-WHERE price IN (SELECT MAX(price) FROM 
++ Row Subqueries 
 
-Table Subqueries _ یک تیبل بیشتر برای استفاده از from
+یه سطر با چندین کالمن بر میگردونه
 
-FROM (SELECT customer_id, SUM(total) as
+        WHERE (order_id, total) = (SELECT order_id, total FROM order)
 
-مقایسه cte vs subqueru
++ Column Subqueries 
+
+چندین سطر فقط یک کالمن
+
+بیشتر برای موارد استفاده میشهIN, ALL, ANY.  
+
+
+        WHERE price IN (SELECT MAX(price) FROM 
+
++ Table Subqueries 
+
+ یک تیبل بیشتر برای استفاده از from
+
+        FROM (SELECT customer_id, SUM(total) as
+
+####  مقایسه cte vs subqueru
 Cte ها یک جدول موقت هستند در حالی که subquery یک سلکت است و می توان خروجی یک سلکت ، عدد ، استرینگ ، سطر ، ستون یا تیبل باشد 
 همچنین 
 
-##Transactions
+####  Transactions
 با استفاده از ترنساکشن ها می توان چندین درخواست را اگزکیوت کرد ، همچنین از اسید پیروی میکند
-Control
+
+++ Control
+
 شامل دستورات اصلی مانند begin , commit , rollback میشود
 
-Savepoint
++ Savepoint
+
 درصورت رول بک ، میتوانیم بگیم از کجای ترنساکشن دوباره شروع کند
-SAVEPOINT my_savepoint; 
 
-ROLLBACK TO my_savepoint;
+        SAVEPOINT my_savepoint; 
 
-Concurrency Control _ TRANSACTION ISOLATION LEVEL
-می توان سطح مشاهده داده همزمان چند ترنس اکشن را مدیریت کرد  
-+ READ UNCOMMITTED _ در این حالت ، میتوان تغییرات قبل از کامیت را مشاهده کرد
-+ READ COMMITTED _ داده راتنها بعد از کامیت میتوان دید
-مثال SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED 
+        ROLLBACK TO my_savepoint;
 
-Locking transaction
++ Concurrency Control _ TRANSACTION ISOLATION LEVEL
+می توان سطح مشاهده داده همزمان چند ترنس اکشن را مدیریت کرد 
+
+++  READ UNCOMMITTED _ در این حالت ، میتوان تغییرات قبل از کامیت را مشاهده کرد
+++  READ COMMITTED _ داده راتنها بعد از کامیت میتوان دید
+
+        SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED 
+
++ Locking transaction
+
 این قابلیت جلوگیری میکند از تغییرات همزمان و ترناکشن ها بر روی چند شارد ، انواع مود ها : 
-FOR UPDATE, FOR NO KEY UPDATE, FOR SHARE,  FOR KEY SHARE
-مثال:
-BEGIN; 
-SELECT * FROM my_table WHERE id = 1 FOR UPDATE;
- COMMIT;
 
-Write ahead logging
+FOR UPDATE, FOR NO KEY UPDATE, FOR SHARE,  FOR KEY SHARE
+
+        BEGIN; 
+        SELECT * FROM my_table WHERE id = 1 FOR UPDATE;
+        COMMIT;
+
+### Write ahead logging
 مزایای استفاده از wal 
 + برای اینکه داده ها را کامل داشته باشیم تا در صورتی که crash کرد یا از دیسک پرید داشته باشیم
 + راهی ساده برای لاگ خوانی ترن اکشن ها
@@ -199,6 +228,6 @@ Write ahead logging
 + با استفاده از این فایل ها می توانیم در صورت کرش ، دادخ را بخوانیم و برگردانیم
 + می توان استریم رپلیکیشن انجام داد
 
-Lateral join
+#### Lateral join
 
 اگر بخواهیم جویین بین یک تیبل و یک ساب کوییری بزنیم ، این مفهوم استفاده میکنیم
