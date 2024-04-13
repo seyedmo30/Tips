@@ -46,3 +46,11 @@ sudo nano ~/.tmux.conf
 set -g mouse
 
 set -g set-titles on
+
+#### after change :
+
+exit tmux
+
+tmux kill-server
+
+tmux

@@ -131,3 +131,8 @@ source /etc/environment
 + SIGTERM - Termination
 
 شماره ۱۵ ، زمانی که یه برنامه بخواد برنامه ما رو ببنده ، مانند بالایی است با این تفاوت که از سمت پروسس دیگه میاد
+
+#### search
+```
+history | grep -- "--dev-url"
+```
