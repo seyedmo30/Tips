@@ -57,7 +57,7 @@ atlas migrate diff initial \
 
 ### socket 
 ```
-atlas migrate diff update1   --to "mysql://root:1qaz@WSX@:3307/salam"  --dev-url "mysql://root:1qaz@WSX@localhost:3307/dev"   --format '{{ sql . "  " }}'
+atlas migrate diff test1  --dir "file:///home/mostafa/test/migratetest/migrationsasd"  --to "mysql://root:1qaz@WSX@:3307/salam"  --dev-url "mysql://root:1qaz@WSX@localhost:3307/dev"   --format '{{ sql . "  " }}' 
 ```
 ## status
 
