@@ -60,6 +60,17 @@ https://medium.com/swlh/use-pointer-of-for-range-loop-variable-in-go-3d3481f7ffc
 https://levelup.gitconnected.com/go-for-range-slice-bug-lessons-learned-fa401d5d8c9a
 
 
+### zero-initialized
+
+0 for numeric types, "" for strings, nil for pointers
+
+
+### Struct Literal vs Pointer
+
+وقتی لیترال تعریف می کنیم ، به صورت کلی بر روی استک ذخیره می شه ، داده ها همون اول توی فیلد ها اینیت می شن به عبارت دیگه داده ها مستفیم درون فیلد های خودشون میشینن در نتیجه نیاز به مموری اضافه نیست زیرا اگر همون اول نشینن به معنی اینه که داده پیش فرض میشینه توش .
+
+
+در عوض وقتی از new استفاده می کنیم ، درون هیپ ریخته میشه ، فیلد ها zero-initialized پر میشن ، مقادیر دوباره باید به پوینتر اساین شوند
 # Method Receiver - Pointer v/s Value
 
 در رسیور های یک استراکت می توانیم ازپروپرتی ها یا فیلد های استراکت هم استفاده کنیم ، برای این منظور از رسیور استفاده می کنیم ، همچنین برای مشخص کردن متد های ایمپلمنت شده برای اینترفیس هم از آن استفاده می شود . 

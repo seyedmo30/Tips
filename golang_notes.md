@@ -70,7 +70,7 @@ redis - json ------- اینجوری می تونیم دیکد کنیم :
 ```
 https://git.maani.app/maani/backend/kafka-wrapper
 ```
-حالا می توان این رو به فایل ..... اضافه کرد 
+حالا می توان این رو به فایل /etc/environment اضافه کرد 
 ```
 GOPRIVATE=*.example.app
 ```
