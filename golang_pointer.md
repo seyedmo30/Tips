@@ -69,6 +69,11 @@ https://levelup.gitconnected.com/go-for-range-slice-bug-lessons-learned-fa401d5d
 
 وقتی لیترال تعریف می کنیم ، به صورت کلی بر روی استک ذخیره می شه ، داده ها همون اول توی فیلد ها اینیت می شن به عبارت دیگه داده ها مستفیم درون فیلد های خودشون میشینن در نتیجه نیاز به مموری اضافه نیست زیرا اگر همون اول نشینن به معنی اینه که داده پیش فرض میشینه توش .
 
+همچنین یه روش هست که فقط declare می کنه اما init value انجام نمی ده خطر اینه اگر مقادیر رو بخوایم runtime error برمی گردونه
+
+‍```
+var contract dto.GetContractRepositoryResponse
+```
 
 در عوض وقتی از new استفاده می کنیم ، درون هیپ ریخته میشه ، فیلد ها zero-initialized پر میشن ، مقادیر دوباره باید به پوینتر اساین شوند
 # Method Receiver - Pointer v/s Value
