@@ -13,3 +13,7 @@
  + ترافیک ورودی به پورت 80 را به پورت 8000 هدایت کن
  iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-ports 8000
 
+### dns over https (doh)
+
+چون udp  دیکیریپت و انکریپت نمیشه ، می تونیم بعضی از درخواست ها رو با یه dns  خاص بندازیم تا رمزنگاری بکنه
+
