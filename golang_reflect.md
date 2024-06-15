@@ -43,3 +43,53 @@
 
 
 
+
+```
+
+
+func GenericValidateAndUnmarshalFunc(data interface{}, jsonData string) {
+
+	v := reflect.ValueOf(data)
+	if v.Kind() != reflect.Func {
+		fmt.Println("Input is not a function")
+		return
+	}
+	if v.Type().NumIn() != 2 {
+		fmt.Println("Function should have exactly 1 parameters")
+		return
+	}
+
+	if v.Type().NumOut() != 2 {
+		fmt.Println("Function should have NumOut exactly 2 parameters")
+		return
+	}
+
+	reqParamType := v.Type().In(1)
+
+	reqParam := reflect.New(reqParamType)
+
+	reqParamInterface := reqParam.Interface()
+	json.Unmarshal([]byte(jsonData), reqParamInterface)
+
+	reqParamElem := reqParam.Elem()
+
+	args := make([]reflect.Value, v.Type().NumIn())
+
+	args[1] = reqParamElem
+	ctx := context.Background()
+
+	valueCtx := reflect.TypeOf(ctx)
+
+	args[0] = reflect.New(valueCtx)
+
+	result := v.Call(args)
+
+	for _, v := range result {
+
+		fmt.Printf("Result: %v, Type: %v\n", v, v.Type())
+
+	}
+}
+
+
+```
