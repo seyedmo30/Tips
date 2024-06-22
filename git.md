@@ -28,6 +28,41 @@ git rebase -i HEAD~15
     
     git rebase -i master
 
++ tip
+توجه شود حتی اگر ۱۰ تا کامیت رو اسکواش کردیم ، باید همیشه اولین کامیت در بالا ترین جای ادیتور ، باید pick  باشد
+
+```
+
+pick 3f6b6d2 Initial commit
+squash d8c9e5b Add feature A
+squash a1b2c3d Fix bug in feature A
+squash 5f4e6a7 Improve feature A
+
+```
+## rebase tips
+
++ Detached HEAD
+
+```
+git checkout origin/feature/finalize-promissory-note
+
+git reset --hard HEAD
+
+```
+گاهی بعد از کار های بالا احتمال داره به جای اینکه دقیقن روی برنچ باشیم ، به عبارتی توی پرانتر oh-my-zsh جای برنچ ، عدد هست 
+
+در این حالت باید به جای checkout origin  چکآوت کنیم بدون origin :
+
+bad :
+```
+git checkout origin/feature/finalize-promissory-note
+```
+ok:
+
+```
+git checkout feature/finalize-promissory-note
+```
+
 ##### MERGE VS REBASE
 مرج تاریخچه را نگه می دارد در حالی که ریبیس تاریخچه را می توان تغییر داد  و بازگشت و ریورت در مرج آسان تر است 
 #### revert
