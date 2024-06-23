@@ -19,7 +19,11 @@
 ما همیشه از این دیزاین استفاده می کنیم بدون اینکه بفهمیم
 
 ### Clean Architecture Directory/Layers 
+
 **Entities**: Represent the core business objects.
+
 **Use Cases/Interactors**: Contain the application-specific business logic.
+
 **Interfaces/Adapters**: Act as a bridge between the core application and the external systems.
+
 **Frameworks/Drivers**: Include all external dependencies and infrastructure-related code.
