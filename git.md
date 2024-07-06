@@ -177,3 +177,9 @@ bugfix/bug-description
 hotfix/issue-description
 release/version-number
 ```
+
+#### history compare file
+
+right click  > git > show history
+
+و این جا میشه دو تا commit رو select کرد و compare کرد
