@@ -99,3 +99,13 @@ The GoPATH determines the root of the workspace whereas the GoROOT determines th
  پکیج های بیلتین
 
       /usr/local/go/src/fmt/
+
+ - **Use Named Return Values** با این روش میشه همون اول توی فانکشن ، نام های خروجی رو مشخص کرد و در پایان تنها ریترن بدون پارام کرد
+ 
+ ```
+ func calculate(x, y int) (sum int, product int) {
+    sum = x + y
+    product = x * y
+    return // no need to explicitly return named values
+}
+```
