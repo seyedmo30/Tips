@@ -76,6 +76,37 @@ https://www.kelche.co/blog/go/zap/
       	return instance
       }
 
+### tips
+توجه شود ارور زیر مجموعه لاگ است و می توان لاگ لول اینفو باشد ، می توان ارور باشد
+
+بهتر است در محیط توسعه لاگ بین لایه ها هم باشد اما در محیط پروداکت ، لاگ در ابتدا و انتهای سرویس باشد مثلن در مانی در لایه ی کافکا لاگ زده میشه ، همون ابتدا می گیم در خواست اومده و اطلاعات در خواست  ، و در نهایتهنگام پاسخ ، لاگ زده میشه و اگر ارور بود ، باید لاگ از لایه های زیری wrap شده باشه و لاگ شود
+یکی از ساختار های سادهلاگ :
+
+```
+{
+  "timestamp": "2024-07-11T15:30:00Z",
+  "level": "INFO",
+  "service": "example-service",
+  "message": "User successfully logged in",
+  "logger": "com.example.service.UserService",
+  "thread": "main",
+  "context": {
+    "user_id": "123456",
+    "request_id": "abc-123-def-456",
+    "ip_address": "192.168.1.100",
+    "request_link": "https://your-service.com/requests/abc-123-def-456",
+    "request_payload": {
+      "username": "example_user",
+      "password": "*****"
+      // Add other relevant request payload fields as needed
+    }
+  }
+}
+```
+
+ و در نهایت میشه خروجی برنامه رو با logstash توی الستیک دامپ کرد
+
+ 
 نکته : اگر در اجرای داکری سرویس از دستور زیر استفاده کنیم ، تمام لاگ ها مستقیم درون فایل لاگ ریخته میشود  و هیچ لاگی در صفحه سیستم عامل پرینت نمی شود ، و در نهایت نتیجه می گیریم لاگ های داکری همیشه خالی است .
 
 CMD /app/postgres_tailer >> /app/logs/log_tailer.log 2>>/app/logs/error.log
