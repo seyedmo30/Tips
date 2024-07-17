@@ -70,3 +70,31 @@ pass: bye
 env.maani.app
 
 token: hvs.CAESIBzHAH1Y-yo6_D-03rPqrWTX-BeQpxzKF9ouKukxsQDIGh4KHGh2cy5JSTJzaTNCdDdOR1lXVnNhZ2VqOHJnTjQ
+
+
+
+
+## swagger
+
++ برای لاگین در dev  ابتدا تو phpmyadmin باید لاگین کنیم
+
+```
+// id خودمون رو پیدا می کنیم
+
+http://10.21.15.99:21680/index.php?route=/sql&pos=0&db=authorizer&table=User
+
+27ed348a-cbe2-4882-8c21-f970c05b87ca
+
+
+// دیوایس ایدی پیدا می کنیم
+
+http://10.21.15.99:21680/index.php?route=/sql&pos=0&db=authorizer&table=Device
+
+SELECT * FROM `Device` WHERE userId = '27ed348a-cbe2-4882-8c21-f970c05b87ca';
+
+bd336d9e-4fc9-4b90-fbd3-36d9e4fc9b90
+
+```
+
+در نهایت توی سوگر لاگین می کنیم
+
