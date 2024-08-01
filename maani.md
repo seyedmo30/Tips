@@ -111,3 +111,26 @@ bd336d9e-4fc9-4b90-fbd3-36d9e4fc9b90
 
 در نهایت توی سوگر لاگین می کنیم
 
+
+### forticlient
+
+https://www.fortinet.com/support/product-downloads/linux
+
+Ubuntu 22.04 LTS
+
+Install gpg key
+
+wget -O - https://repo.fortinet.com/repo/forticlient/7.4/ubuntu22/DEB-GPG-KEY | gpg --dearmor | sudo tee /usr/share/keyrings/repo.fortinet.com.gpg
+
+Create /etc/apt/sources.list.d/repo.fortinet.com.list with the following content
+
+deb [arch=amd64 signed-by=/usr/share/keyrings/repo.fortinet.com.gpg] https://repo.fortinet.com/repo/forticlient/7.4/ubuntu22/ stable non-free
+
+Update package lists
+
+sudo apt-get update
+
+Install FortiClient
+
+sudo apt install forticlient
+ 

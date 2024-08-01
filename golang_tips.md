@@ -74,3 +74,15 @@ https://golangbot.com/first-class-functions/
     
     }
 ```
+
+
+## refrence
+
+### tips
+https://github.com/func25/go-practical-tips/blob/main/tips.md#readability--maintainability
+
+
+### type comperable
+
+تایپ استراکت در گو comperable هستن اگر همه ی فیلد هاشون برابر باشه ، آنگاه == , != نتیجه میده
+ . ولی تایپ فانکشن compareble    نیست
