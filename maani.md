@@ -21,6 +21,19 @@ confluene.maani.app
 smo.hosseini
 m.hosseini
 
+## forticlient
+
++ servcer
+  
+5.160.235.50
+
++ username
+smo.hosseini
+
++ password
+
+***********
+
 # pass
 aE_c$dx9
 SalaM#1234
