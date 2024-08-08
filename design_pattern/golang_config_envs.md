@@ -10,7 +10,7 @@
 
 کانفیگ بهتر است env  باشد اما برای valid کردن یا نگه داری و پاس دادن بهتر است در struct ریخته شود
 
-```
+```go
 import "github.com/caarlos0/env/v11"
 
 type DatabaseConfig struct {
@@ -48,14 +48,14 @@ type Config struct {
 حتی اگر از env  استفاده می کنیم ، بهتره در برنامه به صورت مستقیم از os.get استفاده نکنیم و اون رو پاس بدیم ، به این صورت مکی فهمیم هر لایه چه کانفیگ هایی احتیاج داره
 
 bad :
-```
+```go
 ...
 os.get("SAMPLE_ENV")
 ...
 ```
 
 ok :
-```
+```go
     cfg := config.LoadConfig()
     // Pass cfg to your application components
     app := NewApp(cfg)
