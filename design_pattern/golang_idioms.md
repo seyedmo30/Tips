@@ -100,6 +100,7 @@ func functionName(params ...Type)
 
 arr := [3]int{1, 2, 3}
 Slice := []int{1, 2, 3}
+bt := []byte("salam")
 m :=map[string]int{ "Alice": 30,"Bob":   25,}
 gg := struct{ name string }{name : "ali"}  
 gg := struct{}{} 

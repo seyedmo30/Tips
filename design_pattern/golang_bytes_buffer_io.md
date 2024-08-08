@@ -16,7 +16,9 @@ byt := make([]byte, 0, 50)                     اینیت
 
 # Reader
 
-ریدر در مفهوم گولنگ ، یک اینترفیس است که باید پروتوتایپ زیر را پیاده کند . اصولا در کانکریت ، یک استراکتی وجود دارد که متدی به نام رید دارد که است فیلد های استراکت برمی دارد و بر روی اسلایس ورودی میریزد .
+ریدر در مفهوم گولنگ ، یک اینترفیس است که باید پروتوتایپ زیر را پیاده کند . اصولا در کانکریت ، یک استراکتی وجود دارد که متدی به نام رید دارد که از فیلد های استراکت برمی دارد و بر روی اسلایس ورودی میریزد .
+
+به زبان دیگر از استراکت کم می کنه و به اسلایس بایت ورودی اضافه می کند ، توجه شود این را تا سقف اسلایس می ریزد و اتوماتیک طول اسلایس رو افزایش نمی ده
 
 ```
 type Reader interface {
@@ -27,6 +29,8 @@ type Reader interface {
 # Writer
 
 رایتر یک انترفیس است که متدی به نام رایت باید پیاده سازی کند که از اسلایس ورودی بخواند و به زیر لایه بریزد ، ( در استراکت خود اصولا فیلدی هست که بر روی آن بیفزاید ) 
+
+به زبان دیگر از اسلایس ورودی کم می کند و به اتربیوت درون استراکت میریزد
 
 ```
 type Writer interface {
@@ -41,7 +45,7 @@ type Writer interface {
 
 اینا ورودی یا خروجی ، تایپ نمی گیرن ، بلکه اینترفیس رایتر یا ریدر می گیرن ، حالا شما می تونید هر چی که رید یا رایت داره رو بدید به اینا مثل :
 
-```
+```go
 stdout := os.Stdout
 
 fmt.Fprintf(stdout, "$$$$")
@@ -56,8 +60,56 @@ fmt.Fprintf(f, "@@@@")
 
 
 ```
+## Common Usage Writer/Reader
+
++ **File I/O**
+
+```go
+ file, err := os.Create("example.txt")
+ defer file.Close()
+
+// Write
+_, err = file.Write([]byte("Hello, Go!"))
 
 
+// Read
+buf := make([]byte, 100)
+n, err := file.Read(buf)
+fmt.Println("Read", n, "bytes:", string(buf[:n]))
+```
++ **Custom Implementations**
+
+```go
+type CustomWriter struct{}
+
+func (cw CustomWriter) Write(p []byte) (n int, err error) {
+    return fmt.Print(string(p)) // Write data to standard output
+}
+
+func main() {
+    cw := CustomWriter{}
+    cw.Write([]byte("Hello, CustomWriter!"))
+}
+
+```
++ **Streams and Pipes**
+
+```go
+srcFile, err := os.Open("source.txt")
+defer srcFile.Close()
+
+dstFile, err := os.Create("destination.txt")
+defer dstFile.Close()
+
+ _, err = io.Copy(dstFile, srcFile)
+```
++ **HTTP Requests and Responses**
+```go
+resp, err := http.Get("http://example.com")
+defer resp.Body.Close()
+body, err := ioutil.ReadAll(resp.Body)
+
+```
 در مثال های زیر ریدر و رایتر پیاده سازی شدند
 
 # Buffer
@@ -67,7 +119,7 @@ fmt.Fprintf(f, "@@@@")
  در حقیقت بافر یک استراکت شامل اسلایس بایت ، طول اسلایس و تعداد متد برای راحتی کار با اسلایس فراهم کرده است ، استراکت بافر :
 
 
-```
+```go
 type Buffer struct {
     buf      []byte // contents are the bytes buf[off : len(buf)]
     off      int    // read at &buf[off], write at &buf[len(buf)]
@@ -113,7 +165,7 @@ WriteTo(w io.Writer) (n int64, err error)
 
 ریدر یک استراکت شامل یک استرینگ ، طول رشته است که چند متد دارد ، در حقیقت شبیه با بافر است ، با این فرق که بافر درون خود اسلایس بایت دارد و ریدر استرینگ .
 
-```
+```go
 type Reader struct {
 	s        string
 	i        int64 // current reading index
@@ -140,13 +192,10 @@ WriteTo(w io.Writer) (n int64, err error)
 # example 
 
  
-```
+```go
    package main
    import (
    	"fmt"
-   )
-   //importing the bytes package so that buffer can be used
-   import (
    	"bytes"
    )
    func main() {
@@ -163,6 +212,16 @@ WriteTo(w io.Writer) (n int64, err error)
     strBuffer.WriteTo(os.Stdout)            مثل پرینت
    }
 ```
+
+print :
+
+```
+The string buffer output is It is number: 10, This is a string: Bridge
+Hello RanjanKumar
+It is number: 10, This is a string: Bridge
+Hello RanjanKumar% 
+```
+
 ### نکات به دو روش بهینه می توان یک اسلایس را ریست یا خالی کنیم :
 		bucket := make([]byte, 0, 100)
 در این روش گاربج کالکتور این مریبل رو پاک می کنه و مموری منیجمنت بهتره اما اگر دوباره بخوایم توش چیزی بریزیم ، Capacity آن دیگر 100 نیست و مقدار پیشفرض گو می شود 
