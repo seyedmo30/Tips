@@ -38,91 +38,118 @@ https://stackoverflow.com/questions/71589811/go-ints-and-strings-are-immutable-o
 
  - **Function/method overloading** 
 
-  -  قابلیتی است که بعضی زبان های برنامه نویسی از جمله گو دارند و می تواندر یک پکیج بیش از یک فانکشن با اسم مشابه ساخت ، مثلا چند متد هم نام که هر کدام برای استراکت جدا است
+    قابلیتی است که بعضی زبان های برنامه نویسی از جمله گو ندارند و می توان در یک پکیج بیش از یک فانکشن با اسم مشابه ساخت ، مثلا چند متد هم نام که هر کدام پارامتر های مختلف میگیرند
 
+در گولنگ به جای این قابلیت از روش های غیر مستقیم می توان استفاده کرد
 
++ + استفاده از وریدیک فانکشن ها
 
-در گوروتین ها استفاده از گلوبال ها توصیه نمی شود زیرا می توان به طور همزمان به آنها دسترسی پیدا کرد و race condition رخ می ده
++ + چندین فانکشن که اسماشون تشابه داره ولی تهش متفاوت میشه مثل addInt یا addFloat
+
++ + استفاده از ریسیور ها و تعریف اولیه در اینترفیس
+
 
  - **Type Assertion** 
 
- : اگر بخواهیم تایپ یک اینترفیس را مشخص کنیم -   t, isSuccess := i.(string)
+ اگر بخواهیم تایپ یک اینترفیس را مشخص کنیم 
 
- - **func prototype/signiture** 
+ ```go
+ t, isSuccess := i.(string)
+ ```
+
+ - **func prototype/signature** 
 
  در حقیقت مجموع نام تابع، لیست پارامتر و ریترن را می گوند
 
-+ Compile-time interface assertion 
-
++ **interface compliance assertion**
 زمانی که بخواهیم مطمعن شویم که اینترفیس کانکریت شده ،  و همچنین خانایی استراکت و اینترفیس  بهتر شود از این استفاده می کنیم
-```
+
+```go
+//Compile-time interface assertion
+
 var _ Shape = (*Rectangle)(nil) //Shape interface and Rectangle struct
 ```
 
 
-blank identifier    شناسه خالی
++ **blank identifier**    شناسه خالی
 
 اگر یک فانکشن  خروجی داشت و ما خروجی ها را نادیده گرفته‌ایم ، آن را با  _  نمایش می دهیم یعنی خروجی را نادیده می گیریم
-
+```go
       _,res := Double(8)
+```
 
-
- - **string format** 
+ - **String formatting with placeholders** 
 
   میتوان داخل استرینگ با علامت درصد مقدار جایگذاری کرد
 
  - **Variadic Functions** 
 
- - یک فانکشن می توان صفر یا بی نهایت ورودی بگیرد و با سه نقطه مشخص می کنیم
+یک فانکشن می توان صفر یا بی نهایت ورودی بگیرد و با سه نقطه مشخص می کنیم
 
+ می توان زمانی که پارامتر آپشنال است استفاده کنیم همچنین تنها در هر فانکشن یک بار می شه استفاده کرد و باید آخری باشه
+
+```go
+func functionName(params ...Type)
+```
  - **Composite literals** 
 
  در صورتی که یک دیتا استراکچر تعریف کنیم و مقدار دهی اولیه کنیم ، در حقیقت آن را لیترال تعریف کرده ایم ، کار بردش زمانی است که می دانیم ظرفیت داده چقدر است .
 
 در بیشتر دیتا استراکچر ها در داخل پرانتز بعد اینیت ، مشخص می شود
-      
-      s:=S{name:"Michał", age:0}  -------  [3]string{“foo”, “bar”} --------  map[string]int{“euler”: 2, “pi”: 9}
-      
-      gg := struct{ name string }{name : "ali"}  ------------ gg := struct{}{} 
-      
-      totalRandom := struct {total int	;	mtx   sync.Mutex}{total: 10, mtx: sync.Mutex{}}
+```go
 
-#### empty struct موارد مصرفی
+arr := [3]int{1, 2, 3}
+Slice := []int{1, 2, 3}
+m :=map[string]int{ "Alice": 30,"Bob":   25,}
+gg := struct{ name string }{name : "ali"}  
+gg := struct{}{} 
+```
 
-دقت شود placeholder هیچ جایی در حافظه نمی گیرد
+### empty struct 
+
+دقت شود  هیچ جایی در حافظه نمی گیرد
 
 + لیستی از داده ها ، به جای آرایه یا اسلایس می توانیم از مپ زیر استفاده کنیم ، یکی از کاربرد های این ، سرچ سریع در مپ و گرفتن وجود یا عدم وجود است :
-  
-         map_obj := make(map[string]struct{})
 
+```go
+         map_obj := make(map[string]struct{})
+```
 + ارسال سیگنال به چنل ها البته بهتر است از کانتکست استفاده کنیم
 
-#### different GoPATH and GoROOT  
+## different GoPATH and GoROOT 
+
 The GoPATH determines the root of the workspace whereas the GoROOT determines the location of Go SDK .
 
 گو روت فایل نصبی است و درون bin آن ، باینری است که با آن کار می کنیم . اما GOPATH متغییر محیطی است ( go env بزنیم ) و مواردی چون پکیج ها و کامند های کامپلر شده ( مانند swag )  را درون خود دارد . 
 
 
 ###   export GOPATH=$HOME/go
+
 مثلا هر پکیجی که نصب می کنیم در GOPATH می رود :
-
-      /home/seyed/go/pkg/mod/github.com/gin-gonic/
-
+```
+/home/seyed/go/pkg/mod/github.com/gin-gonic/
+```
 و در صورتی که پکیج کامپایل شود در آدرس زیر می رود
 
-      /home/seyed/go/bin/swag
-
+```   
+   /home/seyed/go/bin/swag
+```
 ###   export GOROOT=/usr/local/go
  فایل اصلی گو که کد را کامپایل می کند 
 
-      /usr/local/go/bin/go
+```
+/usr/local/go/bin/go
+```
  پکیج های بیلتین
 
-      /usr/local/go/src/fmt/
+```     
+/usr/local/go/src/fmt/
+```
+### **Use Named Return Values** 
 
- - **Use Named Return Values** با این روش میشه همون اول توی فانکشن ، نام های خروجی رو مشخص کرد و در پایان تنها ریترن بدون پارام کرد
+با این روش میشه همون اول توی فانکشن ، نام های خروجی رو مشخص کرد و در پایان تنها ریترن بدون پارام کرد
  
- ```
+ ```go
  func calculate(x, y int) (sum int, product int) {
     sum = x + y
     product = x * y
@@ -130,7 +157,7 @@ The GoPATH determines the root of the workspace whereas the GoROOT determines th
 }
 ```
 
-### **variable types**
+## **variable types**
 
  + **visibility across package**
 
@@ -150,6 +177,9 @@ The GoPATH determines the root of the workspace whereas the GoROOT determines th
 
 درون  فانکشن یا متدی نیستند و در بدنه ی پکیج هستند و قابل مشاهده و تغییر توسط تمامی متد های آن پکیج هست
 
+**نکته** در گوروتین ها استفاده از گلوبال ها توصیه نمی شود زیرا می توان به طور همزمان به آنها دسترسی پیدا کرد و race condition رخ می ده
+
+
 + + **Local variables**
 
-درون فانکشن یا  ریسیور هستند و مقدارش تنا توسط فانکشن قابل خواندن است یعنی اگر تغییر دهیم ، درون فانکشن بیرونی همان مقدار قبلی است
+درون فانکشن یا  ریسیور هستند و مقدارش تنها توسط فانکشن قابل خواندن است یعنی اگر تغییر دهیم ، سوپر فانکشن  همان مقدار قبلی است
