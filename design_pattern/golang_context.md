@@ -1,23 +1,80 @@
-اگر بخوهیم از قابلیت cancel , Done کانتکست استفاده کنیم میبایست تمامی فانکشن هایی که این پارامتر را میگیرند ، استفاده کنیم :
 
-```
+### Common Usages
+
++ **Managing Goroutines**
 
 
-func F(ctx context.Context) {
-	select {
-	case <-ctx.Done():
-		fmt.Println("F: received cancellation signal")
-		return
-	default:
-		// Simulate some work
-		time.Sleep(1 * time.Second)
-		fmt.Println("F: working...")
-	}
+زمانی که یک حلقه ی بی نهایت قرار است به صورت گریس فول خاتمه یابد یا فرمان دللاین یا کنسل بیاد
+
+```go
+
+
+func longRunningTask(ctx context.Context) {
+    for {
+        select {
+        case <-ctx.Done():
+            fmt.Println("Task canceled")
+            return
+        default:
+            // Do work
+        }
+    }
 }
 
+```
++ **Timeouts**
 
+در جاهایی از برنامه که احتمال تاخیر در جواب باشد مانند database , network در این موارد پاسخ ممکن است با تاخیر باشد پس می توان تایمر گذاشت :
+
+```go
+func timeoutExample() {
+    // Create a context with a timeout of 2 seconds
+    ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+    defer cancel() // Ensure the context is canceled to avoid resource leaks
+
+    // Start a goroutine that does some work
+    done := make(chan struct{})
+    go func() {
+        defer close(done)
+        select {
+        case <-time.After(3 * time.Second):
+            fmt.Println("Work completed")
+        case <-ctx.Done():
+            fmt.Println("Work timed out:", ctx.Err())
+        }
+    }()
+
+    // Wait for goroutine to exit
+    <-done
+}
 ```
 
-این یعنی همیشه ابتدا چک کنیم کانتکس دان شده یا خیر ، همچنین باید هر جا که رانتایم منمتظر می ماند ، دان شدن را چک کنیم
 
-همچنین در جایی که کد پندیگ داره یعنی کد منتظر یه چنل هست ، در این صورت میتونیم اگر خیلی طول کشید یا برنامه خواست گریسفول پایین بیاد ، متوجه بشیم
++ **graceful shutdown**
+
+زمانی که برنامه به صورت طبیعی بخواد شات داون شه بهتره به تمامی فانکشن هایی که در حال اجرا هستن بگیم که با کمترین خسارت بسته بشن
+
+```go
+func main() {
+    // Create a cancellable context
+    ctx, cancel := context.WithCancel(context.Background())
+
+    // Set up a channel to listen for OS signals
+    sigChan := make(chan os.Signal, 1)
+    signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
+
+    // مثلن کدی که در مثال اول آورده شده
+    go longRunningTask(ctx)
+
+    // Block until a signal is received
+    sig := <-sigChan
+    fmt.Printf("Received signal: %s\n", sig)
+
+    // Cancel the context to notify goroutines to stop
+    cancel()
+
+    // Give goroutines time to clean up before exiting
+    time.Sleep(5 * time.Second)
+    fmt.Println("Shutting down gracefully")
+}
+```
