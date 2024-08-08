@@ -7,6 +7,12 @@ https://blog.faradars.org/%D8%B3%D8%A7%D8%AE%D8%AA%D9%85%D8%A7%D9%86-%D8%AF%D8%A
 
 همچنین، یک اشاره‌گر راس (Head) وجود دارد که به اولین عنصر از لیست پیوندی اشاره می‌کند و اگر لیست خالی باشد به تهی (Null) یا هیچ مقدار اشاره میکند.
 
+**نکته**
+
+همیشه در سوالاتی که حلقه دارد باید مقداری که قراره پیمایش کنیم و به روز کنیم ( منظور شرط حلقه ) را در یک متغییر تمپ بریزیم و بر روی تمپ پیمایش کنیم
+
+
+
 https://www.developer.com/languages/linked-list-go/
 
 https://www.golangprograms.com/golang-program-for-implementation-of-linked-list.html

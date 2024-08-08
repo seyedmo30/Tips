@@ -40,7 +40,7 @@ https://stackoverflow.com/questions/71589811/go-ints-and-strings-are-immutable-o
 
   -  قابلیتی است که بعضی زبان های برنامه نویسی از جمله گو دارند و می تواندر یک پکیج بیش از یک فانکشن با اسم مشابه ساخت ، مثلا چند متد هم نام که هر کدام برای استراکت جدا است
 
-variables scope : Local variables - Global variables -دامنه ی متغییر ها
+
 
 در گوروتین ها استفاده از گلوبال ها توصیه نمی شود زیرا می توان به طور همزمان به آنها دسترسی پیدا کرد و race condition رخ می ده
 
@@ -129,3 +129,27 @@ The GoPATH determines the root of the workspace whereas the GoROOT determines th
     return // no need to explicitly return named values
 }
 ```
+
+### **variable types**
+
+ + **visibility across package**
+
+دسته بندی انواع متغییر از جهت دیدن آنها در پکیج ها
+
++ + **Exported variables**
+
+با حرف بزرگ و در جاهای دیگه هم میشه دید
+
++ + **UnExported variables**
+
+با حرف کوچک و در بیرون پکیج قابل مشاهده نیست
+
++ **accessibility throughout the entire package**
+
++ + **Global variables**
+
+درون  فانکشن یا متدی نیستند و در بدنه ی پکیج هستند و قابل مشاهده و تغییر توسط تمامی متد های آن پکیج هست
+
++ + **Local variables**
+
+درون فانکشن یا  ریسیور هستند و مقدارش تنا توسط فانکشن قابل خواندن است یعنی اگر تغییر دهیم ، درون فانکشن بیرونی همان مقدار قبلی است
