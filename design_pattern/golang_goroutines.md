@@ -166,7 +166,7 @@ type SafeCounter struct {
 
 بهترین راه ارسال done - contect است - هر جا که احساس کردیم برنامه متوقف می شود یعنی یا منتظر سرویس بیرونی است یا .... بهتر است از راه زیر استفاده کنیم :
 
-```
+```go
 
 		select {
 		case <-ctx.Done():
@@ -182,11 +182,12 @@ type SafeCounter struct {
 + ساده
   
 
-		 x := <-ch 
+```	go
+	 x := <-ch 
 		 fmt.Println(x)
-	  
+```
 + انتخاب بین چند چنل
-
+```go
 	      for {
 	        select {
 	        case x, ok := <-ch1:
@@ -198,13 +199,13 @@ type SafeCounter struct {
 	            }
 	        case x, ok := <-ch2:
 	  
-
+```
 + در حلقه ی 
-
+```go
 		for i := range ch {
 		    fmt.Println(i)
 		}
-
+```
 سوالات خوب مصاحبه :
 
 https://www.tutorialspoint.com/articles/category/go-programming
@@ -216,7 +217,7 @@ https://www.tutorialspoint.com/articles/category/go-programming
 
 نیاز داشتم چنل رو پیک کنم یعنی چنل رو بخونم بدون اینکه از تو چنل بردارم و به این راه حل غلط رسیدم :
 
-```
+```go
 			
  res := <-w.workQueue
 			
