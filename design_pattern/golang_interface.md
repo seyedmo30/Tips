@@ -1,11 +1,11 @@
 برای مشخص شدن تایپ اینترفیس :
-
+```go
 type assertion  interface conversion
 
 str, ok := interfaceVar.(string)
 
 if msg, ok := rawMsg.(*pgproto3.CopyData); ok {
-
+```
 موارد مصرف اینترفیس :
 
 
@@ -13,7 +13,7 @@ if msg, ok := rawMsg.(*pgproto3.CopyData); ok {
 # Embedding interfaces in structs
 
 این روش برای وابسته کردن یک کلاس ( استراکت ) به اینترفیس است ، در حقیقت در کانستراکتور این کلاس باید شی ساخته شود که تمام رسیور های اینترفیس را ایمپلمنت کرده باشد 
-```
+```go
 
     type controller struct {
     	dataStore  	 protocol.DataStore
@@ -32,7 +32,7 @@ if msg, ok := rawMsg.(*pgproto3.CopyData); ok {
 ```
 در حقیقت مجبوریم شی بسازیم که dataStore را ایمپلمنت کرده باشد
 
-```
+```go
 	type DataStore interface {
 		GetLastIdList() (uint32, error)
 		List(ctx context.Context) chan types.SeedLink
