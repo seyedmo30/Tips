@@ -62,3 +62,22 @@ Error wrapping بسته بندی خطا
 + Panic: runtime error: index out of range
 
 زمانی که ایندکس مورد نظر در رشته نباشد
+
+
+**github.com/pkg/errors**
+
+```go
+import "github.com/pkg/errors"
+
+var ErrS1 = errors.New("operation failed due to a bad request")   // باید اول اسم حتما Err باشه
+ 
+ 	if err := riskyOperation(); err != nil {
+		return errors.Wrap(err, "failed to do something") // wrapper
+	}
+
+
+    if errors.Is(err, ErrGG) { // Unwrap the error 
+        fmt.Println("salam") // حتی اگه خطا رپ شده هم باشد باز هم خروجی میده
+    }
+
+```
