@@ -6,7 +6,7 @@
 این که از آدرس به مقدار برسیم میگن
 
 ### nil
-```
+```go
 
 A *int
 Print a --> nil
@@ -33,6 +33,7 @@ B =New(int)           ---------> حتی اگر B  رو مقدار دهی هم ن
 
 ### Pointer in go 
 
+```go
 _________ -> error
 
 var x *int
@@ -48,7 +49,7 @@ px := new(int)
 
 x = px
 
-
+```
  توجه شود به هیچ وجه از پوینتر اینترفیس ( *interface{} ) استفاده نشود  .
 
  زیرا مقدار داخل اینترفیس در حقیقت مقدار استراکت ایمپلمنت شده نیست ، در حقیقت پوینتری از آن است .
@@ -93,9 +94,14 @@ https://levelup.gitconnected.com/go-for-range-slice-bug-lessons-learned-fa401d5d
 
 همچنین یه روش هست که فقط declare می کنه اما init value انجام نمی ده خطر اینه اگر مقادیر رو بخوایم runtime error برمی گردونه
 
-‍```
+
+```go
+
 var contract dto.GetContractRepositoryResponse
+
 ```
+
+
 
 در عوض وقتی از new استفاده می کنیم ، درون هیپ ریخته میشه ، فیلد ها zero-initialized پر میشن ، مقادیر دوباره باید به پوینتر اساین شوند
 # Method Receiver - Pointer v/s Value
