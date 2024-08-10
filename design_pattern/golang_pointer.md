@@ -1,9 +1,17 @@
 
 ## tips
 
-### Derefrence
++ **Dereferencing a pointer**
 
 این که از آدرس به مقدار برسیم میگن
+
+
++ همیشه این دو در برابر هم هستند :
+
++ + **pointer variables** -- which point to a memory address
+
++ + **value variables(Non-Pointer)** -- which hold the actual data
+
 
 ### nil
 ```go
@@ -88,22 +96,9 @@ https://levelup.gitconnected.com/go-for-range-slice-bug-lessons-learned-fa401d5d
 0 for numeric types, "" for strings, nil for pointers
 
 
-### Struct Literal vs Pointer
-
-وقتی لیترال تعریف می کنیم ، به صورت کلی بر روی استک ذخیره می شه ، داده ها همون اول توی فیلد ها اینیت می شن به عبارت دیگه داده ها مستفیم درون فیلد های خودشون میشینن در نتیجه نیاز به مموری اضافه نیست زیرا اگر همون اول نشینن به معنی اینه که داده پیش فرض میشینه توش .
-
-همچنین یه روش هست که فقط declare می کنه اما init value انجام نمی ده خطر اینه اگر مقادیر رو بخوایم runtime error برمی گردونه
 
 
-```go
-
-var contract dto.GetContractRepositoryResponse
-
-```
-
-
-
-در عوض وقتی از new استفاده می کنیم ، درون هیپ ریخته میشه ، فیلد ها zero-initialized پر میشن ، مقادیر دوباره باید به پوینتر اساین شوند
+ وقتی از new استفاده می کنیم ، درون هیپ ریخته میشه ، فیلد ها zero-initialized پر میشن ، مقادیر دوباره باید به پوینتر اساین شوند
 # Method Receiver - Pointer v/s Value
 
 در رسیور های یک استراکت می توانیم ازپروپرتی ها یا فیلد های استراکت هم استفاده کنیم ، برای این منظور از رسیور استفاده می کنیم ، همچنین برای مشخص کردن متد های ایمپلمنت شده برای اینترفیس هم از آن استفاده می شود . 
@@ -121,3 +116,40 @@ var contract dto.GetContractRepositoryResponse
 اگر گیرنده map, func or chan است، از اشاره گر به آن استفاده نکنید.
 
 اگر گیرنده یک struct, array or slice است و هر یک از عناصر آن نشانگر چیزی است که ممکن است در حال mutate باشد، یک گیرنده اشاره گر را ترجیح دهید،
+
+
+### Common Usage Scenarios
+
+```go
+type Person struct {  
+	Name string  
+	Age  int  
+}  
+
+
+var p1 Person
+
+p2 := Person{Name: "Salam", Age: 20}
+
+p3 := new(Person)
+
+fmt.Printf("p1: %+v\n", p1) // p1: {Name: Age:0}
+
+fmt.Printf("p2: %+v\n", p2) // p2: {Name:Salam Age:20}
+
+fmt.Printf("p3: %+v\n", p3) // p3: &{Name: Age:0}
+
+
+```
+
++ در اولی و دومی هیچ فرقی ندارند هر دو در وریبل معمولی هستند و کاربردشان در همین اسکوپ است ، بعد از استفاده نیازی به آنها نیست
+
++ در دومی literal  مقدار دهی شده ولی در اولی Zero value (default) شده
+
++ اما در سومی وریبل پوینتری است و کاربردش زمانی است که استراکت بزرگ باشد و بخواهیم چندین بار پاس بدیم و استفاده کنیم
+
++ در اولی و سومی  Name= "" and Age= 0 
+
++ در این مثال p3 **Pointer Variable** 
+
++ در این مثال *Person یک **Pointer Type** هست
