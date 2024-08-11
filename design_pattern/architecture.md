@@ -74,12 +74,28 @@
 
 ### system design paterns
 
- - **CQRS** میگه بیایم دستوراتی که چیزی به استوریج اضافه میکند یا تغییری ایجاد می کند را جدا کنیم از دستوراتی که داده را میخوانند 
+- - **Microservices**
+- - **Event-Driven Architecture**
+- - **API Gateway**
+- - **Load Balancer**
+- - **Service Registry**
+
+این سرویس مانند یک دیتابیس است که هر سرویس که بالا میاد اطلاعاتش رو نگه میداره ، مانند آدرسش توی شبکه  اینکه اینستنس از چه سرویسیه ، هلت چک و اطلاعات متا دیتا از اینستنس
+
+ابزار هایی مانند Zookeeper - Consul - Eureka
+
+- **Circuit Breaker**
+- **Cache**
+- **Database Sharding**
+- **Strangler Fig**
+- **Bulkhead**
+ - **CQRS(Command Query Responsibility Segregation)** میگه بیایم دستوراتی که چیزی به استوریج اضافه میکند یا تغییری ایجاد می کند را جدا کنیم از دستوراتی که داده را میخوانند 
  - - **command side** postgres - Cassandra - mongodb
  - - **query side** mongo - elk - redis
  - **Saga pattern** 
  - **Circuit breaker** 
  - **Rate limiting** 
+ 
 ## اصطلاحات کلی برای system design - architecture
 
  - **Horizontal Scaling** مقایس پذیری افقی ، تعداد سرور ها زیاد شه
@@ -189,9 +205,6 @@ protocol
 
 
 
-
-
-
 ### building blocks
 
 **توجه شود این شاید درست یا کامل نباشد**
@@ -223,3 +236,5 @@ protocol
 + application
 
 + system, architecture
+
+
