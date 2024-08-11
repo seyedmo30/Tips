@@ -1,4 +1,3 @@
-<div dir='rtl' align='right'>
 
 ### circuit breaker pattern
 
@@ -79,7 +78,7 @@
 
 در یک مثال chatgpt
 
-```
+```go
 
 package main
 
@@ -210,6 +209,3 @@ never trust, always verify
 تنها چیزی که gateway تولید میکنه ، metadata هست و میشه به آن اطمینان کرد و با استفاده از این ، درخواست های دابل چک کرد ، به نظرم وظیفه ی ولید بودن درخواست در لایه ی یوزکیس نیست ، در لایه ی دلیوری یا فریمورک است
 
 
-
-
-</div>
