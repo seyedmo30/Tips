@@ -176,9 +176,3 @@ CREATE TABLE Configurations (
     UpdatedBy VARCHAR(100)  
 );  
 ```
-
-sss
-
-‍ff
-
-‍‍‍‍‍‍‍gg
