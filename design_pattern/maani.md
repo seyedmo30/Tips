@@ -159,3 +159,26 @@ Source of truth باید مشخص شود و اما نباید کلید اصلی 
 بهتر است هر چه زود تر sandbox  و راه ارتباطی با پروایدر رو پیدا کرد
 
 همیشه باید سنارو هایی رو دید که پروایدر به صورت موقت یا دایم از دسترس خارج شود
++ **config**
+
+با اینکه منطقیه خیلی از دیتا هایی که کانفیگه رو توی env - vault - نگه داریم اما سامانه هایی که ادمین یا پشتیبان داره میشه بعضی از دیتا ها توی دیتابیس ذخیره مثلا : 
+
++ database socket , kafka socket , اینا رو توی env  میدیم ولی اطلاعات زیر از طریق دیتابیس خونده میشه
+
++ مبلغ سفته یا امضای دیجیتال که احتمالن هیچ وقت تغییر نمی کنه ، ولی شاید بعد یه سال قیمتا عوض شه
+
+```
+CREATE TABLE Configurations (  
+    ConfigKey VARCHAR(255) PRIMARY KEY,  
+    ConfigValue VARCHAR(255) NOT NULL,  
+    Description TEXT,  
+    LastUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  
+    UpdatedBy VARCHAR(100)  
+);  
+```
+
+sss
+
+‍ff
+
+‍‍‍‍‍‍‍gg
