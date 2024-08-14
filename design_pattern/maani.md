@@ -111,6 +111,37 @@ bd336d9e-4fc9-4b90-fbd3-36d9e4fc9b90
 
 در نهایت توی سوگر لاگین می کنیم
 
+### راه راحت لاگین در SWAGGER
+
+ابتدا با کد ملی و پسورد و ورژن ۲ لاگیم می کنیم
+
+**https://api.dev.maani.app/api/v1/auth/login**
+
+```
+curl -X 'POST' \
+  'https://api.dev.maani.app/api/v1/auth/login' \
+  -H 'accept: application/json' \
+  -H 'device-id: bd336d9e-4fc9-4b90-fbd3-36d9e4fc9b90' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "locationLat": 35.725285,
+  "locationLng": 51.442619,
+  "version": "2.0.0",
+  "channel": "Google Play",
+  "manufacturer": "Samsung",
+  "system": 12,
+  "androidApiLevel": 12,
+  "model": "SM-G998B",
+  "resolution": "1600x720",
+  "network": "4G",
+  "carrier": "Irancell",
+  "loginBy": "Credentials",
+  "loginFrom": "Direct",
+  "username": "0019207670",
+  "password": "Salam123"
+}'
+```
+سپستوکن رو کپی می کنیم تو authorizations
 
 ### forticlient
 
