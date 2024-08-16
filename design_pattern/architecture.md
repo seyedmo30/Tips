@@ -88,6 +88,9 @@
 - **Cache**
 - **Database Sharding**
 - **Strangler Fig**
+
+یه استراتجی برای مهاجرت از مونولیتیک به معماری جدید و به معنی انجیر خفه کننده است و یعنی آرام آرام درخت اصلی رو می کشه
+
 - **Bulkhead**
  - **CQRS(Command Query Responsibility Segregation)** میگه بیایم دستوراتی که چیزی به استوریج اضافه میکند یا تغییری ایجاد می کند را جدا کنیم از دستوراتی که داده را میخوانند 
  - - **command side** postgres - Cassandra - mongodb
@@ -95,7 +98,7 @@
  - **Saga pattern** 
  - **Circuit breaker** 
  - **Rate limiting** 
- 
+
 ## اصطلاحات کلی برای system design - architecture
 
  - **Horizontal Scaling** مقایس پذیری افقی ، تعداد سرور ها زیاد شه
