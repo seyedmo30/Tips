@@ -175,7 +175,49 @@ cursor
 
 همچنین می توان ابتدای کوییری explain analize گذاشت و دید که زمان و ترتیب جست و جو در ایندکس ها چقدر است
 
- مثلا استفاده از اینکس با تایپ B_Tree  
+**tips**
+
+دلیل این نام گذاری ، عمق( depth ) این درخت ها ثابت است 
+ مثلا استفاده از اینکس با تایپ B_Tree (Balanced tree)  ، **پیچیدگی زمانی** در این ایندکس برابر **O(log n)** است  
+
+**مثال**
+
+```sql
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate DATE,
+    Amount DECIMAL(10, 2)
+);
+
+CREATE INDEX idx_customer_orderdate ON Orders(CustomerID, OrderDate);
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, Amount) VALUES
+(1, 101, '2024-01-15', 250.00),
+(2, 102, '2024-01-16', 150.00),
+(3, 101, '2024-01-17', 200.00),
+(4, 103, '2024-01-18', 300.00),
+(5, 102, '2024-01-19', 350.00),
+(6, 101, '2024-01-20', 400.00);
+
+
+-- Query using the composite index
+SELECT * FROM Orders 
+WHERE CustomerID = 101 AND OrderDate >= '2024-01-15';
+
+
+              [101, 102, 103]
+             /        |        \
+          /           |         \
+   [101, 2024-01-15] [102, 2024-01-16] [103, 2024-01-18]
+      /      |       \                \
+     /       |        \                \
+[101, 2024-01-17]  [102, 2024-01-19]  [NULL]
+      |
+  [101, 2024-01-20]
+
+
+```
 
 همچنین توجه شود اگر ستونی که تنها ۳ داده مانند "good", "normal", and "bad"  راذخیره می کند ، ایندکس کنیم ، تکرار در ذخیره ایجاد نمی شود
 
