@@ -6,6 +6,19 @@
 
 Handles routing, authentication, authorization, rate limiting, load balancing, logging, and monitoring.
 
+**tips**
+
+ کد 429 در http به معنی rate limiting است
+
+می شه توی ردیس ذخیره کرد
+
+**algorithm**
+
++ **token bucket**
+
+هر ریکوست یک توکن داره و به ازای هر کاربر یک باکت در نظر میگیریم این باکت میتونه مثلن سقف ۱۰ توکن داشته باشه و هر در خواست یه دونه توش میندازه ، اگر پر شده اید صبر کنیم تا توکن ها اکسپایر شن و باکت خالی شه 
+
+
 
 + **Authentication and Authorization**
 
@@ -31,7 +44,7 @@ Handles routing, authentication, authorization, rate limiting, load balancing, l
 
 Examples: Prometheus, Grafana, ELK
 
-+ **Message Brokers/Event Buses**
++ **Message Brokers/Event Buses/Message queue**
 
 asynchronous communication and event-driven architectures.
 

@@ -16,6 +16,33 @@
 
 + Polymorphism - می توان توابعی نوشت که هر تایپی را میگیرد یا خروجی دهد، anyelement
 
+### انواع nosql ها
+
++ **key-value base**
+ولیو میتونه استرینگ یا حتی جیسون باشه
+
+مثلن ذخیره سشن یا شبیه به اطلاعات ردیس 
+
+مثل amazon dunamoDb
+
++ **document base**
+
+مثل mongodb
+
+روی key-value نمی شه ایندکس زد یا کوییری روی value زد اما روی document میشه ایندکس کرد
+
++ **wite base/column family base**
+
+پایگاه داده های ستونی
+
+casandra
+
++ **graph base**
+
+گره نماینده شی و یال رابطه است
+
+مثل neo4j
+
 ##  Transactions
 
 

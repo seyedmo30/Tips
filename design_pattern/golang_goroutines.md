@@ -107,7 +107,7 @@ CPU Threads: 8 (which usually means 8 **logical** processors or CPU cores)
 
 ### **mutex**
 
-برای اینکه race condition رخ ندهد ، یعنی چند گوروتین دسترسی یا تغییر shard data همزمان نداشته باشند از mutex استفاده می کنیم
+برای اینکه race condition رخ ندهد ، یعنی چند گوروتین دسترسی یا تغییر shared data همزمان نداشته باشند از mutex استفاده می کنیم
 
 
 در بیشتر مثال ها داده درون یک استراکت ، همراه mutex است 

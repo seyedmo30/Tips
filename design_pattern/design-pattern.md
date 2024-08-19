@@ -8,11 +8,138 @@
 
  یک رابط برای ایجاد خانواده های اشیاء مرتبط یا وابسته بدون مشخص کردن کلاس های مشخص آنها فراهم می کند.
 
+در حقیقت زمانی استفاده میشه که پیاده سازی کلاس برامون مهم نیست و مستقله
+
+
 
 در این دیزاین پترن ، نیازی نیست تمام اجزای برنامه را ( کلاس ها را ) پیاده سازی کنیم ، بلکه با تعریف اینترفیس ها تنها رابطه ی بین کلاس ها را تعریف می کنیم و پیاده سازی کلاس ها را مستقل از رابطه آنها در نظر می گیریم. 
 
-در حقیقت می توانیم بجای اینکه یک شی را ایجاد کنیم ، فانکشن ها و رفتار های کلی آن را در یک رابط یا اینتر فیس تعریف کنیم و از آن پس می توانیم شی های مورد نظر را با توجه به امضا های تعریف شده در رابط پیاده سازی کنیم و در صورت پیاده سازی تمام فانکشن ها ، به صورت غیر مستقیم و با استفاده از رابط ، آنها را به هم وصل کنیم. 
 
+چهار بخش اصلی :
+
++ **Abstract Factory**
+
++ **Concrete Factory**
+
++ **Abstract Products**
+
++ **Concrete Products**
+
+**usage**
+
+زمانی استفاده میشه که مانند Builder بخوایم یه پکیج بسازیم ولی ورودی هامون اینترفیس باشه و با رفتار هایی که تعریف کردیم توی اینترفیس کار کنیم
+
+مثلن شما orm جنگو رو دارید ولی می خوایید از mysql  برید روی postgres  پس نیاز دارید یه پکیج نصب کنید ، اون پکیج بدون این که ببینیدتمامی اینترفیس های فکتوری رو پیاده کرده
+
+یا مثلن کسی که یه پلتفورم رو طراحی کرده و بقیه می تونن extention روش بنویسن از این استفاده می کنن
+
+باید interaface در خروجی داد
+
+برای نوشتن پلتفرمی که اکستنشن ها بتونن تو اون پلتفرم کار کنن از این الگو باید استفاده کرد
+
+```go
+// ProductA is the interface for the first product type
+type ProductA interface {
+	Use() string
+}
+
+// ProductB is the interface for the second product type
+type ProductB interface {
+	Use() string
+}
+type AbstractFactory interface {
+	CreateProductA() ProductA
+	CreateProductB() ProductB
+}
+
+
+////////////////////
+
+
+// ConcreteFactory1 is a concrete implementation of AbstractFactory
+type ConcreteFactory1 struct{}
+
+func (f *ConcreteFactory1) CreateProductA() ProductA {
+	return &ConcreteProductA1{}
+}
+
+func (f *ConcreteFactory1) CreateProductB() ProductB {
+	return &ConcreteProductB1{}
+}
+
+// ConcreteFactory2 is another concrete implementation of AbstractFactory
+type ConcreteFactory2 struct{}
+
+func (f *ConcreteFactory2) CreateProductA() ProductA {
+	return &ConcreteProductA2{}
+}
+
+func (f *ConcreteFactory2) CreateProductB() ProductB {
+	return &ConcreteProductB2{}
+}
+
+//////////////
+func main() {
+	var factory AbstractFactory
+
+	// Use ConcreteFactory1
+	factory = &ConcreteFactory1{}
+	productA1 := factory.CreateProductA()
+	productB1 := factory.CreateProductB()
+	
+	println(productA1.Use()) // Output: Using Product A1
+	println(productB1.Use()) // Output: Using Product B1
+
+	// Use ConcreteFactory2
+	factory = &ConcreteFactory2{}
+	productA2 := factory.CreateProductA()
+	productB2 := factory.CreateProductB()
+
+	println(productA2.Use()) // Output: Using Product A2
+	println(productB2.Use()) // Output: Using Product B2
+}
+```
+
+
+## factory method
+
+ این الگو به ما اجازه می دهد تا با استفاده از interface ها ، شی مورد نظر خود را بسازیم اما زیر کلاس ها بتونن و اجازه داشته باشن کلاس ساخته شده را تغییر دهند 
+ 
+ معمولا زمانی استفاده میشود که یک شی فیلد هاش قابل پیش بینی نباشد 
+
+ به دلیل این که گولنگ از وراثت پشتیبانی نمی کند ، نمی توان مثالی آورد
+
+
+## factory method vs Abstract Factory
+
+**شباهت**
+
+ساختار هر دو بسیار شبیه است
+
+و باید interface در خروجی باشد
+
+**نکته** جز معدود جاهایی است که در سیگنیچر این ها ، اینترفیس باید ریترن کرد
+
+بیش از حد شبیه **Abstract Factory** هست تنها تفاوتشون نحوه ی استفادشون هست ولی ساختارشون یکیه 
+
+توی Abstract Factory می تونیم چندین شی شبیه به هم کانکریت کنیم
+
+```go
+type AbstractFactory interface {
+	CreateProductA() ProductA
+	CreateProductB() ProductB
+}
+```
+اما توی factory method نیازه تنها یک شی کانکریت بشه
+```go
+type Creator interface {
+	FactoryMethod() Product
+}
+```
+
+همچنین client یا کاربر تنها در main.go از اشیا استفده می کنند و خود آن ها را کانکریت نمی کنند
+
+کانکریت کردن وظیفه ی کاربر نیست و subclass باید superclass را کانکریت کند
 
 ## Builder
 
@@ -24,13 +151,6 @@
 بجای اینکه بخوایم تمام مقادیر رو یگ جا بدیم، می تونیم از الگوی بیلدر استفاده کنیم و تیکه تیکه به اون مقدار بدیم
 
 و یکی از بهترین مثال هاش ، او آر ام جنگو هست که می شه تیکه تیکه آبجکت رو ساخت و در نهایت اون رو اگزکیوت کرد
-
-## factory method
-
- این الگو به ما اجازه می دهد تا با استفاده از زیر کلاس ها ، تغییرات روی اشیا را صورت دهیم .
- 
- به دلیل این که گولنگ از وراثت پشتیبانی نمی کند ، نمی توان مثالی آورد
-
 
 ## singleton
 
