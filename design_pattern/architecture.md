@@ -3,7 +3,15 @@
 
 به تعریف و طراحی معماری سیستم ، کامپوننت ها ، اینترفیس ها - همان API  - ، دیتابیس می گن و با توجه به نیاز ها و بیزینس می شه تردآف هایی در نظر گرفت
 
+## انواع معماری
 
++ monolitic arch
++  microservice arch
++  event driven arch
++  Hexagonal Architecture (Ports and Adapters)
++  N-Tier Architecture
++  Service-Oriented Architecture (SOA)
++  client server arch
 ### Event-driven architecture
 
 یک الگوی طراحی است که اجزای آن رویداد محور ارتباط با هم دارن و این ارتباط شامل generation, detection, and consumption of events است
