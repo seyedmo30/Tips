@@ -6,6 +6,8 @@
 
 Handles routing, authentication, authorization, rate limiting, load balancing, logging, and monitoring.
 
+tools kong 
+
 **tips**
 
  کد 429 در http به معنی rate limiting است
@@ -24,6 +26,8 @@ Handles routing, authentication, authorization, rate limiting, load balancing, l
 
 مدیریت یوزر ها و دسترسی به کامپوننت ها
 
+tools keyclock
+
 
 + **Service Registry and Discovery**
 
@@ -31,8 +35,9 @@ Handles routing, authentication, authorization, rate limiting, load balancing, l
 
 در حقیقت این یه سرویس هست که بتونیم به جای یه آدرس ، یه نام برای سرویس داشته باشیم و با یه نام مشخص کنیم و در صورتی که بخوایم این سرویس رو به جای یه سرویس دیگه قرار دهیم می تونیم اون رو به جای یه سرویس دیگه قرار دهیم 
 
+tools zookeeper
 
-**Infrastructure Services**
+#### **Infrastructure Services**
 
 یکم زیر ساختی تر :
 
@@ -65,6 +70,7 @@ Examples: Kubernetes Liveness
 Examples: Kubernetes, Docker Swarm
 
 + **Service Mesh**
-
+  
+example tools :consul
 مدیریت  ارتباط سرویس ها با هم  مانند سیکیوریتی ، قابلیت مشاهده ی یک دیگر سرویس ها ،  و ترافیک بین آنها
 
