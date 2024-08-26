@@ -46,6 +46,47 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
 
  کولپس  و اکسپند تمام صفحه
 
+## debug
+
+برای debug توی main.go 
+#### ...... project/.vscode/launch.json 
+```
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+
+        
+        {
+            "name": "Launch Package",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "args": ["serve"],
+            "env": {
+                "IRANSIGN_BASE_URL": "1234",
+                "IRANSIGN_API_KEY": "1234",
+                "IRANSIGN_PRODUCT": "800",
+                "KAFKA_SOCKET": "1234",
+                "DB_USERNAME": "root",
+                "DB_PASSWORD": "1234",
+                "DB_HOST": "10.21.10.8",
+                "DB_PORT": "3307",
+                "DB_DATABASE": "digital_signature",
+                "DB_POOL_SIZE": "10",
+                "DB_MAX_IDLE": "5",
+                "KAFKA_RETRY": "0",
+                "KAFKA_TIMEOUT": "30",
+                "KAFKA_GROUP_ID": "1234"
+              },
+            "program": "/home/mostafa/projects/digital-signature/main.go"
+        }
+    ]
+}
+```
 #### home/seyed/.config/Code/User/keybindings.json
 
 ```
