@@ -32,6 +32,23 @@ https://stackoverflow.com/questions/71589811/go-ints-and-strings-are-immutable-o
 
  به این معناست که ما می توانیم هرتایپی را درون استراکت بزاریم ، اینجا مقصود اینترفیس است که می توان در استراکت ، یک پراپرتی باشد
 
+ توجه شود نباید **struct embedding** و **Field Containment** را با هم اشتباه بگیریم ، در امبد کردن در حقیقت آن استراکت بخش از سوپر استراکت است و برای دسترسی نیازی به نام امبد شده نیست
+
+ همچنین برای کار با جیسون ، زمانی که امبد می کنیم ، در حقیقت هیچ کلیدی در نظر نمی گیرد
+ ```go
+
+type Outer struct {
+    Inner // Inner is embedded
+}
+
+type GetOrderInfoBodyResponse struct {
+    Message      string               `json:"message"`
+    ResultCode   int                  `json:"resultCode"`
+    ResponseBody GetOrderInfoResponse `json:"responseBody"` // This is a field, not embedding
+}
+ ```
+
+
  - **deadlock** 
 
  زمانی که بافر چنل ها پر شود، وگوروتین ها منتظرخالی شدن چنل برای ریختن داده در آن هستند ، در حالی که خالی نمی شود ، اصطلاحا می گن ددلاک شده ،همچنین اگه چنل خالی باشه و یک گوروتین منتظر که داده از چنل برداره و همه گوروتین ها منتظرن ، باز هم دد لاک میشه
