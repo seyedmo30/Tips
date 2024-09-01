@@ -757,6 +757,10 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
     {
         "key": "ctrl+.",
         "command": "workbench.action.focusActiveEditorGroup"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.files.action.collapseExplorerFolders"
     }
 ]
 
