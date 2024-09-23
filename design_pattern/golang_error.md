@@ -86,11 +86,16 @@ var ErrS1 = errors.New("operation failed due to a bad request")   // باید ا
 
 ## tips
 
+### error extend struct 
 بهتره ارور ساختار زیر رو داشته باشه :
 
 ```go
+// built-in interface
+type error interface {
+	Error() string
+}
 
-
+// custom struct error
 type AppError struct {  
 	Code        int  
 	Description string  

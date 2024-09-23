@@ -79,6 +79,17 @@ user : root
 
 pass: bye
 
+
+#### mysql dev read_only
+
+فقط با php myadmin میشه رفت توش
+
+https://mysql.dev.maani.app/
+
+user: report
+
+pass: hjsatyc656afbxhgdFsd56
+
 # vault
 env.maani.app
 
@@ -207,3 +218,21 @@ CREATE TABLE Configurations (
     UpdatedBy VARCHAR(100)  
 );  
 ```
+
+
+
+### داستان sync و مشکلات آن
+
+گاهی اوقات اپ درخواست ایجاد پرونده رو میزنه و میگه hasDigitalSignature یعنی داره یا نه ، گاهی برنامه تازه نصب شده و در دیتابیس جدید است و مراحل happy path  میره جلو در این صورت در دیتابیس و پروایدر ساخته میشه
+
+اما گاهی طرف قبلن امضا داشته ولی clear cache  کرده
+
+حال دوباره hasDigitalSignature چک میشه ، اگه false  باشه ابتدا sync  صدا زده میشه سپس register ، بر این باوریم هرگاه register  از سمت app صدا زده میشه آنگاه hasDigitalSignature نبوده تو app  پس باید تمامی امضا ها باطل شود و از نو ساخته باشه
+
+مشکل فعلی sync هم اینه که اگر بد موقع صدا زده شه ، امضا ها رو باطل میکنه
+
+
+**راه حل به ذهن من میرسه**
+
+به جای sync یک api میدیم که باطل میکنه ، حال کلاینت میتونه با استفاده از شناسه یوزر بخواد که امضا ها رو باطل کن ، اینجوری مشکل سینک بودن بر طرف میشه و اگر خواست register  کنه با خطا مواجه میشه ، چون درخواست کننده میدونه  که باید دوباره register  کنه طبق **hasDigitalSignature** ابتدا revoke  کنه سپس register  کنه
+
