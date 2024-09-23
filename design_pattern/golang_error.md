@@ -82,7 +82,7 @@ var ErrS1 = errors.New("operation failed due to a bad request")   // باید ا
 
 ```
 
-
+![Description of the image](https://github.com/seyedmo30/Tips/blob/main/static/1_CcZQx10nlxPi2YD3x5fUpg.png)
 
 ## tips
 
