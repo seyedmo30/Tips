@@ -1,4 +1,101 @@
 
+میشه رفتار ها و انواع مفاهیم مرتب با مموری و ذخیره  رو از چند منظر دید 
+
+## data allocation (stack or heap)
+
+بعدن باید مطالب به این جا آورده شود
+
+## type of the variable(Reference Types vs Value Types) 
+
++ **`Value Types`**
+
+
+تایپ هایی که در ورونش واقعن مقدار آن ریخته میشود و به این معنی که هر بار به فانکشنی پاس میدهیم  یک کپی از آن گرفته میشه و کپی در فانکشن جدید ریخته میشه ، به این ترتیب داده در اسکوپ جدید استفاده می شه و بعد از پایان کار فانکشن داده پاک میشه ( چون تو استک هست) 
+
+داده های زیر از این نوع هستند
+
+```
+int,  , bool , string , Structs ,Arrays
+```
+زمانی که بخواهیم تایپ ما یک پوینتر باشد به طوری که مقدار و رفرنس تایپ ما (Reference Types vs Value Types)  هر دو روی هیپ ذخیره شود از `new()` استفاده می کنیم
+
++ **`Reference Types`**
+
+این تاپ ها درون خود آدرس دارن ( شبیه به پایتون وقتی یه کلاس رو توی یه متغییر جدید  کپی م کردیم ) و نه داده ی واقعی و وقتی آن را در متغییر جدید میریزیم ، در حقیقت آدرس رو میریزیم
+
+هرگاه برای ساخت اینا از دستور `make()`  استفاده کنیم ، بر روی هیپ آن ها رو الوکیت می کنیم . توجه شود با*`new()`* هم می توان تولید کرد
+
+
+
+`Slices,  , Maps , Channels , Pointers`
+
+
+```go
+var s1 = []int{1, 2, 3}  
+var s2 = s1 // s2 points to the same underlying array as s1  
+
+m1 := make(map[string]int)  
+m1["one"] = 1  
+m2 := m1 // m2 refers to the same map as m1
+
+ch1 := make(chan int)  
+ch2 := ch1 // ch2 refers to the same channel 
+
+var x int = 42  
+var p *int = &x // p is a pointer to x  
+```
+
+همچنین اگر این ها به تابعی پاس داده شوند ، تابع می تواند داده های سوپر فانکشن رو تغییر بده 
+
+```go
+func modifySlice(s []int) {  
+    s[0] = 100 // Modifying the first element of the slice  
+}  
+
+func modifyValue(n *int) {  
+    *n = 100 // Modifying the value at the pointer's address  
+}  
+
+
+func main() {  
+
+    original := []int{1, 2, 3}  
+    modifySlice(original)  
+    fmt.Println(original) // Output: [100 2 3]  
+
+
+    original := 42  
+    modifyValue(&original) // Passing the address of original  
+    fmt.Println(original)   // Output: 100  
+}  
+```
+
+توجه شود این که `Reference Types` است ربطی به این نداره که در `heap or stack`  ذخیره بشه
+
++ `Slices`
+
+خود وریبل اسلایس در استک ذخیره میشود اما محتوات درونش توی هیپ است به خصوص اگر بزرگ شود یا از make  برای ایجاد استفاده کنیم
+
+
++ `Maps`
+
+همیشه بر روی heap ذخیره میشه ، شاید خود وریبلی که رفرنس رو نگه میداره بر روی استک ذخیره شه اما داده های درونش توی هیپ هست 
+
+
+
++ `Pointers`
+هر جا پوینتر ساخته شود  در همان جا مشخص میشود مثلن اگر در همان فانکشن ساخته شود در استک ذخیره میشود
+
+این بستگی به داده ای که اشاره می کند دارد ، اگر داده درونش لوکال یا درون فانکشن  باشد و `Value Types` باشد آنگاه اشاره به استک دارد اما اگر با `new() or make()`  ساخته شود ، آنگاه به هیپ اساره دارد
+
+## Mutable vs. Immutable Types
+
+به این معنا که متغییر قابل تغییر نیست یعنی که آپدیت مقدار درون آن باعث تغییر خانه ی حافظه میشود
+
++ **Immutable Types**
+
+این داده ها نباید تغییری داشته باشند (like int and string)  و در صورت تغییر کپی شده و در خانه ی جدید از حافظه قرار میگیرند
+
 ## tips
 
 + **Dereferencing a pointer**
