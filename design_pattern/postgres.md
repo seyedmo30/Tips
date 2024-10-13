@@ -1,4 +1,154 @@
-postgres 
+# interview postgres
+
+همیشه ۲ تا مسعله پرسیده میشه و من نمی تونم جواب بدم
+
+## اگر سرعت کوییری ها پایین بیاد باید چیکار کنیم؟
+
+### explain analyze
+
+
+### vacuum
+
+
+### Enabling Logging
+
+میتونیم با تغییر این فایل لاگ رو فعال کنیم : `postgresql.conf`
+
+```
+log_min_duration_statement = 1000  # Log queries taking longer than 1000 ms (1 second)
+log_statement = 'all'               # Log all statements (optional)
+log_directory = 'pg_log'            # Directory for log files
+log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'  # Log file naming pattern
+
+```
+و لاگ رو ببینیم 
+
+`tail -f /path/to/your/pg_log/postgresql-*.log`
+
+
+### pg_stat_activity
+
+با استفاده از این میتونیم ببینیم کدام کلاینت کانکت شده و چه کاری انجام میده و چه کوییری هایی زده و چقد زمان برده اطلاعاتی مانند ip و یوزرنیم و ... کار بر توش هست
+
+```sql
+
+SELECT pid, usename, state, query, now() - query_start AS duration
+FROM pg_stat_activity
+WHERE state = 'active'
+ORDER BY duration DESC;
+```
+
+SELECT * FROM orders WHERE status = 'pending';      ------- 00:00:45
+UPDATE products SET stock = stock - 1 WHERE id = 1001;   -- 00:00:30
+
+
+### Monitoring Logs
+می تونیم لاگ هایی که مورد نظرمونه رو نمایش بدیم و نگه داریم
+
+با استفاده از تولز هایی این کار رو انجام میدیم
+`postgres_exporter`
+
+### pg_stat_statements
+ابتدا باید فعالش کنیم و ببینیم هر کوییری چقدر هزینه بر بوده :
+
+`CREATE EXTENSION pg_stat_statements;`
+
+
+```sql
+SELECT
+    query,
+    calls,
+    total_time,
+    rows,
+    mean_time,
+    stddev_time
+FROM
+    pg_stat_statements
+ORDER BY
+    total_time DESC
+LIMIT 10;
+```
+
+پاسخ این کوییری این است که بیشترین کوییری ها که تکرار شدن ، چقد زمان بردن
+
+
+### work_mem
+
+ظرفیت حافظه کاری که برای هر کوییری استفاده می شود و داخل آن ریخته میشود
+
+در حقیقت هر بار که کوییری میزنیم کلی داده تمییز نشده که بر اساس sort , where , groupby  جدا جدا در مموری میاد و میتونیم سقف ظرفیت رو بالا ببریم
+
+`SET work_mem = '16MB';`
+
+### shared_buffers
+
+این حافظه ی `cache` است نتایج اخیر رو ذخیره میکنه  به صورت پیش فرض 128 MB است و میتونیم آن را بالا ببریم
+
+`SHOW shared_buffers;`
+
+SET shared_buffers = '128MB';`
+### pg_locks
+
+با استفاده از این دستور میتونیم ببینیم که کدام لاک رو استفاده میکنه و چه حالتی داره
+
+همچنین با تنظیم انواع ترن اکشن ها می تونیم با توجه به بیزینس ، سرعتو بهبود ببخشیم :
+
+
+
+**Access Share Lock**
+SELECT
+
+**Row Exclusive Lock**
+
+INSERT, UPDATE, or DELETE
+
+**Share Lock**
+
+SELECT FOR UPDATE
+
+
+```sql
+
+SELECT
+    pid,
+    mode,
+    relation::regclass AS relation,
+    transactionid,
+    virtualtransaction,
+    state,
+    granted
+FROM
+    pg_locks
+WHERE
+    NOT granted;
+
+
+```
+
+## نوشتن کوییری های پیشرفته
+
+به نظرم به هوش مصنوعی بگیم سوال بپرسه بهتره ولی حتما grouup by ها رو بگیم , join , having 
+
+مثال
+
+```sql
+
+SELECT
+    c.name,
+    SUM(o.total_amount) AS total_spend
+FROM
+    customers c
+JOIN
+    orders o ON c.customer_id = o.customer_id
+GROUP BY
+    c.customer_id, c.name
+HAVING
+    SUM(o.total_amount) > 500
+ORDER BY
+    total_spend DESC;
+
+```
+## ادامه
 
 #اون طور که فهمیدم کسی که از لوکال به پستگرس وصل میشه نیازی به پسورد نداره
 
