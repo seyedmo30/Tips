@@ -179,3 +179,10 @@ redis - json ------- اینجوری می تونیم دیکد کنیم :
 	result := new(interface{})
 	json.Unmarshal([]byte(cacheResponse.(string)), result)
  
+### golang conventional naming package
+
+متاسفانه مرسومه که نام پکیج ها `lowercase` باشه و از `-` or `_` استفاده نکنیم
+
+و این شد که من باید اسم پکیجم رو این بزارم :
+
+`internalrequestservice`

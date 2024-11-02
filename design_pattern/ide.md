@@ -761,6 +761,23 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
     {
         "key": "ctrl+j",
         "command": "workbench.files.action.collapseExplorerFolders"
+    },
+    {
+        "key": "shift+alt+1",
+        "command": "-workbench.action.moveEditorToFirstGroup"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "-cursorUndo",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "workbench.action.moveEditorToLastGroup"
+    },
+    {
+        "key": "shift+alt+9",
+        "command": "-workbench.action.moveEditorToLastGroup"
     }
 ]
 

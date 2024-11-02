@@ -1,4 +1,17 @@
 
+## سوالی که توی مصاحبه می پرسن زمانی که کد سنگین میشه یا مموری لیک داریم و می خوایم مشکل رو رفع کنیم 
+
++ pprof
+
++ Logging
+
++ Monitoring
+
++ Benchmarking
+
++ Concurrency Issues
+
+
 ## tips
 
 ### comment
