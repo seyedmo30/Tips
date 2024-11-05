@@ -1,10 +1,11 @@
-# unit test
+#  test
+### unit test
 
 بخش های بسیار کوچک و فانکشن ها را با این روش تست می کنیم .
 
 در این روش ، ورودی و خروجی و نتیجه ی فانشکن را از قبل مشخص می کنیم و تست را اجرا می کنیم .
 
-# integration test
+### integration test
 
 گاهی اوقات تست به پیش نیاز هایی وابسته است ، مثلا برای تست یک ریکویست ، با وظیفه ثبت در دیتابیس یا خطا ، ما نیاز داریم که علاوه بر مشخص کردن ورودی و خروجی ، کانکتور ها ( یا dependency ها ) را هم مشخص کنیم . در این صورت می توانیم ابتدا تمامی کلاس ها یا استراکت ها را معرفی کنیم . مثلا تنظیمات کانکشن به دیتا بیس یا تنظیمات روتر . 
 ```
@@ -39,14 +40,16 @@
 
 توجه شود می توان کانفیگ را به صورت nested پیدا کرد ، در این صورت نیازی نیست در تمامی دارکتوری ها config  را قرار داد .
 
+# metrics
+
 ### pprof ـ portabl profile 
 ابتدا باید این پکیج را نصب کنیم
    
-    sudo apt install graphviz
+  `  sudo apt install graphviz `
    
 حال باید در یک گوروتین جدا ، لیسن به کد کنیم 
 
-
+```go
     import (
     	"net/http"
     	_ "net/http/pprof"
@@ -56,15 +59,56 @@
      http.ListenAndServe("localhost:6060", nil)
     }()
 
-             
+```    
+
+پروفایل مموری: 
+
+`http://localhost:6060/debug/pprof/heap`
+
+پروفایل CPU:
+
+ `http://localhost:6060/debug/pprof/profile?seconds=30`
+
+پروفایل گوروتین‌ها: 
+
+`http://localhost:6060/debug/pprof/goroutine`
+
+
+
 و همزمان در حلقه چندین بار فانکشن هایی که احتمالا گلوگاه کد هستند را فراخانی کنیم . کد حداقل باید 30 ثانیه در حلقه تکرار شود ، همزمان کد زیر را اجرا می کنیم تا کد را از طریق ListenAndServe کد را ذخیره کند :
 
-    go tool pprof http://localhost:6060/debug/pprof/profile
+`go tool pprof http://localhost:6060/debug/pprof/profile`
+
 اگر بتواند 30 ثانیه آنالیز کند ، آنگاه می توانیم به روش های گوناگون خروجی را بگیریم ولی متداول ترین روش ، وب است:
 
     (pprof) web
 
-### tips
+
+### TotalAlloc
+
+
+```go
+import (
+    "runtime"
+    "log"
+)
+
+var memStats runtime.MemStats
+runtime.ReadMemStats(&memStats)
+log.Printf("Alloc = %v, TotalAlloc = %v, Sys = %v, NumGC = %v", memStats.Alloc, memStats.TotalAlloc, memStats.Sys, memStats.NumGC)
+```
+
+### pprof goroutines
+
+گاهی شایدی تعداد زیادی گوروتین باز شده ولی استفاده نمی شه
+
+با استفاده از **pprof** میشه دید چه تعداد گوروتین بازه
+
+### Prometheus و Grafana
+
+باید اطلاعات سیستم عامل به این ابزار فرستاده شود تا مصرف کنابع دیده شود
+
+## tips
 
 در مانی تست ها همه در دایرکتوری تست قرار دارد  ، خوبیش اینه که همه تست ها یه جاست و با خاندن جیسون ، تمام سید ها و داده های تست در دسترسه
 
