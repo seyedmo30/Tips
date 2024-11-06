@@ -15,6 +15,7 @@
 داده های زیر از این نوع هستند
 
 `int,  , bool , string , Structs ,Arrays`
+
 زمانی که بخواهیم تایپ ما یک پوینتر باشد به طوری که مقدار و رفرنس تایپ ما (Reference Types vs Value Types)  هر دو روی هیپ ذخیره شود از `new()` استفاده می کنیم
 
 + **`Reference Types`**
