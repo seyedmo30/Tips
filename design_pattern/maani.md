@@ -34,10 +34,7 @@ smo.hosseini
 
 ***********
 
-# pass
-aE_c$dx9
-SalaM#1234
- 
+
 # shecan
 178.22.122.100 ,185.51.200.2
 
