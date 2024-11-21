@@ -2,6 +2,10 @@
 
 همیشه ۲ تا مسعله پرسیده میشه و من نمی تونم جواب بدم
 
++ اگر سرعت کوییری ها پایین بیاد باید چیکار کنیم؟
+
++ advance query (select , groupby,having,join,subquery)
+
 ## اگر سرعت کوییری ها پایین بیاد باید چیکار کنیم؟
 
 یه اصطلاحی هست تحت عنوان  tuning هست که می تونه به سرعت کوییری ها کمک کنه
@@ -152,6 +156,7 @@ log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'  # Log file naming pattern
 
 `tail -f /path/to/your/pg_log/postgresql-*.log`
 
+بعد از فعال کردن لاگ ، این طور میبینیم :
 
 
 + همچنین میشه لاگ ها رو آپشنال کرد و مشاهده کرد ، در مثال زیر کوییری هایی که خیلی سرعت کمی دارند رو میشه مشاهده کرد
@@ -160,6 +165,22 @@ SET log_min_duration_statement = 1000; -- log queries taking longer than 1000 ms
 
 
 
+```sql
+2024-10-19 09:02:30.789 UTC [12347] LOG:  duration: 10 ms  statement: INSERT INTO employees (name, department, salary) VALUES ('John Doe', 'Sales', 50000);
+
+2024-10-19 09:01:10.456 UTC [12346] LOG:  duration: 2000 ms  statement: UPDATE employees SET salary = salary * 1.1 WHERE department = 'Marketing';
+
+2024-10-19 09:00:00.123 UTC [12345] LOG:  duration: 1500 ms  statement: SELECT * FROM employees WHERE department = 'Sales';
+
+2024-10-19 09:06:30.123 UTC [12351] LOG:  statement: BEGIN;
+
+2024-10-19 09:06:35.456 UTC [12351] LOG:  statement: COMMIT;
+
+2024-10-19 09:07:00.789 UTC [12352] ERROR:  relation "non_existent_table" does not exist
+2024-10-19 09:07:00.789 UTC [12352] STATEMENT:  SELECT * FROM non_existent_table;
+
+
+```
 ### pg_stat_activity
 
 با استفاده از این میتونیم ببینیم کدام کلاینت کانکت شده و چه کاری انجام میده و چه کوییری هایی زده و چقد زمان برده اطلاعاتی مانند ip و یوزرنیم و ... کار بر توش هست
@@ -284,6 +305,21 @@ WHERE
 
 Set synchronous_commit = OFF;  -- Not recommended without understanding the implications
 
+### همچنین اگه سرعت نوشتن اومده باشه پایین باید چی کار کرد؟
+
++ بررسی کنیم i/o سخت افزاری رو ابتدا ببینیم هارد دیسک کند نشده ؟ و اینکه شاید از سمت سیستم عامل و در کل ربطی به پایگاه داده نیست
+
++ شاید WAL رو خوب مدیریت نکردیم و همه چیز رو داره ارشیو می کنه و پاک نمی کنه و بررسی کانفیگ archive_mode and archive_command
+
++ شاید  **Table Bloat**  رخ داده ، یعنی بر اثر تغییر های زیاد مانند آپدیت و دیلیت مدیریت حافظه از بهینه در اومده و با استفاده **VACUUM FULL** میشه بهبود دد البته توجه کنید این کار تیبل رو لاک می کنه .  توضیح در باره ی **Table bloat** این پدیده زمانی می گیم که حافظه ی تخصیص داده شده برای ذخیره بیشتر از مقدار مورد نیاز برای ذخیره سازی داده ها استفاده می شود. و زمانی رخ میدهد که تعداد تغییرات تاپل ها زیاد است ، دلایل زیر می توان باعث این دیده شه : 
+ MVCC (Multi-Version Concurrency Control) و Frequent Updates and Deletes 
+
+
++ بررسی **Lock Contention** با استفاده از `pg_stat_activity`  و همچنین با استفاده از `pg_locks` میتونیم ببینیم که کدام لاک رو استفاده میکنه و چه حالتی داره
+
++ بررسی ایندکس ها اینکه همه چیز رو الکی ایندکس کردیم همچنین نگاه به کانفیگ shared_buffers, work_mem, maintenance_work_mem
+
++ اگه همه چیز اوکی بود باید با افزایش مموری یا ssd و تکنیک های شاردینگ درستش کنیم
 
 ## نوشتن کوییری های پیشرفته
 
