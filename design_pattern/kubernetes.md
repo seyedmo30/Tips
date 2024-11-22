@@ -59,4 +59,39 @@
  
        kubectl run nginx --image=nginx
 
-    
+# commands
+
++ کلاستر تستی رو میسازه
+
+‍`minikube start --driver=docker`
+
++ نود ها رو میشه دید
+
+`kubectl get nodes`
+
+
++ دیپلویمنت ها رو میشه دید    
+
+`kubectl get deployments`
+
++ پاد ها رو میشه دید
+
+`kubectl get pods`
+
+
++ کانفیگ
+
+`cat ~/.kube/config`
+
++ گرفتن ایمیج
+
+‍`kubectl get svc nginx`
+
++ اکسپوز کردن پورت پاد
+
+
+`kubectl expose deployment nginx --type=NodePort --port=80 --name=nginx`
+
++ پاد ها رو میشه دید
+
+`curl http://192.168.49.2:32593`
