@@ -74,6 +74,18 @@
 
 `kubectl get deployments`
 
+
++ سرویس ها رو میشه دید    
+
+`kubectl get services`
+
+
++ سرویس ها رو با مینیکیوب میشه دید    
+
+`minikube service nginx`
+
+
+
 + پاد ها رو میشه دید
 
 `kubectl get pods`

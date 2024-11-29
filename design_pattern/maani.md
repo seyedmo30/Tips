@@ -32,6 +32,19 @@ smo.hosseini
 
 + password
 
+
+
+`sudo apt install openfortivpn`
+
+`sudo openfortivpn --trusted-cert 724e45fe738be47c769e09798847f7c1e07c0026a6ba7bab58cd641ef341f723`
+
+```
+host = 5.160.235.50
+port = 443
+username = smo.hosseini
+password = a
+```
+
 ***********
 
 
