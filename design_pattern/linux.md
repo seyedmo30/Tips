@@ -16,6 +16,11 @@
             sudo apt install net-tools
             netstat -tulpn
   
++ گاهی برنامه توی محیط گرافیکی  gnome  مشکل میخوره برای بستنش ابتدا باید ps رو پیدا کنیم 
+
+`ps aux | grep totem`
+
+
 + با دستور ifconfig می توان اطلاعات کلی ماشین مانند default gateway , netmask ,inet  را دید همچنین شبکه اصلی ماشین enp4s0 را دید همچنین شبکه های محلی مانند داکر هم قابل رویت است
 
                 ifconfig
