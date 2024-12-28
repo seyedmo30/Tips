@@ -1,4 +1,6 @@
 #  test
+
+
 ### unit test
 
 بخش های بسیار کوچک و فانکشن ها را با این روش تست می کنیم .
@@ -107,6 +109,17 @@ log.Printf("Alloc = %v, TotalAlloc = %v, Sys = %v, NumGC = %v", memStats.Alloc, 
 ### Prometheus و Grafana
 
 باید اطلاعات سیستم عامل به این ابزار فرستاده شود تا مصرف کنابع دیده شود
+
+### repository layer test
+
++ **Isolate Tests**
+
+بهتره تست ها جوری باشن که نیازی به ترتیب و پیش نیاز نباشه ، هر تست ، با هر ترتیبی بتونه اجرا بشه
+
++ **Use a Test Database**
+
+بهتره روی یه دیتابیس دیگه تست انجام بشه
+
 
 ## tips
 

@@ -57,7 +57,7 @@ mostafa@10.21.10.8
 
 git clone https://git.maani.app:glpat-TyUZNaMiucjkFzMGnDGc@git.maani.app/maani/backend/direct-debit.git
 
-# chargoon
+# chargoon (windows server -remmina) 
 
 Host : 10.21.13.97
 user : m.hosseini
@@ -264,3 +264,39 @@ CREATE TABLE Configurations (
 `isRevoked - isRegistered`
 
 اما به نظرم بولین isActive باید بمونه زیرا ربطی به روند خطی نداره
+
+
+
+# on_boarding
+
+
+## actor
+
+### user
+
+وام گیرنده
+### admin
+
+ادمین مانی
+
+### company
+
+
+کمپانی مثل ایران خودرو  که برای کارکنانش طرح تعریف میکنه  مثلن ۵۰ میلیون ۶ ماهه
+
+### merchant
+
+فروشند مثل اسنوا یا دیجیکالا
+
+### fund_provider
+
+تامین مالی بانک ملی یا بلو بانک
+
+### offline_fund_provider(manual_fund_provider)
+
+لیزینگی ها مثل رایا
+
+### legal_user
+
+نمایندگی های فروشنده مثل نماینده های اسنوا
+
