@@ -291,7 +291,7 @@ https://www.tutorialspoint.com/articles/category/go-programming
 باید معماری گوروتین ها طوری باشد که نیازمندی دوری - حلقوی نشود - 
 
 #### نکات چنل ها
-+ **تایم اوت استفاده شود**
++ **تایم اوت استفاده شود Timeouts**
 
 شاید به دد لاک نرسد ولی می تاون برنامه را تا بینهایت منتظر گذاشت
 
@@ -302,6 +302,19 @@ https://www.tutorialspoint.com/articles/category/go-programming
 + **کلوز کردن**
 
 بعد اتمام کار ، اطمینان حاصل کنید که چنل بسته شده
+
++ **Deadlock Detection**
+
+`go run -race`
+
++ **unbuff**
+  دقت شه ابتدا ارسال نکنیم به آنبافر
+```
+  func main() {
+    ch := make(chan int)
+    ch <- 42 // Deadlock because no goroutine is reading from the channel
+} 
+```
 
 ### error handling by channels
 
