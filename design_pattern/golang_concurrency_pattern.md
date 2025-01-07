@@ -158,4 +158,18 @@ func producer(queue chan<- int, id int) {
     }
 }
 ```
+9. Publish-Subscribe Pattern
+Description: Allows multiple consumers (subscribers) to listen to messages published by producers.
+Use Case: Event-driven architectures, notifications.
 
+10. Timeout Pattern
+Description: Uses a timer or timeout channel to handle operations that exceed a certain duration.
+Use Case: Avoid blocking indefinitely in network calls or resource access.
+
+11. Retry Pattern
+Description: Retries a failed operation with exponential backoff or a fixed number of attempts.
+Use Case: Fault-tolerant systems.
+
+12. Resource Pool Pattern
+Description: Maintains a pool of reusable resources, such as database connections or goroutines.
+Use Case: Efficient resource management.
