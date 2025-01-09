@@ -36,10 +36,6 @@
 
 به مجموع deployments, replica sets, services, pods از یک واحد در کلاستر میگن
 
-+ + Service
-
-یک انتزاع برای مدیریت آسان چند پاد است ، چون پاد ها کیل میشوند و دوباره بالا میان، با سرویس می تونیم راحت  پاد ها رو مدیریت کنیم البته با لیبل زدن اونها
-
 + + ReplicaSet
 
 می توان تعداد تکرار پاد ها را با استفاده از لیبل مدیریت کرد
@@ -48,7 +44,8 @@
 
 استقرار یک پاد یا رپلیکا را مدیریت می کند
 
-در حقیقت یه فایله که مانند یک داکر کامپوس است که به کلاستر اضافه میشه
+ گروهی از Pods را مدیریت می‌کند و اطمینان می‌دهد که آنها در حالت دلخواه و مقیاس خودکار اجرا می‌شوند.
+
 
 + minikube
 
@@ -91,6 +88,20 @@
 با استفاده از این می توان تعداد پاد ها رو مشخص کرد ، حتی اگه کرش کنن یا پاک شن ، این ابزار به تعداد نگاه می کنه و تعداد پاد ایجاد می کنه
 
 `kubectl get rs`
+
+
+### Service
+
+برای مدیریت درخواست ها و توضیع بین پاد ها شبیه load balancer
+
+مهم ترین سرویس ها :
+
++ **ClusterIP** (default): Internal access within the cluster.
++ **NodePort**: Exposes a service on each node's IP and a static port.
++ **LoadBalancer**: Exposes the service to the internet using a cloud provider's load balancer.
++ **ExternalName**: Maps a service to an external DNS name.
+
+
 
 
 ### دیپلوینمت
@@ -183,3 +194,35 @@
 
 `curl http://192.168.49.2:32593`
 
+### متداول ترین راه ها برای دیباگ و یافت خطا
+
++ Check Pod Status: `kubectl get pods`
++ Describe Pod: `kubectl describe pod <pod-name> to check for events and errors.`
++ Logs: `kubectl logs <pod-name> for application logs.`
++ Exec into Pod: `kubectl exec -it <pod-name> -- /bin/bash to explore the container’s environment.`
++ YAML Validation: `Ensure the Pod specification file is correct.`
+
+
+
+### چگونه ریسورس رو مدیریت می کنیم
+
+
+```yml
+
+apiVersion: v1  
+kind: Pod  
+metadata:  
+  name: resource-limits-pod  
+spec:  
+  containers:  
+  - name: nginx  
+    image: nginx  
+    resources:  
+      requests:  
+        memory: "64Mi"  
+        cpu: "250m"  
+      limits:  
+        memory: "128Mi"  
+        cpu: "500m" 
+
+```
