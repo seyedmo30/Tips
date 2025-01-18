@@ -1,0 +1,82 @@
+//
+
+package main
+
+import (
+	"bytes"
+	"fmt"
+)
+
+// declare []byte == temp
+
+// declare []byte == result
+
+// اگر تمپ تونست توی حلقه کلمه اول و دوم کامل بگذره ، ریزالت رو آپدیت می کنیم
+
+// declare minLen === itrate
+
+// declare len
+// least of itrate add to slice of temp
+
+// after internal loop
+
+// get index[1] from 2 word
+
+// itrate on 2 word  , if dont repit , break , else get count of loop
+
+//  add next index to index num
+
+func gcdOfStrings(s1, s2 string) (res string, err error) {
+
+	// temp := []byte
+
+	result := make([]byte, 0)
+
+	slice1 := []byte(s1)
+	slice2 := []byte(s2)
+
+	var minSlice []byte
+	if len(slice1) > len(slice2) {
+		minSlice = slice2
+	} else {
+		minSlice = slice1
+
+	}
+
+	for i := 0; i < len(minSlice); i++ {
+		if checkexist(slice1, minSlice[:i+1]) && checkexist(slice2, minSlice[:i+1]) {
+
+			result = minSlice[:i+1]
+		}
+	}
+	return string(result), err
+}
+
+// input = "salam"   sub := "sa"
+func checkexist(input, subString []byte) (exist bool) {
+
+	for {
+
+		if bytes.Equal(input[0:len(subString)], subString) {
+
+			input = input[len(subString):]
+			if len(input) == 0 {
+				return true
+
+			}
+
+		} else {
+
+			return false
+		}
+	}
+}
+
+func main() {
+
+	s1 := "ABCABC"
+	s2 := "ABC"
+	res, _ := gcdOfStrings(s1, s2)
+
+	fmt.Println(res)
+}

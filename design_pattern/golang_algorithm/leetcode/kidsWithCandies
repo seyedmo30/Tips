@@ -1,0 +1,75 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+// get array
+
+// store max
+
+// get  int
+
+// declare new array
+
+// add int to each index of array , if gt max -> set true , else false
+
+//  must have err
+
+// 	2 <= n <= 100
+// 1 <= candies[i] <= 100
+// 1 <= extraCandies <= 50
+
+func kidsGC(kids []int, extraCandies int) (result []bool, err error) {
+
+	if 1 > len(kids) || len(kids) > 100 {
+		return result, errors.New("1 <= candies[i] <= 100")
+	}
+
+	if 0 >= (extraCandies) || (extraCandies) >= 50 {
+		return result, errors.New(" 1 <= extraCandies <= 50")
+	}
+
+	max := getMax(kids)
+
+	result = make([]bool, len(kids))
+	for k, v := range kids {
+		if (v + extraCandies) >= max {
+			result[k] = true
+		} else {
+			result[k] = false
+
+		}
+	}
+
+	return
+}
+
+func getMax(kids []int) (max int) {
+
+	// max := 0
+	for _, v := range kids {
+		if max < v {
+			max = v
+		}
+	}
+
+	return
+}
+
+func main() {
+
+	kids := []int{1, 2, 3, 4}
+	candies := 1
+
+	res, err := kidsGC(kids, candies)
+
+	if err != nil {
+
+		fmt.Println(err)
+	}
+
+	fmt.Println(res)
+
+}

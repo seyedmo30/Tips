@@ -1,0 +1,71 @@
+package main
+
+import (
+	"fmt"
+)
+
+func reverseWords(s string) string {
+	// Trim leading and trailing spaces manually
+	s = trimSpaces(s)
+	// Split the string into words manually
+	words := splitIntoWords(s)
+	// Reverse the words
+	for i, j := 0, len(words)-1; i < j; i, j = i+1, j-1 {
+		words[i], words[j] = words[j], words[i]
+	}
+	// Join words with a single space
+	return joinWords(words)
+}
+
+func trimSpaces(s string) string {
+	start, end := 0, len(s)-1
+	// Find the first non-space character from the start
+	for start <= end && s[start] == ' ' {
+		start++
+	}
+	// Find the last non-space character from the end
+	for end >= start && s[end] == ' ' {
+		end--
+	}
+	if start > end {
+		return ""
+	}
+	return s[start : end+1]
+}
+
+func splitIntoWords(s string) []string {
+	var words []string
+	word := ""
+	for i := 0; i < len(s); i++ {
+		if s[i] != ' ' { // Add non-space characters to the current word
+			word += string(s[i])
+		} else if word != "" { // When a space is encountered, push the word
+			words = append(words, word)
+			word = ""
+		}
+	}
+	// Add the last word if any
+	if word != "" {
+		words = append(words, word)
+	}
+	return words
+}
+
+func joinWords(words []string) string {
+	result := ""
+	for i, word := range words {
+		if i > 0 {
+			result += " " // Add space between words
+		}
+		result += word
+	}
+	return result
+}
+
+func main() {
+	// Test cases
+	// fmt.Println(reverseWords("the sky is blue"))            // Output: "blue is sky the"
+	// fmt.Println(reverseWords("  hello world  "))            // Output: "world hello"
+	// fmt.Println(reverseWords("a good   example"))           // Output: "example good a"
+	fmt.Println(reverseWords("  this  is   a test case  ")) // Output: "case test a is this"
+}

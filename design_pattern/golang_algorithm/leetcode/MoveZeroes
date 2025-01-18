@@ -1,0 +1,35 @@
+package main
+
+import "fmt"
+
+// change 0 by next index
+
+// true flag
+
+func MoveZeroes(req []int) (res []int, err error) {
+
+	for j := len(req) - 1; j > 0; j-- {
+		flag := false
+		for i := 0; i < j; i++ {
+			if req[i] == 0 {
+				flag = true
+				req[i] = req[i+1]
+				req[i+1] = 0
+			}
+		}
+	
+		if flag == false {
+			break
+		}
+	}
+
+	return req, nil
+}
+
+func main() {
+
+	data := []int{1, 0, 2, 0, 3, 0}
+
+	res, _ := MoveZeroes(data)
+	fmt.Println(res)
+}
