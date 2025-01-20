@@ -200,3 +200,16 @@ release/version-number
 right click  > git > show history
 
 و این جا میشه دو تا commit رو select کرد و compare کرد
+
+
+### troubleshoot
+
+#### Ambiguous object name: 'HEAD
+
+گاهی اشتباهی روی برنچ های اصلی مثل master , dev , stage  کامیت می کنیم ، در این صورت اگر بخواهیم  برنچ جدید بسازیم و به اون `checkout` کنیم شاید به ارور  **Ambiguous object name: 'HEAD**بخوریم
+
+راه حل :
+
+شماره کامیت هم بنویسیم
+
+`git checkout -b feat/append_repository  c4aa7947701f7fa6d60380fef9da7dcb7a497b4c`

@@ -210,3 +210,17 @@ Gmail, Outlook.com , Slack, Microsoft Teams , Trello, Asana
 
 در برنامه نویسی در خواست هایی هستند که شاید به ندرت رخ دهند و کمتر برای جلو گیری از آنها زمان میزاریم چون در موارد استسناع رخ میدهند ، مثلا زمانی که در خواست ورودی خیلی عجیب باشد یا در پردازش های خیلی سنگین ، اتفاقات نادری رخ دهد ، باید یه برنامه جوری تست نویسی شه که این ها هم تست شه
 
+
+### variable naming formats
+
++ Snake Case `provider_id`
+
++ Camel Case `providerId`
+
+
++ Pascal Case `ProviderId`
+
+
++ Kebab Case `provider-id`
+
+
