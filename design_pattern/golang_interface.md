@@ -43,6 +43,26 @@ if msg, ok := rawMsg.(*pgproto3.CopyData); ok {
 ```
 و در نهایت کلاینت باید با توجه به سیگنیچر های اینترفیس آن را پیاده سازی کند
 
+
+نکته بامزه :
+
+گاهی توی یه ریسیور های یه اینترفیس نیاز داریم که یک فانکشن مشترک داشته باشیم ، من قدیما این کار رو می کردم :
+
+
+```go
+
+func ProcessSingleOrder(ctx context.Context,u *orderUseCase) error {
+
+```
+
+اما کار درست اینه
+
+```go
+
+func (u *orderUseCase) processSingleOrder(ctx context.Context) error 
+```
+
+
  # Pass an Interface as an argument to a function
  
 
