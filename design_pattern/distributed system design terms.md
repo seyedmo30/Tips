@@ -1,3 +1,6 @@
+ابتدا چندین مفهوم که کلی ترن رو تعریف می کنم ، سپس  مراحل طراحی یه سیستم رو مانند مصاحبه ها طی می کنیم
+
+# system design terms
 
 ### circuit breaker pattern
 
@@ -14,27 +17,6 @@
 میگه تا جایی که ممکنه کانکشن های زیاد نزنیم برای گرفتن داده ها  از یه منبع بجاش از بچ یا بالک یا ... استفاده کنیم ، به تعریف دیگر هر در خواست به خارج از سرویسمون ، خارج از گو نیاز به کانکشن و io  داره
 باید اونها رو بهینه کرد 
 
-
-### scope architecture
-
-**namespace**
-
-برای دسته بندی کردن و مرتب کردن کد های طوری که در اسم گذادی ها کانفلیکت نخوریم ، این مفهوم بیشتر در c , c++ , java  کاربرد دارد
-
-همچنین وقتی صحبت در اسکوپ namespace می شه منظور در مقیاس یا دسترسی کلاس ها ، فانکشن ها و وریبل های یک ماژول صحبت میشه
-
-**ماژول**
-
-برای سازمان دهی فانکشن ها همچنین برای ری یوزبل کردن آنها که می توان در یک یا چند فایل بیان ، که از کلاس ها ، فانکشن ها و مقدار ها ساخته شده
-
-**پکیج**
-
-برای سازماندهی و مدیریت ارتباط چند ماژول است ، پکیج  می توان چند ماژول یا ساب پکیج در خود داشته باشد
-
-**لایبری**
-
-کد هایی از پیش نوشته شده هستند که می توان در پروژه ها استفاده نمود ، تمرکز لایبری ، ارتباط آسان و فراهم کردن فانکشن یا توضیحات برای راحت سازی و استفاده در پروژه های متنوع است
-لیبری می توان به صورت تنها باشد یا در یک پکیج استفاده شود
 
 ### نحوه سنجش عملکرد کد
 
@@ -58,10 +40,10 @@
 می توان latancy رو چند حالت اندازه گیری کرد ابتدایی ترین راه ، میانگین است یعنی مجموع ریکوست ها تقسیم بر تعداد اما راه بهتر upper 90
 , upper 99 است
 
+### معیار های قابل اعتماد بودن - Design for Reliability
+ - **Redundancy** داده ها در جای دیگر هم باشند در صورتی که مسیر اصلی پایین آمد ، بشه از جای پشتیبان داده ها رو خوند
+ - **Graceful Degradation** در صورتی که بخشی ترکید ، همه ی اکوسیستم نترکه و تنها اون بخش از کار بیفته
 
-**Data dummy _ seed**
-
-داده هایی که فقط برای پر کردن استفاده میشن 
 
 
 ### Scaleup 
@@ -90,121 +72,6 @@
 
 + **ZooKeeper** یه ابزار هست و این کار رو میکنه
 
-### saga
-
-ساگا در ساختار تیبل ها تغییری ایجاد نمی کند ، یا فیلدی اضافه نمی کند ، بلکه یک رویکرد است و سرویس ساگا کوردینیتور باید با ارسال دستور به میکروسرویس ها ، آن ها را به مرحله ی بعد ببرد یا رول بک بزنند
-
-در حقیقت باید هر میکرو سرویس ،قابلیت رول بک داشته باشه مثلن اگر داشته باشیم ثبت سفارش ، باید همچنین داشته باشیم کامپنسیت سفارش 
-
-در یک مثال chatgpt
-
-```go
-
-package main
-
-import (
-    "bytes"
-    "encoding/json"
-    "fmt"
-    "net/http"
-)
-
-type OrderRequest struct {
-    OrderID    int     `json:"order_id"`
-    UserID     int     `json:"user_id"`
-    ProductID  int     `json:"product_id"`
-    Quantity   int     `json:"quantity"`
-    TotalPrice float64 `json:"total_price"`
-}
-
-type InventoryRequest struct {
-    ProductID int `json:"product_id"`
-    Quantity  int `json:"quantity"`
-}
-
-type PaymentRequest struct {
-    OrderID int     `json:"order_id"`
-    Amount  float64 `json:"amount"`
-}
-
-func main() {
-    order := OrderRequest{
-        OrderID:    1,
-        UserID:     1,
-        ProductID:  1,
-        Quantity:   2,
-        TotalPrice: 200.00,
-    }
-
-    err := createOrderSaga(order)
-    if err != nil {
-        fmt.Printf("Saga failed: %v\n", err)
-    } else {
-        fmt.Println("Saga completed successfully")
-    }
-}
-
-func createOrderSaga(order OrderRequest) error {
-    // Step 1: Create Order
-    if err := createOrder(order); err != nil {
-        return err
-    }
-
-    // Step 2: Reserve Inventory
-    if err := reserveInventory(order.ProductID, order.Quantity); err != nil {
-        compensateOrder(order.OrderID)
-        return err
-    }
-
-    // Step 3: Process Payment
-    if err := createPayment(order.OrderID, order.TotalPrice); err != nil {
-        compensateInventory(order.ProductID, order.Quantity)
-        compensateOrder(order.OrderID)
-        return err
-    }
-
-    // All steps succeeded
-    return nil
-}
-
-func createOrder(order OrderRequest) error {
-    orderURL := "http://order-service/orders"
-    return sendRequest("POST", orderURL, order)
-}
-
-func reserveInventory(productID, quantity int) error {
-    inventoryURL := "http://inventory-service/inventory"
-    req := InventoryRequest{ProductID: productID, Quantity: quantity}
-    return sendRequest("POST", inventoryURL, req)
-}
-
-func createPayment(orderID int, amount float64) error {
-    paymentURL := "http://payment-service/payments"
-    req := PaymentRequest{OrderID: orderID, Amount: amount}
-    return sendRequest("POST", paymentURL, req)
-}
-
-func compensateOrder(orderID int) {
-    orderURL := fmt.Sprintf("http://order-service/orders/%d", orderID)
-    sendRequest("DELETE", orderURL, nil)
-}
-
-func compensateInventory(productID, quantity int) {
-    inventoryURL := "http://inventory-service/inventory/compensate"
-    req := InventoryRequest{ProductID: productID, Quantity: quantity}
-    sendRequest("POST", inventoryURL, req)
-}
-
-func sendRequest(method, url string, body interface{}) error {
-    jsonBody, err := json.Marshal(body)
-    if err != nil {
-        return err
-    }
-
-    req, err := http.NewRequest(method
-
-```
-
 ### Auth Messages in Microservices
 
 **trust zone**
@@ -228,6 +95,69 @@ never trust, always verify
 توجه شود gateway تنها میتواند توکن رو چک کنه ، مثلن وقتی درخواست تنها بر اساسه uuid باشه ، نیازی نیست دابل چک بشه چون احتمال تولید چنین شناسه ای صفره ، ولی وقتی درخواست دریافت اطلاعات فلان کد ملی میشه ، علاوه بر چک gateway , باید سرویس دوباره چک کنه کاربر می تونه این درخواست رو بزنه یا نه
 تنها چیزی که gateway تولید میکنه ، metadata هست و میشه به آن اطمینان کرد و با استفاده از این ، درخواست های دابل چک کرد ، به نظرم وظیفه ی ولید بودن درخواست در لایه ی یوزکیس نیست ، در لایه ی دلیوری یا فریمورک است
 
+
+### **Disaster Recovery**
+
+ در برابر خرابی و سوختن سرور ها یا کرش کردن مقاومه و حتی بعد از از دست دادن دیتا ها ، بشه 
+ برگردوند 
+
+
+### Centralized	Decentralized	Distributed Systems
+
++ **Centralized**
+
+تمام سیستم و پردازش ها روی سینگل سرور یا ماشین هستند
+
++ + سینگل پوینت
++ + مدیریت و نگهداری آسان
++ + امنیت بالا تر و ساده تر
++ + زمانی که منابع محدود میشه مشکل خیلی سخت برطرف میشه
+
++ **Decentralized**
+
+تمام پردازش در یک ماشین یا سرور نیست اما مدیریت نود ها مشخص است ، بین پاد ها یکی باید مستر باشد برای سینک و منیج
+
++ + سرور ها مستقل هستند
+
++ + مدیریت سخت تر است
+
++ + منابع میتونه بیشتر بشه
+
++ + خیلی نقش مستر یا لید مهمه
+
++ **Distributed**
+
+پردازش در یک ماشین نیست و مدیریت هم خیلی جدی و ثابت نیست ، هر پاد گاهی میتونه مستقل کار کنه گاهی هم می تونن بین پاد هایی که بالا هستند ، خودشون یک یا چند مستر انتخاب کنند
+
++ + سرور ها مستقل هستند
+
++ + مدیریت خیلی خیلی سخته و باید الگوریتم های خفن کوردینت و هندل کردن پاد ها رو به خوبی پیاده کنیم
+
++ + کاملن اطمینان از استقلال پاد ها و مستقل بودن
+
+
+
+
+
+### **CDN (Content Delivery Network)**
+
+ برای کاهش تاخیر داده ها در چند سرور تقسیم میشوند ، به بیان دیگه سرور هایی توزیع شده تو شبکه اینترنت که داده های استاتیک رو کش کرده و با سرعت بالا برای یوزر با توجه به ریجن سرو می کنه مانند عکس فیلم و فایل های استاتیک ، همچنین لود از روی سایت ما برداشته می شه 
+
+ ### Trade-offs
+
+ - **latency and throughput** درصورتی که منابع ثابت است و درخواست ها زیاد یا باید جواب همه رو با تاخیر بدیم یا محدود کنیم درخواست ها رو
+
+ - **Complexity and Maintainability** هر چه قدر بخوای کد های پیچیده تر و خفن تر بزنی و فیچر خفن اضافه کنی ، نگه داری هم سخت تر میشه
+ - **CAP theorem**  توجه شود این برای دیستریبیوتد سیستم ها - دیتابیس ها - هست و نه برای سرویس ها
+
+همیشه باید یه تعادلی بین ۳ مفهوم زیر ایجاد کرد consistency, availability, and partition tolerance
+ - - **consistency** میگه اگر چند نود داشته باشیم همه ی داده ها در نود ها بروز و یکسان باشد و درصورتی که در خواست بزنیم هر نود که جواب دهد ، داده بروز باشد  ، اگر این قابلیت رو پایین بیاریم شاید هر درخواست از نود های مختلف ، پاسخ های نامساوری برگردونن ، توجه شود اگر دیتا دیستریبوتد ها در regional های مختلف باشد ، شاید تا یک ساعت ، یا ۸ ساعت سینک نباشند برای مثال کساندرا این رو نداره
+
+ - - **Availability** پاسخ بده حتی اگه پاسخ درست نباشه ، یا پاسخ درست بده ، یا پاسخ قدیمی بده ، یا پاسخ اشتباه ولی بی پاسخ نزاره ، برای مثال mongo این رو نداره
+
+ - - **Partition tolerance** حتی اگر یکی از پارتیشن ها از دسترس خارج شد ، بقیه به کار خودشون ادامه بدن ، اگر بخوایم این رو حفظ کنیم باید ثبات یا دردسترس بودن رو زیر پا بزاریم ، برای مثال دیتابیس هایsql distribiuted(sharding)  این رو ندارن
+
+ 
 
 # system design interview
 
@@ -422,7 +352,8 @@ graph TD;
 
 بعد از لود بالانسر ها وجود دارند و وظیفه ی لاجیک بیزینس رو هندل کنند
 
-**نکته** توجه شود الزامی نداره این بخش شبیه به تقسیم بندی data model  باشه ، به بیان دیگر الزامی نیست بیزینس لاجیک ما که شمال سرویس های ما هستند نظیر تیبل های دیتابیس ما باشه
+**نکته**
+ توجه شود الزامی نداره این بخش شبیه به تقسیم بندی data model  باشه ، به بیان دیگر الزامی نیست بیزینس لاجیک ما که شمال سرویس های ما هستند نظیر تیبل های دیتابیس ما باشه
 
 #### **حافظه در سرور ها **
 

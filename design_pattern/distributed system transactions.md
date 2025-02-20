@@ -6,9 +6,14 @@
 
 ### **2pc**  two phase commit 
 
+در این روش ، پارت ها باید مطمعن شوند که تراکنش با موفقیت انجام می شود و سپس کامیت کنند . همچنین دپ بخش دارد : 
++ کوردینیتور  - این سرویس وظیفه ی مدیریت ترنساکشن ها را برعهده دارد .
++ پارتیسپیت ها - نود های ما هستند
+در این روش ، برای هر تراکنش ، ترنساکشنی باز می شود ولی کامیت نمی کنند . در فاز اول کوردینیتور از همه ی پارت ها می پرسد که می توانید کامیت کنید ، اگر تمام پارت ها مثبت بود ، در فاز دوم به همه می گه کامیت کنید و در صورتی که یک پارت نتواند ، به همه دستور می ده رول بک بزنن .
+
 یک روش ترساکشن در دیتابیس ها است ، در این روش پارتیسیپنت (دیتابیس ها) باید توانایی کامیت کردن و رولبک زدن رو داشته باشند ، این روش خوب نیست چون شاید تو اکوسیستم از nosql استفاده شود و این قابلیت ها را ندتشته باشد 
 
-پس میریم سراغ ساگا 
+
 ### Saga
 Saga اگر بخوهیم اسید را در استوریج خود ، در اسکیل چندین میکرسرویس پیاده سازی کنیم ، از دیزاین پترن ساگا استفاده میکنیم
 
@@ -68,3 +73,127 @@ Saga اگر بخوهیم اسید را در استوریج خود ، در اسک
 
 دیتابیس های جدید ، این قابلیت رو به خودشون اضافه میکنند ، در حقیقت پیچیدگی معماری رو حذف میکنیم و پیچیدگی رو به کار با این قابلیت دیتابیس ها میبریم
 
+
+### database per service
+
+در معماری database per service باید از یکی از الگو های زیر استفاده کنیم
+
+database per service benefit : ایزوله ، با توجه به نیاز دیتابیس مورد نظرو انتخاب میکنیم ، اسکیلبل
+
+
+
+
+### یه مثال شبیه سازی شده از saga Orchestration ولی با chatgpt
+
+ساگا در ساختار تیبل ها تغییری ایجاد نمی کند ، یا فیلدی اضافه نمی کند ، بلکه یک رویکرد است و سرویس ساگا کوردینیتور باید با ارسال دستور به میکروسرویس ها ، آن ها را به مرحله ی بعد ببرد یا رول بک بزنند
+
+در حقیقت باید هر میکرو سرویس ،قابلیت رول بک داشته باشه مثلن اگر داشته باشیم ثبت سفارش ، باید همچنین داشته باشیم کامپنسیت سفارش 
+
+در یک مثال chatgpt
+
+```go
+
+package main
+
+import (
+    "bytes"
+    "encoding/json"
+    "fmt"
+    "net/http"
+)
+
+type OrderRequest struct {
+    OrderID    int     `json:"order_id"`
+    UserID     int     `json:"user_id"`
+    ProductID  int     `json:"product_id"`
+    Quantity   int     `json:"quantity"`
+    TotalPrice float64 `json:"total_price"`
+}
+
+type InventoryRequest struct {
+    ProductID int `json:"product_id"`
+    Quantity  int `json:"quantity"`
+}
+
+type PaymentRequest struct {
+    OrderID int     `json:"order_id"`
+    Amount  float64 `json:"amount"`
+}
+
+func main() {
+    order := OrderRequest{
+        OrderID:    1,
+        UserID:     1,
+        ProductID:  1,
+        Quantity:   2,
+        TotalPrice: 200.00,
+    }
+
+    err := createOrderSaga(order)
+    if err != nil {
+        fmt.Printf("Saga failed: %v\n", err)
+    } else {
+        fmt.Println("Saga completed successfully")
+    }
+}
+
+func createOrderSaga(order OrderRequest) error {
+    // Step 1: Create Order
+    if err := createOrder(order); err != nil {
+        return err
+    }
+
+    // Step 2: Reserve Inventory
+    if err := reserveInventory(order.ProductID, order.Quantity); err != nil {
+        compensateOrder(order.OrderID)
+        return err
+    }
+
+    // Step 3: Process Payment
+    if err := createPayment(order.OrderID, order.TotalPrice); err != nil {
+        compensateInventory(order.ProductID, order.Quantity)
+        compensateOrder(order.OrderID)
+        return err
+    }
+
+    // All steps succeeded
+    return nil
+}
+
+func createOrder(order OrderRequest) error {
+    orderURL := "http://order-service/orders"
+    return sendRequest("POST", orderURL, order)
+}
+
+func reserveInventory(productID, quantity int) error {
+    inventoryURL := "http://inventory-service/inventory"
+    req := InventoryRequest{ProductID: productID, Quantity: quantity}
+    return sendRequest("POST", inventoryURL, req)
+}
+
+func createPayment(orderID int, amount float64) error {
+    paymentURL := "http://payment-service/payments"
+    req := PaymentRequest{OrderID: orderID, Amount: amount}
+    return sendRequest("POST", paymentURL, req)
+}
+
+func compensateOrder(orderID int) {
+    orderURL := fmt.Sprintf("http://order-service/orders/%d", orderID)
+    sendRequest("DELETE", orderURL, nil)
+}
+
+func compensateInventory(productID, quantity int) {
+    inventoryURL := "http://inventory-service/inventory/compensate"
+    req := InventoryRequest{ProductID: productID, Quantity: quantity}
+    sendRequest("POST", inventoryURL, req)
+}
+
+func sendRequest(method, url string, body interface{}) error {
+    jsonBody, err := json.Marshal(body)
+    if err != nil {
+        return err
+    }
+
+    req, err := http.NewRequest(method
+
+```

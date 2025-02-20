@@ -181,6 +181,9 @@ endpoints(dto) - states - entities(domain) -
 
 Gmail, Outlook.com , Slack, Microsoft Teams , Trello, Asana
 
++ **Post Mortem**
+
+معمولا بعد از این که سرویس ترکید یا یه مشکلی پیش اومد ، تاریخش ، دلیلش و نحوه ی ترابل شوت کردنش رو مستند می کنیم ، به این مستندات پست مورتم می گن
 
 + **tl;dr - too long; didn't**
 
