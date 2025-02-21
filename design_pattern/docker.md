@@ -1,268 +1,217 @@
-    sudo docker run یا pull نام ایمیج
-
-دانلود و اجرای ایمیج 
-
-    docker run -d nginx
-
-اگر بخواهیم بدون تی ماکس برنامه دی اتچ کار کنه 
-
-    sudo docker images
-
-لیست ایمیج ها 
-
-    sudo docker ps
-
-تمام کانتر هایی که در حال اجرا هستند 
-
-    sudo docker ps -a
-
-لاگ تمام کانتینر ها 
-
-    sudo docker rm  id
-  
-
-    docker rm $(docker ps -a -q)
-
-  
-  
-پاک کردن کانتینر
-
-    docker stop id
-  
-ایستاپ کردن کانتینر 
-
-    docker start id
 
 
-بعد از ران یا استارت کردن کانتینر ، اگر بخواهیم اطلاعات آن را ( مانند داکر کامپوز که همه چی رو لاگ میندازه) ببینیم ، می تونیم attach  کنیم :
-
-    sudo docker attach id
-
-ایمیج های دنگلینگ را پاک می کند :
-
-    docker image prune 
 
 
-کانتینر هایی که اگزیت شدن پاک می کنه :
 
-    docker container prune
-  
-  
-با این ایمیج می شه پاک کرد :
+# Docker Cheat Sheet
 
-    sudo docker rmi
+## دانلود و اجرای ایمیج
 
-اطلاعات کلی از فضای ایمیج ، کانتینر و والیوم : 
-
-    sudo docker system df
-  
-پاک کردن ایمیج
-
-    sudo docker container prune
-
-  
-پاک کردن ایمیج های بدون تگ یا آویزان
-  
-    docker image prune --filter="dangling=true"
-
-می توان والیوم هایی که در لوکال آدرس دهی شده ،( دستی آدرس نداده باشیم ) و به هیچ کانتینری مربوط نیست را پاک کنیم :
-
-    sudo docker volume prune
-  
-تمامی کانتینر ها پاک میشن 
-
-    
-    --rm اتماتیک بعد از باز شدن ریموو می شه
-  
-    
-    -it می گه توش بمون 
-  
-    
-    -p6379:6379 میگه از پورت داخل شبکه داکر ، رو پورت سیستم عامل هم نشون بده
-  
-    
-    --name redis نام کانتینر تو داکر
-  
-    
-    --network mynetwork
-  
-    
-    -w /var/ مکان دایرکتوری در شروع
-    
-    
-    -v /var/volume/sla/django:/data
-
-نکته مهم والیوم : توجه شود در صورتی که داکر به صورت عادی ران شود ، دایرکتوری درون کانتینر پاک شده و دایرکتوری تعریف شده سیستم جای آن می نشیند 
-
-بهترین راه برای والیوم:
-
+```bash
+sudo docker run یا pull نام ایمیج
+docker run -d nginx
 ```
-    volumes:
-      - postgres-db-airflow:/var/lib/postgresql/data
-      - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
-      - ./init-sql.sql:/init-sql.sql
 
+## مدیریت ایمیج‌ها و کانتینرها
+
+### لیست ایمیج‌ها
+
+```bash
+sudo docker images
+```
+
+### لیست کانتینرهای در حال اجرا
+
+```bash
+sudo docker ps
+```
+
+### لیست تمام کانتینرها (حتی استاپ شده)
+
+```bash
+sudo docker ps -a
+```
+
+### پاک کردن کانتینرها
+
+```bash
+sudo docker rm id
+docker rm $(docker ps -a -q)
+```
+
+### ایستاپ و استارت کردن کانتینرها
+
+```bash
+docker stop id
+docker start id
+```
+
+### مشاهده لاگ‌های کانتینر
+
+```bash
+sudo docker logs -f id_container
+```
+
+### اتصال به یک کانتینر در حال اجرا
+
+```bash
+sudo docker attach id
+```
+
+## پاکسازی و مدیریت حافظه
+
+### حذف ایمیج‌های دنگلینگ
+
+```bash
+docker image prune
+```
+
+### حذف کانتینرهای اگزیت شده
+
+```bash
+docker container prune
+```
+
+### حذف والیوم‌های بدون استفاده
+
+```bash
+sudo docker volume prune
+```
+
+### مشاهده وضعیت دیسک
+
+```bash
+sudo docker system df
+```
+
+## مدیریت والیوم‌ها
+
+### تعریف والیوم در `docker-compose.yml`
+
+```yaml
 volumes:
-  postgres-db-airflow8:
-
+  - postgres-db-airflow:/var/lib/postgresql/data
+  - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+  - ./init-sql.sql:/init-sql.sql
 ```
 
-اولین والیوم، تنها نام والیوم را تعریف کرده و خود مکان آن را مشخص نمی کنیم، بلکه داکر خود در لوکال والیومش ، یه دایرکتوری اتوماتیک می سازه ، چون کانتینر اطلاعاتش را درون ماشین ما میریزد
+### نکته مهم در والیوم‌ها
 
-دومی و سومی ، فایل هایی از ماشین کپی کرده و درون کانتینر می ریزد ، می توانیم فولدر هم معرفی کنیم اما در صورتی که در کانتینر همچین فولدری موجود باشد ، فایل های آن را پاک کرده ( اور رایت می کند ) ، برای اطمینان read only می زاریم :
++ در صورتی که داکر به‌صورت عادی ران شود، دایرکتوری درون کانتینر پاک شده و دایرکتوری تعریف شده سیستم جای آن را می‌گیرد.
 
-        volumes:
-          - ./nginx.conf:/etc/nginx/nginx.conf:ro
++  volume mount
 
-  
-    sudo docker run --rm  --name resis -p6379:6379 redis 
+یه name میدیم و داکر خودش هندل میکنه
 
 
-بعد از اگزیت شدن ، کانتینر و پاک می کنه: 
++ bind mount
 
-    sudo docker exec -it id bash
-  
+آدرس دستی میدیم
 
-### troubleshoot
 
-اگر کانتینر بعد ران، با ارور بسته می شود ، و بخواهیم توی کانتینر اگزک کنیم :
-+ اگر داکر بود ( یعنی داکر ران می زنیم و کانفیگ ها رو همون جا میدی) ابتدا باید یه کانتینر جدید بسازیم و در نهایت بعد دستورات ، بش بزنیم ، در این صورت به جای این که مراحل طی شود و با ارور استاپ شود ، در بش می توانیم ببینیم مشکل کجاست :
-  
-      docker run -ti image_id sh
+## اجرای دستورات درون کانتینر
 
-، می توان یک ترمینال دیگر باز کرد و لاگ های این کانتینر را خواند ، با دستور زیر : 
+```bash
+sudo docker exec -it id bash
+```
 
-      sudo docker logs -f id_container
+## Troubleshooting
 
+### دیباگ کردن کانتینری که اجرا نمی‌شود
 
-+ در صورتی که به محض اجرا ، خطا بده می تونیم از دستور زیر استفاده کنیم
+```bash
+docker run -ti image_id sh
+```
 
-`docker run -it --entrypoint /bin/sh echo-app`
+### مشاهده لاگ‌های یک کانتینر کرش‌شده
 
+```bash
+sudo docker logs -f id_container
+```
 
-+ اگر داکر کامپوزی بود ، می تونیم در یمل فایل کد زیر رو اضافه کنیم:
-  
-      command:  ping localhost
-حالا دیگه سرویس به جای این که CMD (کامند) داکر فایل رو اجرا کنه، این کامند اجرا میشه و حالا ما می تونیم درون کانتینر با bash اگزک کنیم 
+### تغییر `entrypoint` هنگام اجرای کانتینر
 
+```bash
+docker run -it --entrypoint /bin/sh echo-app
+```
 
+## ورود به داکر هاب
 
-    docker login -u seyedmo30 -p 12345
-لاگیدن در داکر هاب و گرفتن ایمیج تا ۲۰۰ تا
+```bash
+docker login -u username -p password
+```
 
+## بیلد کردن و ذخیره ایمیج‌ها
 
-تو پروژه ها بهتره هر جا آی پی یا لوکال هاست بود
-اسم کانتینری که دادیم رو بزاریم
+### بیلد کردن ایمیج از `Dockerfile`
 
-  
-  
-  
-  
-  می تونیم بدون استفاده از داکر کامپوز ، داکر فایل رو بسازیم و از اون بیلد بگیریم
-  
-  
-    docker build -t name:version directory
-  
-  
-    docker build -t food:1.0 ~/test/
-  
-  همچنین می تونیم داکر فایل بیلد شده را زیپ کرده و خروجی اش را بگیریم ( تنها آدرس داکر فایل را می دهیم و پیش فرض در آن دایرکتوری زیپ می سازد )
-  
-  
-    docker build  --output type=tar,dest=out.tar  -t project:1.0.0 .
-  
-  
-  می توانیم همچنین از ایمیج هامون خروجی بگیریم 
+```bash
+docker build -t name:version directory
+docker build -t food:1.0 ~/test/
+```
 
-    sudo docker save -o ~/ngin nginx:1.0.0
+### ذخیره و لود کردن ایمیج‌ها
 
-  و فایل های خروجی را در ایمیج ها لود یا بارگزاری کنیم
+```bash
+sudo docker save -o ~/ngin nginx:1.0.0
+sudo docker load < ngin
+```
 
-    sudo docker load < ngin
-  
-------------------------------------------------------------------------------------------------------
+## استفاده از PostgreSQL در داکر
 
-# postgres
+### اجرای PostgreSQL
 
-برای ران کردن حتما باید پسورد داده شود
+```bash
+docker run -itd -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=salam -p 5432:5432 -v /data:/var/lib/postgresql/data --name postgresql postgres:15-alpine
+```
 
-    docker run -itd -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=salam -p 5432:5432 -v /data:/var/lib/postgresql/data --name postgresql postgres:15-alpine
+### ورود به دیتابیس PostgreSQL
 
-سپس درونش اگزک می کنیم
+```bash
+PGPASSWORD=salam psql -U postgres
+```
 
-    sudo docker exec -it 98d7a843febd sh
+### اجرای اسکریپت SQL در دیتابیس
 
-به جای ورود متداول اینجوری می ریم توی پستگرس
+```bash
+psql -U postgres -d news_fetcher -h localhost -p 5432 -a -f init-sql.sql
+```
 
-    PGPASSWORD=salam psql -U postgres
-  
-یکی از راه های ساختن تیبل در اینیت کردن دیتا بیس اینه که DDL ها رو توی فایل ریخته و با دستور زیر فایل اجرا شود :
+## Dockerfile نمونه
 
-    psql -U postgres -d news_fetcher -h localhost -p 5432 -a -f init-sql.sql
+```dockerfile
+FROM alpine:3.17
+WORKDIR /app
+COPY . /app
+CMD /app/salam
+```
 
-در فایل init-sql.sql می توان مشخصات تیبل ها رو ریخت
+## مدیریت شبکه‌ها در داکر
 
---------------------------------------------------------------------------------------------------------
+### ساخت شبکه
 
-# Dockerfile
+```bash
+sudo docker network create mynetwork
+```
 
+### مشاهده شبکه‌ها
 
-    FROM alpine:3.17
+```bash
+docker network ls
+```
 
-همیشه باید از یک ایمیج شروع کنیم به ساختن
+### مشاهده اطلاعات شبکه
 
-    FROM golang:1.20-rc-alpine as builder
+```bash
+docker network inspect <network-name>
+```
 
+### پینگ گرفتن از کانتینرها درون شبکه
 
+```bash
+nslookup <container-name>
+ping <container-name>
+```
 
-    RUN mkdir /app
-
-دستورات رو اینجوری درون ایمیج میزنیم
-
-  
-    WORKDIR /app
-
-چنج دایرکتوری درون ایمیج
-
-
-    COPY . /app
-
-کپی از سرور (آدرس اول ) به ایمیج (آدرس دوم) 
-
-    
-    CMD /app/salam
-
-اجرای دستور نهایی 
-
-
-
-
-
-### network
-
-  
-ساخت شبکه - 
-
-    sudo docker network create mynetwork
-
-
- دو نوع شبکه متداول داریم :
- 
- + host -  در صورتی بخواهیم از شبکه ی خود ماشین استفاده کنیم ، می توانیم از هاست استفاده کنیم ، در این حالت نیازی به تعریف شبکه ی جدید و یا مشخص کردن پورت نیست زیرا در پورت مستقیم ماشین می نشیند
-
- + bridge - می توانیم یک شبکه ی مجازی بسازیم ، در این صورت اگر بخواهیم پورتی را اکسپوز کنیم ، باید پورت درون شبکه را به پورت ماشین وصل کنیم
-
-   در شبکه بریج ، به جای localhost- 127.0.0.1 - 0.0.0.0 می بایست نام سرویس بزنیم
-
-برای اینکه ببینیم از یک کانتینر درون شبکه ، می توانیم کانتینر دیگر را پینگ کنیم ، از دستورات زیر می توانیم استفاده کنیم :
-
-    nslookup <container-name>
-    ping <container-name>
-
-همچنین می توانیم اطلاعات کلی شبکه را ببینیم :
-
-
-    docker network ls
-    docker network inspect <network-name>
-
+more
 

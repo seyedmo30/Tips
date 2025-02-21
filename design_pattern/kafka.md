@@ -9,15 +9,15 @@
 
 اگه یکی از بروکر ها کرش کنه ، میشه قبلش کافکا رو جوری کانفیگ کرد که چندین رپلیکا داشته باشه و پرودوسر و کانسیومر ها باید جوری کانفیگ بشن که سوییچ کنن رو رپلیکای جدید
 
-+ offset commit
++ offset commit - consumer
 
-به صورت پیش فرض هر پیام که توسط کانسیومر خوانده میشود کامیت میشود ولی برای بالا بردن اطمینان می شه **manual offset commit** رو فعال کرد
+به صورت پیش فرض هر پیام که توسط **کانسیومر** خوانده میشود کامیت میشود ولی برای بالا بردن اطمینان می شه **manual offset commit** رو فعال کرد
 
 
 
-+ acknowledgment
++ acknowledgment - producer
 
-این برای اینه که پرودیوسر مطمعن شه که پیام به بروکر رسیده ، ربطی به **کانسیومر** هنوز نداره و ۳ سطح داره :
+این برای اینه که **پرودیوسر** مطمعن شه که پیام به بروکر رسیده ، ربطی به **کانسیومر** هنوز نداره و ۳ سطح داره :
 
 + +  acks=0: هیچ تأییدی دریافت نمی‌کند
 + +  acks=1: فقط از رهبر پیام را دریافت می‌کند
@@ -26,15 +26,65 @@
 + Log Retention
 مدت  زمانی که پیام ها در سیستم ذخیره می شوند و پیش فرض ۷ روز است
 
+
+
+## راه های تضمین ارسال پیام
+
+### Delivery semantics
+
+most-once, at-least-once, or exactly-once
+
+این ها تنظیمات ندارن بلکه با تغییر کامیت یا اکنالج ، به این ها برسیم
++ At-most-once Semantics
+در این حالت یا پیام به کانسومر یک بار میرسه ، یا نمیرسه ، در این حالت نباید کانسومر بعد از پردازش کامیت کند (یعنی بلافاصله بعد از دریافت auto commit کنه) همچنین تنظیمات پرودیوسر به ترتیب زیر است
+```
+Properties props = new Properties();
+props.put("acks", "0"); // No acknowledgment
+props.put("retries", "0"); // No retries
+
+
+```
++ At-least-once Semantics
+
+در این حالت حداقل یک بار پیام به کانسیومر میرسه ، ولی امکان داره بیش از یک بار هم برسه و 
+
+باید جلوی duplicate رو بگیریم وزمانی اتفاق می افته که برنامه قبل کامیت کردن کرش کنه
+
+```
+Properties props = new Properties();
+props.put("acks", "all"); // Wait for acknowledgment from all replicas
+props.put("retries", "3"); // Retry 3 times before failing
+
+
+consumer.commitSync(); // Commit the offset after processing the message
+
+
+```
+
++ Exactly-once Semantics (EOS)
+
+دقیقن به دست کانسیومر یه دونه میرسه
+
+
+```
+Properties props = new Properties();
+props.put("acks", "all"); // Wait for all replicas to confirm
+props.put("enable.idempotence", "true"); // Enable idempotence to avoid duplicates
+props.put("transactional.id", "transactional-producer-id"); // Set a unique transactional ID for the producer
+
+
+
+
+Properties consumerProps = new Properties();
+consumerProps.put("isolation.level", "read_committed"); // Read only committed transactions
+
+```
 # kafka
 
 data pipelines - distributed event store -  Kafka is not a traditional message queue -  Kafka is a distributed messaging system -  RabbitMQ is a message broker, while Kafka is a distributed streaming platform. One of the primary differences between the two is that Kafka is pull-based, while RabbitMQ is push-based -Kafka offers much higher performance than message brokers like RabbitMQ - bus using a pub-sub model of stream-processing
 
-# rabbitMQ
 
-RabbitMQ is message-broker software - it allows for various protocol extensions via a plug-in architecture -  message broker between microservices
-
-# kafka vs rabbit
+### kafka vs rabbit
 
 RabbitMQ cannot replay events ربیت زمانی می تواند مفید باشد که برای پخش مجدد پیام ها در یک موضوع به این ویژگی نیاز ندارید
 RabbitMQ برای برنامه هایی که معماری برنامه ناشناخته است بهتر است و با بیان مشکل و راه حل توسعه و تکامل می یابد. RabbitMQ در این شرایط در مقایسه با کافکا بسیار انعطاف پذیرتر و آسان تر است. اما زمانی که برنامه بالغ شد و نیاز به مقیاس‌پذیری، توان عملیاتی زیاد، قابلیت اطمینان، استحکام و قابلیت پخش مجدد پیام‌ها وجود داشت، RabbitMQ تبدیل به یک گلوگاه می‌شود و بهتر است به کافکا بروید.
@@ -55,6 +105,8 @@ Publish-subscribe message system :
 ## خلاصه 
 
 اگر نیاز داریدپیام بعد استفاده حذف شود ، می توان از rabbit استفاده کرد ، ولی اگر پیام در یک بازه ی زمانی بماند ، از کافکا استفاده کنید ولی در کل کافکا بهتر است
+
+# terms
 
 #### topic :
 
@@ -142,9 +194,7 @@ First Offset: 271905  Last Offset: 271908  Size: 3
 
 پس ابتدا آفست رو ذخیره می کنیم ، سپس مسیج رو کانسیوم می کنیم و در انتها آفست رو به مکان قبلی انتقال می دیم
 
-
-نکات :
-
+# tips
 هر تاپیک حداقل یک پارتیشن دارد ، اما اگر بخواهیم حجم داده از سمت پابلیشر را افزایش دهیم ، برای این کار پارتیشن های تاپیک را به نصبت پالیشر ها افزایش می دهیم تا راحت تر پابلیشر ها داده را در کافکا قرار دهند
 
 اگر در یک تاپیک، چند پارتیشن داشته باشیم و سرعت پابلیش بالا باشه ، کانسیومر باید از تمام پارتیشن ها داده بخونه و این یک باتلنک هست ، برای حل این می توانیم تعداد سابسکرایبر هامون رو افزایش بدیم به طوری که هر سایبسکرایبر یک پارتیشن رو بخونه ، اما به شرطی که همه یک گروپ آی دی داشته باشن  ، اگر تعداد سابسکرایبرای یک گروپ بیشتر از پارتیشن ها باشه ، اصطلاحات سابسکرایبر بی کار (idle ) می شه .
@@ -153,6 +203,12 @@ First Offset: 271905  Last Offset: 271908  Size: 3
 کانسیومر ها متوانند یا تاپیک به آنها اساین شود ، یا می توان پارتیشن به آنها اساین شود ، اما هردو نمی شود .
 
 
+توی حصین یه ماه درگیر یه نکته بودم ، اگر دیدید بعد از هر بار کانکشن ، مثل آدم کانسوم نمی کنه ، احتمال خیلی زیاد کانسومر شاید به دلیل  کانکارنسی روی کار نمیاد ،
+
+مشکل من این بود بعضی وقتا که تعداد کانسیومر ها زیاد می شد ، کانسیوم دیر می کرد ، من فکر می کردم مشکل از کافکاست ولی دیدم گروپ آی دی جدید ساخته میشه ولبی کانسیومر لگ حتی ۰ هم نیست ( توی کافکا یو آی ) و بعد یه ماه فهمیدم گروپ آیدی ساخته می شه ولی نمی دونم چرا ، هیچ کی اونو کانسوم نمی کنه
+
+
+# commands
 
 مشاهده لیست تاپیک ها  
     
@@ -229,12 +285,8 @@ reset groupID
 
         sudo apt-get install build-essential
 
-### سوتی
-توی حصین یه ماه درگیر یه نکته بودم ، اگر دیدید بعد از هر بار کانکشن ، مثل آدم کانسوم نمی کنه ، احتمال خیلی زیاد کانسومر شاید به دلیل  کانکارنسی روی کار نمیاد ،
 
-مشکل من این بود بعضی وقتا که تعداد کانسیومر ها زیاد می شد ، کانسیوم دیر می کرد ، من فکر می کردم مشکل از کافکاست ولی دیدم گروپ آی دی جدید ساخته میشه ولبی کانسیومر لگ حتی ۰ هم نیست ( توی کافکا یو آی ) و بعد یه ماه فهمیدم گروپ آیدی ساخته می شه ولی نمی دونم چرا ، هیچ کی اونو کانسوم نمی کنه
-
-### برای بالا آوردن روی لوکال هاست
+### docker file
 
 خیلی ساده با یه پارتیشن
 
