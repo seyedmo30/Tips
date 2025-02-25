@@ -52,6 +52,10 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
 #### ...... project/.vscode/launch.json 
 
 
+برای تغییر pascal case to camel case  باید ابتدا پکیج زیر رو نصب کنید
+
+
+`finntenzor.change-case`
 
 #### key map
 
@@ -738,10 +742,6 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
         "when": "textInputFocus"
     },
     {
-        "key": "ctrl+u",
-        "command": "workbench.action.moveEditorToLastGroup"
-    },
-    {
         "key": "shift+alt+9",
         "command": "-workbench.action.moveEditorToLastGroup"
     },
@@ -868,6 +868,33 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
         "key": "ctrl+o",
         "command": "-workbench.action.files.openLocalFile",
         "when": "remoteFileDialogVisible"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "editor.action.revealDefinition",
+        "when": "editorHasDefinitionProvider && editorTextFocus"
+    },
+    {
+        "key": "f12",
+        "command": "-editor.action.revealDefinition",
+        "when": "editorHasDefinitionProvider && editorTextFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "-workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "change-case.changeCase"
+    },
+    {
+        "key": "alt+q",
+        "command": "-change-case.changeCase"
     }
 ]
 
