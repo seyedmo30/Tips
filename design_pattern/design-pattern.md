@@ -271,6 +271,33 @@ Observer یا سابسکرایبر
 
 کلاینت یا متد اصلی
 
+نکته ی مهم دیگر استراتجی پترن هم این است که به جای استفاده از **if/else** یا **switch** از **map** استفاده می کنیم به این صورت که کلید مپ نام آن استراتجی است و کلیدش **FACTORY FUNCTION** است
+
+فرض کنیم به ازای هر استراتجی یک کانستراکتور باید داشته باشیم مانند کانستراکتور زیر :
+
+`NewShahinService(config config.App, bank string) (*shahinService, error) `
+
+و وظیفه ی این است که استراکتی که اینترفیس را ایمپلمنت کرده بسازیم
+
+اما مشکلی که وجود دارد این است که **هارد کدی** باید بگیم به ازای این استراتجی چه کانستراکتوری باید داشته باشیم
+ همچنین تنها یک بار ایجاد میشود و هر بار از اون مجددا استفالده میشود
+
+اما روش بهینه این است که تایپ اون فانکشن رو بسازیم و اون رو داخل **MAP** قرار بدیم
+
+```go
+
+
+type BankServiceFactory func(config.App, string) (interfaces.BankService, error)
+
+var registry = make(map[string]BankServiceFactory)
+func RegisterBankServiceFactory(providerName string, factory BankServiceFactory) {
+	registry[providerName] = factory
+}
+
+```
+
+اگر توجه شود سیگنیچر **BankServiceFactory** شبیه کانستراکتور است
+
 
 ## iterator
 
