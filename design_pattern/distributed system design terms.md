@@ -227,7 +227,7 @@ never trust, always verify
 
 + stock
 
-+ object-storage(minio) image-profile
++ object-storage(minio) https://github.com/seyedmo30/Tips/blob/main/static/iiiprofile
 
 
 حالا باید هر دیتابیس بالا رو مشخص کنیم sql  هست یا nosql و دلیلش هم بگیم
