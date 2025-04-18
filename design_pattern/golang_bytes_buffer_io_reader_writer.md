@@ -232,3 +232,39 @@ Hello RanjanKumar%
 		bucket = bucket[:0] 
 
   
+
+# stream
+
+توجه شود زمانی که فایلی اوپن میشود ، به این معنی نیست که در مموری ریخته میشود ، بلکه تنها اطلاعات  فایل از os  گرفته میشود
+
+`file, err := os.Open("largefile.txt")`
+
+چند راه متداول برای استریم کردن هست : 
++ معمول ترین راه
+
+```
+for {
+       n, err := file.Read(buffer)
+```
+
++ همچنین میشه از bufio استفاده کرد
+تقریبا همون read byte  هست با یه سری قابلیت ها
+
+```
+scanner := bufio.NewScanner(file)
+   for scanner.Scan() {
+```
+توجه شود برای write file  باید آخرش فلاش کرد
+
+`writer.Flush() // Ensure all`
+
++ **Memory-Mapped Files**
+
+این روش بهینه تر از موارد قبلی هست و در مموری مپ ایجاد میکنه ، همچنین پکیج خوب این هست :
+
+```
+import "golang.org/x/exp/mmap"
+
+   r, err := mmap.Open("largefile.txt")
+
+```

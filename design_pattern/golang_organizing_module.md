@@ -21,8 +21,21 @@ func NewContent(reader Reader) (*ContentResult, error) {
 به جای گرفتن چند ورودی ، یک استراکت تعریف کنیم و آن را بگیریم
 
 
-### 
+### dto embeding
 
+هر لایه باید  dto  خودش رو داشته باشه ، به هیچ  وجه نباید dto  شیر بشه یا dto  generic  داشته باشیم و برای جلو گیری از پیچیدگی یا readundancy  میتونیم از موارد زیر استفاده کنیم
+
++ mapper package : go-napper , mapstructure
+
++ embeding : Base dto
+
+```go
+type BaseDigitalSignature struct {
+    ID          string
+    CreatedAt   time.Time
+    UpdatedAt   time.Time
+}
+```
 
 
 ## Designing Go Packages
