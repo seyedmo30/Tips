@@ -85,6 +85,93 @@ CREATE INDEX idx_department_id ON employees(department_id);
 (7 rows)
 ```
 
+
+
+یک مثال از تجربه عملی که تونستم یک کوییری رو اوپتیمایز کنم :
+
+```json
+
+ 
+
+{
+  "query_block": {
+    "select_id": 1,
+    "cost_info": {
+      "query_cost": "2.75"   //   هزینه بالاست
+    },
+    "table": {
+      "table_name": "incoming_payment_requests",
+      "access_type": "ALL",
+      "rows_examined_per_scan": 25,  // ۲۵ تا رو اسکن کرده
+      "rows_produced_per_join": 0,
+      "filtered": "4.00",  //  درصد فیلترا به دردش خورده 
+      "cost_info": {
+        "read_cost": "2.65",
+        "eval_cost": "0.10",
+        "prefix_cost": "2.75",
+        "data_read_per_join": "5K"
+      },
+      "used_columns": [
+        "amount",
+        "created_at",
+        "status",
+        "bank_id"
+      ],
+      "attached_condition": "((`open_banking`.`incoming_payment_requests`.`bank_id` = 'sadad') and (`open_banking`.`incoming_payment_requests`.`status` in ('SUCCESS','READY_FOR_EXECUTE')))"
+    }
+  }
+}
+
+```
+
+حالا بعد از ایندکس کردن
+
+```json
+
+
+{
+  "query_block": {
+    "select_id": 1,
+    "cost_info": {
+      "query_cost": "0.72"  // هزینه
+    },
+    "table": {
+      "table_name": "incoming_payment_requests",
+      "access_type": "range",
+      "possible_keys": [
+        "idx_metrics_cover"
+      ],
+      "key": "idx_metrics_cover",
+      "used_key_parts": [
+        "bank_id",
+        "status",
+        "created_at"
+      ],
+      "key_length": "2050",
+      "rows_examined_per_scan": 2,   // کلا ۲ تا اسکن کرده
+      "rows_produced_per_join": 2,   // ۲ تا نیازش بوده
+      "filtered": "100.00",   ‍// کامل مفید بوده
+      "using_index": true,   // **عالی**
+      "cost_info": {
+        "read_cost": "0.52",
+        "eval_cost": "0.20",
+        "prefix_cost": "0.72",
+        "data_read_per_join": "11K"
+      },
+      "used_columns": [
+        "amount",
+        "created_at",
+        "status",
+        "bank_id"
+      ],
+      "attached_condition": "((`open_banking`.`incoming_payment_requests`.`bank_id` = '11') and (`open_banking`.`incoming_payment_requests`.`created_at` >= TIMESTAMP'2025-05-22 00:00:00') and (`open_banking`.`incoming_payment_requests`.`status` in ('SUCCESS','READY_FOR_EXECUTE')))"
+    }
+  }
+}
+
+
+```
+
 ### vacuum
 
 در پستگرس (PostgreSQL)، دستور VACUUM به منظور پاکسازی و بهینه‌سازی دیتابیس استفاده می‌شود. وقتی داده‌ها در پایگاه‌داده حذف یا به‌روزرسانی می‌شوند، فضای حافظه‌ای که اشغال کرده‌اند به‌طور خودکار آزاد نمی‌شود. این موضوع باعث می‌شود که پایگاه‌داده به مرور زمان حجیم‌تر شود و کارایی آن کاهش یابد. دستور VACUUM به این کمک می‌کند که این فضای آزاد شده را دوباره بازیابی کرده و عملکرد سیستم را بهبود بخشد.

@@ -257,6 +257,31 @@ resource group هست
 
 # commands
 
+## commons
+
+
+**و چند دستور کاربردی برای کار با محیطی که devops در اختیار قرار میده**
+
+### پاد ها رو میشه دید
+
+`kubectl get pods`
+
+
+###  مشاهده لاگ
+
+ابتدا نیازه لیست پاد ها رو دریافت کنیم
+
+`kubectl logs -f pod/mostafa-backend-tenancy-digitalsignature-76d465f8bd-2s8lz`
+
+
+### دیپلویمنت ها رو میشه دید
+
+`kubectl get deployments.apps`
+
+### پایین اوردن یه سرویس در محیط
+
+`kubectl scale deployment mostafa-backend-tenancy-upg --replicas=0`
+
 ### کلاستر تستی رو میسازه
 
 ‍`minikube start --driver=docker`
@@ -265,10 +290,6 @@ resource group هست
 
 `kubectl get nodes`
 
-### دیپلویمنت ها رو میشه دید
-
-`kubectl get deployments`
-
 ### سرویس ها رو میشه دید
 
 `kubectl get services`
@@ -276,10 +297,6 @@ resource group هست
 ### سرویس ها رو با مینیکیوب میشه دید
 
 `minikube service nginx`
-
-### پاد ها رو میشه دید
-
-`kubectl get pods`
 
 ### حذف پاد
 

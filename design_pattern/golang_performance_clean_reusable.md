@@ -60,6 +60,72 @@ go get github.com/prometheus/client_golang/prometheus/promhttp
 آموزش داره ، ولی یه api  میدیم و اون تو هر با کال بشه ، memalloc رو میفرستیم ، اینجوری metric  رو هم دادیم
 
 
+### Enum with a Map vs Direct Constant String
+
+
+```go
+
+// Enum with a Map
+const (
+	sadadGetAccountBalance routeSadadName = iota
+	sadadTransfer
+	sadadTransactionInquiry
+	sadadTransferValidation
+	sadadGetIbanInfo
+)
+
+var routesSadad = map[routeSadadName]string{
+	sadadGetAccountBalance:  "/v0.3/obh/api/aisp/get-account-balance",
+	sadadTransfer:           "/v0.3/obh/api/pisp/transfer",
+	sadadTransactionInquiry: "/v0.3/obh/api/pisp/transaction-inquiry",
+	sadadTransferValidation: "/v0.3/obh/api/pisp/transfer-validation",
+	sadadGetIbanInfo:        "/v0.3/obh/api/aisp/get-iban-info",
+}
+
+// Direct Constant String
+
+const (
+	sadadGetAccountBalance  = "/v0.3/obh/api/aisp/get-account-balance"
+	sadadTransfer           = "/v0.3/obh/api/pisp/transfer"
+	sadadTransactionInquiry = "/v0.3/obh/api/pisp/transaction-inquiry"
+	sadadTransferValidation = "/v0.3/obh/api/pisp/transfer-validation"
+	sadadGetIbanInfo        = "/v0.3/obh/api/aisp/get-iban-info"
+)
+
+```
+
+
+### refactor Switch Statement to map
+
+ اگر دیدیم چندین متغییر شبیه به هم با نام های متفاوت داریم ، شاید بشه  یه مپ گذاشت
+
++ bad
+
+```go
+
+type sadadService struct {
+	httpService                 interfaces.HttpService
+	config                      config.App
+	bank                        string
+	scopeTokenMoneyTransfer     SadadAccessToken
+	scopeTokenAccount           SadadAccessToken
+	scopeTokenSvcMgmtMqStmtInfo SadadAccessToken
+	mu                          sync.Mutex // mu is a mutex to protect concurrent access to the AccessToken.
+}
+```
+
++ good
+```go
+type sadadService struct {
+	httpService interfaces.HttpService
+	config      config.App
+	bank        string
+	scopeToken  map[string]SadadAccessToken
+	mu sync.Mutex // mu is a mutex to protect concurrent access to the AccessToken.
+}
+
+
+```
 ## نکات کتاب ۱00 اشتباه
 
 ### ۱ با احتیاط از مقدار دهی سریع استفاده کنیم
