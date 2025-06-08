@@ -123,7 +123,46 @@ func main() {
  
  معمولا زمانی استفاده میشود که یک شی فیلد هاش قابل پیش بینی نباشد 
 
- به دلیل این که گولنگ از وراثت پشتیبانی نمی کند ، نمی توان مثالی آورد
+ بخوایم به زبون ساده بگیم به فانکشنی که اینترفیس ریترن می کنه میگن فکتوری متود.
+
+ به دلیل این که گولنگ از وراثت پشتیبانی نمی کند ، نمی توان مثالی آورد ،  اما میشه به روش زیر تلاش کنیم نیاز مندی هامون رو رفع کنیم
+
+```go
+package main
+
+import "fmt"
+
+// Product Interface
+type Vehicle interface {
+	Drive() string
+}
+
+// Concrete Products
+type Car struct{}
+func (c Car) Drive() string { return "Driving a car 🚗" }
+
+type Bike struct{}
+func (b Bike) Drive() string { return "Riding a bike 🚴" }
+
+// Factory Method
+func GetVehicle(vehicleType string) Vehicle {
+	switch vehicleType {
+	case "car":
+		return Car{}
+	case "bike":
+		return Bike{}
+	default:
+		panic("unknown vehicle")
+	}
+}
+
+func main() {
+	car := GetVehicle("car")
+	fmt.Println(car.Drive()) // Driving a car 🚗
+}
+```
+
+
 
 
 ## factory method vs Abstract Factory
