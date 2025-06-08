@@ -162,7 +162,70 @@ func main() {
 }
 ```
 
+اما اونجا که سابکلاس ها می تونن سوپر کلاس رو اور رایت کنن رو ئایتون داره و گولنگ نداره و گولنگ باید با امبد و کامپوزیشن ئیاده سازی کنه :
 
+
+```python
+
+from abc import ABC, abstractmethod
+
+class VehicleFactory(ABC):  # Base Creator
+    def __init__(self, base_color="red"):
+        self.base_color = base_color  # Shared state for all factories
+    
+    def prepare_vehicle(self):  # Shared logic for all factories
+        print(f"Preparing {self.base_color} vehicle")
+    
+    @abstractmethod
+    def create_vehicle(self) -> "Vehicle":  # Factory Method
+        pass
+
+# Concrete Creators (inherit shared logic)
+class CarFactory(VehicleFactory):
+    def create_vehicle(self):  # Override factory method
+        self.prepare_vehicle()
+        return Car()
+
+class BikeFactory(VehicleFactory):
+    def create_vehicle(self):
+        self.prepare_vehicle()
+        return Bike()
+```
+به لاجیک شیرد ها توجه شود
+
+```go
+type VehicleFactory struct {
+    baseColor string
+}
+
+func (f *VehicleFactory) prepareVehicle() {
+    fmt.Printf("Preparing %s vehicle\n", f.baseColor)
+}
+
+// No way to force implementation in "subclasses"
+type Creator interface {
+    CreateVehicle() Vehicle
+}
+
+// Must reimplement shared logic per factory
+type CarFactory struct {
+    VehicleFactory // Embedding (composition)
+}
+
+func (f *CarFactory) CreateVehicle() Vehicle {
+    f.prepareVehicle() // Manual call to shared logic
+    return Car{}
+}
+
+type BikeFactory struct {
+    VehicleFactory
+}
+
+func (f *BikeFactory) CreateVehicle() Vehicle {
+    f.prepareVehicle() // Duplicated boilerplate
+    return Bike{}
+}
+```
 
 
 ## factory method vs Abstract Factory
