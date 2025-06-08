@@ -386,3 +386,32 @@ func main() {
 
 
 ولی شاید بتونیم نیاز مندی مون رو با استفاده از دیزاین پترن **decorator** برطرف کنیم
+
+example 1 :
+```go
+func loggingMiddleware(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        log.Println("Request received")
+        next.ServeHTTP(w, r)
+    })
+}
+```
+
+
+example 2 :
+
+```go
+// ===== Decorator Pattern for Functions =====
+type Operation func(int, int) int
+
+// Decorator: Adds logging to any function
+func logDecorator(fn Operation) Operation {
+	return func(a, b int) int {
+		start := time.Now()
+		defer fmt.Printf("Execution time: %v\n", time.Since(start))
+		fmt.Printf("Calling function with (%d, %d)\n", a, b)
+		return fn(a, b)
+	}
+}
+
+```
