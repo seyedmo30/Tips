@@ -431,6 +431,30 @@ ORDER BY
     total_spend DESC;
 
 ```
+
+### Customers Table
+| `customer_id` | `name`          | `email`               |
+|--------------|-----------------|-----------------------|
+| 1            | Alice Smith     | alice@example.com     |
+| 2            | Bob Johnson     | bob@example.com       |
+| 3            | Charlie Brown   | charlie@example.com   |
+
+### Orders Table
+| `order_id` | `customer_id` | `order_date` | `total_amount` |
+|------------|---------------|--------------|----------------|
+| 101        | 1             | 2023-10-01   | 200.00         |
+| 102        | 1             | 2023-10-05   | 350.00         |
+| 103        | 2             | 2023-10-10   | 600.00         |
+| 104        | 3             | 2023-10-12   | 100.00         |
+| 105        | 3             | 2023-10-15   | 150.00         |
+| 106        | 3             | 2023-10-20   | 300.00         |
+
+### Query Result
+| `name`          | `total_spend` |
+|-----------------|---------------|
+| Bob Johnson     | 600.00        |
+| Alice Smith     | 550.00        |
+
 ## ادامه
 
 
