@@ -418,17 +418,17 @@ Set synchronous_commit = OFF;  -- Not recommended without understanding the impl
 
 SELECT
     c.name,
-    SUM(o.total_amount) AS total_spend
+    SUM(o.total_amount) AS total_spend           // این جا اگریگیت ها مهم هستن
 FROM
     customers c
 JOIN
     orders o ON c.customer_id = o.customer_id
 GROUP BY
-    c.customer_id, c.name
+    c.customer_id, c.name                        // همیشه جدولی که ایتماش کمه و اونی که کلید خارجی داده  تو گروپ آیدی میاد
 HAVING
-    SUM(o.total_amount) > 500
+    SUM(o.total_amount) > 500                    // دقیقا مثل where هست برای گروپ
 ORDER BY
-    total_spend DESC;
+    total_spend DESC;                            // نزولی یعنی بیشترن تعداد یا جدید ترین تاریخ
 
 ```
 
