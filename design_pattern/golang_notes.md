@@ -1,7 +1,7 @@
 
 
 
-## export path
+#### export path
 
 بعد از نصب گولنگ ،فایل اجرا کننده کد های گولینگ ،  فایلی که باید در bashrc , zshrc  باید اضافه بشه در این مسیر است - /usr/local/go/bin/
 
@@ -92,7 +92,15 @@ nano ~/.gitconfig
         insteadOf = https://git.maani.app/
 ```
 
-### cobra vs multiple cmd folders
+#### 403 - 443 
+
+یه سری وقتا یه پکیج نصب نمی شه ، شاید بشه با یه سری فلگ نصب کرد
+
+`GOPROXY=https://proxy.golang.org,direct go get github.com/gin-gonic/gin`
+
+`GODEBUG=netdns=go GOHOST=localhost GOINSECURE=nullprogram.com GONOSUMDB=nullprogram.com GO111MODULE=on go get -v github.com/gin-gonic/gin`
+
+#### cobra vs multiple cmd folders
 
 در صورتی که برنامه ی ما بیش از یک حالت ران شود یعنی همزمان هم rest api http  داره هم چند کرون جاب  ، می تونیم ۲ کار کنیم :
 
