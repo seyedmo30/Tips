@@ -171,6 +171,38 @@ The GoPATH determines the root of the workspace whereas the GoROOT determines th
 ```     
 /usr/local/go/src/fmt/
 ```
+
+
+### mod tidy - install - get - mod download
+
++ go install
+
+
+
+زمانی که بخواهیم یه باینری **Go CLI tool** رو نصب کنیم ، نیاز به **go mod**  نداره و هر جا می تونه اجرا شه
+
+`go install github.com/rakyll/hey@latest`
+
++ go get
+
+برای نصب نیازمندی ها در ماژول و آپدیت  **go mod**  
+
+`go get github.com/segmentio/kafka-go`
+
++ go mod tidy
+
+سینک کردن پکیج های ایمپورت شده و  **go mod**  
+
+پایک کردن از **go mod**  زمانی که از پکیجی دیگه استفاده نمی کنیم یا افزودن بدون **get**
+
++ go mod download
+
+از لیست **go mod**  می خونه و تا جایی که بتونه از لوکال کش می خونه دقت شود **go.mod** آپریت نمی شه
+
+در زمان بیلد گرفتن آفلاین استفاده میشه ، همچنین در زمان پایپلاین با استفاده از کش
+
+`go mod download`
+
 ### **Use Named Return Values** 
 
 با این روش میشه همون اول توی فانکشن ، نام های خروجی رو مشخص کرد و در پایان تنها ریترن بدون پارام کرد

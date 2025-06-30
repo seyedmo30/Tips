@@ -729,10 +729,6 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
         "command": "workbench.action.focusActiveEditorGroup"
     },
     {
-        "key": "ctrl+j",
-        "command": "workbench.files.action.collapseExplorerFolders"
-    },
-    {
         "key": "shift+alt+1",
         "command": "-workbench.action.moveEditorToFirstGroup"
     },
@@ -746,7 +742,7 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
         "command": "-workbench.action.moveEditorToLastGroup"
     },
     {
-        "key": "ctrl+shift+j",
+        "key": "alt+3 alt+k",
         "command": "workbench.scm.action.collapseAllRepositories"
     },
     {
@@ -895,6 +891,100 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
     {
         "key": "alt+q",
         "command": "-change-case.changeCase"
+    },
+    {
+        "key": "alt+1 alt+k",
+        "command": "workbench.files.action.collapseExplorerFolders"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "-workbench.action.togglePanel"
+    },
+    {
+        "key": "alt+4 alt+k",
+        "command": "variables.collapse",
+        "when": "view == 'workbench.debug.variablesView'"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.files.action.collapseExplorerFolders"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "-workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "alt+1",
+        "command": "-workbench.action.openEditorAtIndex1"
+    },
+    {
+        "key": "alt+1",
+        "command": "workbench.view.explorer"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "-workbench.view.search",
+        "when": "workbench.view.search.active && neverMatch =~ /doesNotMatch/"
+    },
+    {
+        "key": "alt+2",
+        "command": "-workbench.action.openEditorAtIndex2"
+    },
+    {
+        "key": "ctrl+shift+g",
+        "command": "-workbench.view.scm",
+        "when": "workbench.scm.active"
+    },
+    {
+        "key": "ctrl+shift+g g",
+        "command": "-workbench.view.scm",
+        "when": "workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
+    },
+    {
+        "key": "alt+3",
+        "command": "-workbench.action.openEditorAtIndex3"
+    },
+    {
+        "key": "alt+3",
+        "command": "workbench.view.scm"
+    },
+    {
+        "key": "ctrl+shift+d",
+        "command": "-workbench.view.debug",
+        "when": "viewContainer.workbench.view.debug.enabled"
+    },
+    {
+        "key": "alt+4",
+        "command": "-workbench.action.openEditorAtIndex4"
+    },
+    {
+        "key": "alt+4",
+        "command": "workbench.view.debug"
+    },
+    {
+        "key": "shift+alt+f",
+        "command": "search.action.restrictSearchToFolder",
+        "when": "folderMatchWithResourceFocus && searchViewletVisible"
+    },
+    {
+        "key": "shift+alt+f",
+        "command": "-search.action.restrictSearchToFolder",
+        "when": "folderMatchWithResourceFocus && searchViewletVisible"
+    },
+    {
+        "key": "shift+alt+f",
+        "command": "filesExplorer.findInFolder",
+        "when": "explorerResourceIsFolder && filesExplorerFocus && foldersViewVisible && !inputFocus"
+    },
+    {
+        "key": "shift+alt+f",
+        "command": "-filesExplorer.findInFolder",
+        "when": "explorerResourceIsFolder && filesExplorerFocus && foldersViewVisible && !inputFocus"
+    },
+    {
+        "key": "alt+6",
+        "command": "-workbench.action.openEditorAtIndex6"
     }
 ]
 

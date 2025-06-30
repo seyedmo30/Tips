@@ -52,7 +52,7 @@ resource group هست
 
 برای مشاهده پاد جدید ساخته شده دستور زیر
 
-``get pod -n ns1l1
+`get pod -n ns1l1`
 
 ### Namespace
 
