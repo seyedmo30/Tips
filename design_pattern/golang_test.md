@@ -63,46 +63,65 @@
 
 ```    
 
-پروفایل مموری: 
-
-`http://localhost:6060/debug/pprof/heap`
-
-پروفایل CPU:
-
- `http://localhost:6060/debug/pprof/profile?seconds=30`
-
-پروفایل گوروتین‌ها: 
-
-`http://localhost:6060/debug/pprof/goroutine`
 
 
-
-و همزمان در حلقه چندین بار فانکشن هایی که احتمالا گلوگاه کد هستند را فراخانی کنیم . کد حداقل باید 30 ثانیه در حلقه تکرار شود ، همزمان کد زیر را اجرا می کنیم تا کد را از طریق ListenAndServe کد را ذخیره کند :
-
-`go tool pprof http://localhost:6060/debug/pprof/profile`
-
-اگر بتواند 30 ثانیه آنالیز کند ، آنگاه می توانیم به روش های گوناگون خروجی را بگیریم ولی متداول ترین روش ، وب است:
-
-    (pprof) web
-
-
-زمانی که بخواهیم توی وب ببینیم
++ زمانی که بخواهیم مموری  توی وب ببینیم
 
 `go tool pprof -http=:8080 http://localhost:6060/debug/pprof/heap`
 
+
+
+
++ پروفایل گوروتین‌ها: 
+
+`go tool pprof -http=:8080 http://localhost:6060/debug/pprof/goroutine`
+
+
++ پروفایل CPU:
+
+و همزمان در حلقه چندین بار فانکشن هایی که احتمالا گلوگاه کد هستند را فراخانی کنیم . کد حداقل باید 30 ثانیه در حلقه تکرار شود ، همزمان کد زیر را اجرا می کنیم تا کد را از طریق ListenAndServe کد را ذخیره کند :
+
+
+ `go tool pprof -http=:8080 http://localhost:6060/debug/pprof/profile?seconds=30`
+
+اگر بتواند 30 ثانیه آنالیز کند ، آنگاه می توانیم به روش های گوناگون خروجی را بگیریم ولی متداول ترین روش ، وب است:
 
 ### TotalAlloc
 
 
 ```go
-import (
-    "runtime"
-    "log"
-)
 
-var memStats runtime.MemStats
-runtime.ReadMemStats(&memStats)
-log.Printf("Alloc = %v, TotalAlloc = %v, Sys = %v, NumGC = %v", memStats.Alloc, memStats.TotalAlloc, memStats.Sys, memStats.NumGC)
+func main() {
+	go func() {
+		pkg.PrintMemStats()
+	}()
+}
+
+
+// pkg
+
+func PrintMemStats() {
+	for {
+
+		var m runtime.MemStats
+		runtime.ReadMemStats(&m)
+
+		const mb = 1024 * 1024
+
+		timestamp := time.Now().Format(time.RFC3339)
+		fmt.Printf("\n---- Memory Stats at %s ----\n", timestamp)
+		fmt.Printf("Mallocs:        %d\n", m.Mallocs)
+		fmt.Printf("Frees:          %d\n", m.Frees)
+		fmt.Printf("Live Objects:   %d\n", m.Mallocs-m.Frees)
+		fmt.Printf("TotalAlloc:     %.2f MB\n", float64(m.TotalAlloc)/mb)
+		fmt.Printf("Alloc:          %.2f MB\n", float64(m.Alloc)/mb)
+		fmt.Printf("HeapAlloc:      %.2f MB\n", float64(m.HeapAlloc)/mb)
+		fmt.Printf("HeapSys:        %.2f MB\n", float64(m.HeapSys)/mb)
+		fmt.Println("------------------------------")
+		time.Sleep(5 * time.Second)
+	}
+}
+
 ```
 
 ### pprof goroutines

@@ -51,6 +51,27 @@
 + در کل بهتره اگر ولیدیشن خیلی پیچیده بود ، توی یه فانکشن صورت بگیره و کد لاجیک کوچیک باشه.
 
 
+### Domain Primitives (domain-specific types)
+
+به نظرم یه کار خفن اینه که از تایپ های خاص به جای استرینگ  یا اینت در **dto**  ها استفاده کنیم و مزیتاش اینه که اگر از یه مفهوم در چندین dto  استفاده می کنیم و اونا از **entity-domain** استفاده کنیم و بخواهیم اون رو حذف کنیم ، بتونیم تایپ رو حذف کنیم و همه جا که استفاده میشده ، خطا گرفت
+
+توجه شود مشکلاتی مانند بیشتر شدن حجم کد و اینکه شاید چندین تایپ نیاز داشته باشند نام یکسان داشته باشند اما میبایست نام یونیک انتخاب کنیم 
+
+```go
+
+type (
+	BankType string
+	NationalCodeType string
+	SourceAccountType string
+ )
+
+type BaseGetAccountBalanceRequest struct {
+	Bank          BankType         `json:"bank" validate:"required"`
+	NationalCode  NationalCodeType `json:"nationalCode" validate:"required"`
+	SourceAccount SourceAccountType `json:"sourceAccount" validate:"required"`
+}
+```
+ 
 ### golang_memory_leak
 توجه شود مهم ترین کار استفاده از  pprof  است
 
