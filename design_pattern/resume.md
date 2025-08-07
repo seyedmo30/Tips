@@ -16,18 +16,17 @@ Passionate about tackling complex challenges, conducting thorough user testing, 
 - Improved relational database performance by analyzing queries, monitoring metrics, and applying statistical tools to guide optimizations.
 
 
-## Software Developer, Parnian Dadeh Negar Pishrafteh
+## Backend Software Engineer, Parnian Dadeh Negar Pishrafteh
 2021/03 – 2024/02
  | 
 tehran
-### Providing comprehensive cybersecurity solutions
+### Cybersecurity Solutions
 
 
-- Built and maintained backend systems using Go, Python, and PostgreSQL in a microservices environment.
-- Developed custom Change Data Capture (CDC) pipelines from PostgreSQL to Kafka, similar to Debezium.
-- Designed and tuned PostgreSQL schemas and queries using PL/pgSQL for high throughput.
-- Created and managed dynamic web scrapers to extract structured data from external sources.
-- Contributed to both backend and frontend tasks, including Vue.js interfaces and data handling.
+- Built and maintained backend systems in Go, Python, and PostgreSQL within a microservices environment.
+- Developed custom Change Data Capture (CDC) pipelines from PostgreSQL to Kafka (Debezium-style).
+- Authored 3,000+ lines of PL/pgSQL functions and stored procedures to boost database throughput.
+- Created and managed dynamic web scrapers to extract and normalize external data feeds.
 
 
 ## Full-Stack Developer, Tavanmandsazi MS Charity
@@ -36,8 +35,8 @@ tehran
 tehran
 ### MS Charity Website
 
-+ Designed, developed, and maintained a full-featured website using the Django framework.
-+ Built a user-friendly admin panel to manage member information and financial aid operations efficiently.
+- Designed, developed, and maintained a full-featured website using Django and Vue.js frameworks.
+- Built a user-friendly admin panel to manage member information and financial aid operations efficiently.
 
 # Deep Expertise In
 
