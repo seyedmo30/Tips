@@ -5,28 +5,29 @@ Passionate about tackling complex challenges, conducting thorough user testing, 
 
 # Professional Experience
 
+## Microservices Developer — Hasin (Lending Tech)  
+**Feb 2024 – Present** | *Financial Services*
 
-## Microservices Developer, Hasin (Maani Team)
-2024/02 – present
-
-### Industry: Financial Services
-
-+ Developed multiple microservices within a large-scale distributed system.
-
-+ Designed the system architecture for integrating with providers such as Shahin, Sadad (Open Banking), Iransign (Digital Signature), Eniac, SEP (IPG), and Faraboom (Direct Debit).
+- Developed multiple microservices within a large-scale distributed system.
+- Designed system architecture for integrating with providers including Shahin, Sadad (Open Banking), Iransign (Digital Signature), Eniac, SEP (IPG), and Faraboom (Direct Debit).
+- Built a secure wallet withdrawal service via Open Banking (OBH), with safeguards against double spending.
+- Created an internal service template (boilerplate) to accelerate the development of new Golang microservices.
+- Developed a Kafka-based synchronous request package for efficient service-to-service communication.
+- Improved relational database performance by analyzing queries, monitoring metrics, and applying statistical tools to guide optimizations.
 
 
 ## Software Developer, Parnian Dadeh Negar Pishrafteh
 2021/03 – 2024/02
  | 
 tehran
-### Industry: Cybersecurity Solutions
+### Providing comprehensive cybersecurity solutions
 
-+ Handled a wide range of responsibilities, including backend development, frontend implementation, and data storage management.
-+ Developed Change Data Capture (CDC) services similar to Debezium for efficient data synchronization from PostgreSQL to Kafka.
-+ Designed and optimized PostgreSQL databases using PL/pgSQL to enhance performance and maintainability.
-+ Worked within a microservice architecture, building and maintaining several services.
-+ Designed and implemented dynamic web scrapers to extract data from multiple external websites.
+
+- Built and maintained backend systems using Go, Python, and PostgreSQL in a microservices environment.
+- Developed custom Change Data Capture (CDC) pipelines from PostgreSQL to Kafka, similar to Debezium.
+- Designed and tuned PostgreSQL schemas and queries using PL/pgSQL for high throughput.
+- Created and managed dynamic web scrapers to extract structured data from external sources.
+- Contributed to both backend and frontend tasks, including Vue.js interfaces and data handling.
 
 
 ## Full-Stack Developer, Tavanmandsazi MS Charity
@@ -48,9 +49,9 @@ tehran
 
 + Git
 + Django ( python )
-+ Vue ( Java Script )
 + Kafka
-+ Microservices
++ Microservices Architecture
++ System Design
 + Ubuntu
 + Docker
 + ELK
