@@ -27,7 +27,7 @@ tehran
 - Developed custom Change Data Capture (CDC) pipelines from PostgreSQL to Kafka (Debezium-style).
 - Authored 3,000+ lines of PL/pgSQL functions and stored procedures to boost database throughput.
 - Created and managed dynamic web scrapers to extract and normalize external data feeds.
-
+- Implemented ELK Stack with compound queries, ingest pipelines, and index mappings for efficient log processing.
 
 ## Full-Stack Developer, Tavanmandsazi MS Charity
 2020/07 – 2021/03
@@ -52,8 +52,8 @@ tehran
 + Microservices Architecture
 + System Design
 + Ubuntu
-+ Docker
-+ ELK
++ Docker / Kubernetes
++ ELK Stack
 + CI/CD
 + Clean / Hexagonal Architecture
 
