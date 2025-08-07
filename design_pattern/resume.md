@@ -1,6 +1,7 @@
 # profile
 
-Software Developer with over 4 years of experience. Proficient in utilizing modern development tools and technologies to create innovative and scalable solutions. Skilled in developing, deploying, and maintaining software projects with a strong focus on performance optimization and user experience. Committed to staying up-to-date with industry trends and best practices, and consistently improving technical skills through continuous learning and professional development. Eager to deep-dive into complex problems, conduct comprehensive user testing, and design the best solutions. Enjoys collaborating in a team of talented developers, contributing to building top-notch applications, and delivering high-quality software products on time and within budget. Experienced in integrating with various service providers and utilizing their APIs by reading and understanding their documentation, and seamlessly integrating these services into existing projects. Recognized for exceptional problem-solving skills, attention to detail, and the ability to translate business requirements into technical specifications
+Software Developer with over 5 years of experience in designing innovative and scalable solutions using modern development tools and technologies. Skilled in developing, deploying, and maintaining software projects with a strong focus on performance optimization and user experience. Committed to staying current with industry trends and best practices, continuously improving technical expertise through ongoing learning and professional development.
+Passionate about tackling complex challenges, conducting thorough user testing, and crafting effective solutions. Enjoys collaborating within talented teams to build high-quality applications and deliver reliable software products on time and within budget. Experienced in integrating with diverse service providers by reading and understanding API documentation, and seamlessly incorporating these services into existing systems. Recognized for strong problem-solving skills, attention to detail, and the ability to translate business needs into technical solutions.
 
 # Professional Experience
 
@@ -8,24 +9,24 @@ Software Developer with over 4 years of experience. Proficient in utilizing mode
 ## Microservices Developer, Hasin (Maani Team)
 2024/02 – present
 
-### Financial Services Company
+### Industry: Financial Services
 
-+ Developed multiple microservices within the system.
++ Developed multiple microservices within a large-scale distributed system.
 
-+ Designed system architecture for integrating and interacting with various service providers, including Ipaam, Eniac, SEP, and Faraboom, in the financial loan services sector.
++ Designed the system architecture for integrating with providers such as Shahin, Sadad (Open Banking), Iransign (Digital Signature), Eniac, SEP (IPG), and Faraboom (Direct Debit).
 
 
 ## Software Developer, Parnian Dadeh Negar Pishrafteh
 2021/03 – 2024/02
  | 
 tehran
-### Providing comprehensive cybersecurity solutions
+### Industry: Cybersecurity Solutions
 
-+ Demonstrates versatility in handling diverse tasks, including back-end development, front-end implementation, and data storage management.
-+ Developed Change Data Capture (CDC) services similar to Debezium for efficient data transfer from PostgreSQL to Kafka.
-+ Designed and optimized PostgreSQL databases using PL/pgSQL, focusing on enhancing performance and efficiency.
-+ Proficient in microservice architecture and adept at developing services within this ecosystem.
-+ Designed and implemented dynamic web scraper services to efficiently extract data from various websites.
++ Handled a wide range of responsibilities, including backend development, frontend implementation, and data storage management.
++ Developed Change Data Capture (CDC) services similar to Debezium for efficient data synchronization from PostgreSQL to Kafka.
++ Designed and optimized PostgreSQL databases using PL/pgSQL to enhance performance and maintainability.
++ Worked within a microservice architecture, building and maintaining several services.
++ Designed and implemented dynamic web scrapers to extract data from multiple external websites.
 
 
 ## Full-Stack Developer, Tavanmandsazi MS Charity
@@ -34,17 +35,16 @@ tehran
 tehran
 ### MS Charity Website
 
-+ Designed, implemented, and maintained a website using the Django framework.
-+ Developed a user-friendly management panel to facilitate member management and financial aid administration.
++ Designed, developed, and maintained a full-featured website using the Django framework.
++ Built a user-friendly admin panel to manage member information and financial aid operations efficiently.
 
+# Deep Expertise In
 
-# Deep skills
++ Golang
 
-+ golang
++ PostgreSQL
 
-+ Postgres -PL/pgSQL
-
-# Experience working with
+# Proficient With
 
 + Git
 + Django ( python )
