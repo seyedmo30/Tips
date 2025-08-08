@@ -1,27 +1,31 @@
 # profile
 
-Software Developer with over 5 years of experience in designing innovative and scalable solutions using modern development tools and technologies. Skilled in developing, deploying, and maintaining software projects with a strong focus on performance optimization and user experience. Committed to staying current with industry trends and best practices, continuously improving technical expertise through ongoing learning and professional development.
-Passionate about tackling complex challenges, conducting thorough user testing, and crafting effective solutions. Enjoys collaborating within talented teams to build high-quality applications and deliver reliable software products on time and within budget. Experienced in integrating with diverse service providers by reading and understanding API documentation, and seamlessly incorporating these services into existing systems. Recognized for strong problem-solving skills, attention to detail, and the ability to translate business needs into technical solutions.
+Software Developer with 5+ years of experience building scalable, high-performance systems. Expert in Go, PostgreSQL, Kafka and modern backend architectures with a focus on clean code, optimization, and reliability. Skilled in integrating third-party services and translating business requirements into effective technical solutions.
 
 # Professional Experience
 
-## Microservices Developer — Hasin (Lending Tech)  
-**Feb 2024 – Present** | *Financial Services*
+## Software Engineer, Hasin - 1 year 6 months
+**Feb 2024 – Present** | 
 
-- Developed multiple microservices within a large-scale distributed system.
-- Designed system architecture for integrating with providers including Shahin, Sadad (Open Banking), Iransign (Digital Signature), Eniac, SEP (IPG), and Faraboom (Direct Debit).
-- Built a secure wallet withdrawal service via Open Banking (OBH), with safeguards against double spending.
-- Created an internal service template (boilerplate) to accelerate the development of new Golang microservices.
-- Developed a Kafka-based synchronous request package for efficient service-to-service communication.
-- Improved relational database performance by analyzing queries, monitoring metrics, and applying statistical tools to guide optimizations.
+Financial Services - Maani is a financial platform under Hasin Holding that provides credit and installment purchase services to employees of partner organizations.
 
 
-## Backend Software Engineer, Parnian Dadeh Negar Pishrafteh
+- Developed 5 microservices within a large-scale distributed system, including integrations with third-party services such as Open Banking, Digital Signatures, Promissory Notes, UPG, and Direct Debits.
+- Built a secure wallet withdrawal service via Open Banking, with safeguards against double-spending.
+- Standardized a Golang microservice template to improve integration consistency and accelerate service startup by 50%.
+- Implemented a reusable Kafka integration library, simplifying service-to-service messaging and improving development efficiency.
+- Improved Database performance by analyzing queries, monitoring metrics, and applying statistical tools .
+
+
+## Software Engineer, Parnian Dadeh Negar - 2 years  11 months
+
 2021/03 – 2024/02
  | 
 tehran
+
 ### Cybersecurity Solutions
 
+Cybersecurity Solutions - Parnian is a cybersecurity company that provides penetration testing and vulnerability assessment services to government agencies, banks, and enterprises to enhance their security posture.
 
 - Built and maintained backend systems in Go, Python, and PostgreSQL within a microservices environment.
 - Developed custom Change Data Capture (CDC) pipelines from PostgreSQL to Kafka (Debezium-style).
@@ -29,11 +33,15 @@ tehran
 - Created and managed dynamic web scrapers to extract and normalize external data feeds.
 - Implemented ELK Stack with compound queries, ingest pipelines, and index mappings for efficient log processing.
 
+
 ## Full-Stack Developer, Tavanmandsazi MS Charity
 2020/07 – 2021/03
  | 
 tehran
 ### MS Charity Website
+
+
+MS Charity Website - Nonprofit organization supporting MS patients by introducing doctors, consultants, and donors through an informational website.
 
 - Designed, developed, and maintained a full-featured website using Django and Vue.js frameworks.
 - Built a user-friendly admin panel to manage member information and financial aid operations efficiently.
@@ -44,11 +52,12 @@ tehran
 
 + PostgreSQL
 
++ Kafka
+
 # Proficient With
 
 + Git
 + Django ( python )
-+ Kafka
 + Microservices Architecture
 + System Design
 + Ubuntu
@@ -60,3 +69,5 @@ tehran
 # Education
 
 Bachelor / Computer Science, Semnan National University
+
+2015/09 – 2021/02
