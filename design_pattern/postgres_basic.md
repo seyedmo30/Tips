@@ -77,20 +77,18 @@ host    replication     postgres        127.0.0.1/32            scram-sha-256
 host    replication     postgres        ::1/128                 scram-sha-256
 ```
 
-
-configure
+### postgresql.conf
 
 برای پیکر بندی بعد از نصب باید با دستور زیر ون رو استارت کرد
 
-/etc/postgresql/14/main/postgresql.conf
+`/etc/postgresql/14/main/postgresql.conf`
 
-
+```
 listen_addresses = '*'
-
-
 
 listen_addresses = 'localhost,192.168.13.14'
 
+```
 
 یکی از راه های ساختن تیبل در اینیت کردن دیتا بیس اینه که DDL ها رو توی فایل ریخته و با دستور زیر فایل اجرا شود :
 
