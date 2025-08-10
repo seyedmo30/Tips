@@ -27,6 +27,8 @@ sudo -i -u postgres psql -c "CREATE ROLE hp WITH LOGIN PASSWORD 'your_password_h
 
 psql -c "CREATE DATABASE hp OWNER hp;"
 
+ALTER ROLE hp WITH SUPERUSER;
+
 ```
 
 #### سوال چرا از لوکال  و یا ssh  نیازی نیست پسورد بزنیم؟
