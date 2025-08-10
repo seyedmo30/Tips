@@ -119,6 +119,15 @@ VALUES
 
 `SELECT * FROM pg_stat_database;`
 
+اگر نسیت زیر کمتر از 95 درصد بود باید به شیرد بافر اضافه کنیم
+```sql
+SELECT datname,
+       blks_hit::float / (blks_hit + blks_read) AS cache_hit_ratio,
+       blks_hit, blks_read
+FROM pg_stat_database
+WHERE blks_hit + blks_read > 0;
+‍‍‍
+```
 
 
 ### pg_stat_statements
