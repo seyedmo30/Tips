@@ -136,7 +136,13 @@ FROM pg_stat_statements
 ORDER BY total_exec_time DESC
 LIMIT 10;
 ```
+#### ستون های مهم :
 
++ query --- متن کوییری
++ calls --- تعداد بار های فراخوانی
++ total_exec_time --- زمانی که صرف شده
++ rows --- تعداد سطر هایی که میاره ، میشه با calls  مقایسه کرد
++ shared_blks_hit, shared_blks_read, shared_blks_written --- چقد از کش استفاده می کنیم و یا از io
 
 
 
