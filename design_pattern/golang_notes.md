@@ -69,6 +69,14 @@ redis - json ------- اینجوری می تونیم دیکد کنیم :
 	result := new(interface{})
 	json.Unmarshal([]byte(cacheResponse.(string)), result)
  
+
+#### json.Decoder
+
++ یکی از ابزار های خوب برای کار با جیسون آنمارشال است اما گاهی جیسون ما خیلی بزگ است و یا گاهی می خواهیم بخشی از جیسون رو استفاده کنیم در این صورت نیازی نیست تمامی جیسون را در مموری نگه داریم و راه حل  استفاده از json.Decoder
+
+
+
+
 ### golang conventional naming package
 
 متاسفانه مرسومه که نام پکیج ها `lowercase` باشه و از `-` or `_` استفاده نکنیم

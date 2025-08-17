@@ -300,6 +300,11 @@ Gmail, Outlook.com , Slack, Microsoft Teams , Trello, Asana
 
 
 
+### PREAPARED_STATEMENT
+
+این روش برای پرفورمنس و حمله  SQL injection attacks محافظت می کند ، اما خیلی از کتابخانه ها و orm ها پشتیبانی نمی کنند ، مثلن نمی توان dynamic array  استفاده کرد همچنین از فانکشن های خوب sqlx دیگه نمی شه استفاده کرد
+
+
 #### Golang integer type
    می تونیم به چند روش، عدد درون تایپ اینت بریزیم ، توجه شود تمامی مقادیر ۱۵ هستند ، 
 
