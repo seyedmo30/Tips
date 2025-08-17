@@ -415,3 +415,26 @@ func logDecorator(fn Operation) Operation {
 }
 
 ```
+
+
+
+
++ **type inheritance**
+
+وراثت ساپورت نمی کنه ولی بجاش از `composition` همچنین اینترفیس ها می تونیم استفاده کنیم
+
+
++ **operator overloading**
+
+تغییر علامت های محاسبات مانند موارد زیر در گو امکان پذیر نیست
+
+`like +, -, *,`
+
+
++ **pointer arithmetic**
+
+مثلن میشه عملیات روی پوینتر ها زد فرض کنید می گیم خونه ی بعدی یک پوینتر رو بده یا پلاس پلاس کن و در خونه بعدی یه چیز رو ذخیره کن و گولنگ اجازه نمی ده
+
++ **struct type in consts**
+
+نمیشه یه استراکت ثابت ساخت برحلاف تایپ های بیسیک `like integers, floats, strings, and booleans` 
