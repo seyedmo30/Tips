@@ -8,7 +8,6 @@
 
 + توجه شود چون هر کانتکست که کنسل شه ، تنها کانتکست های فرزند کنسل میشن ، پس تایپ ولیو هست و هر بار کپی ارسال میشه
 
-![alt text](https://github.com/seyedmo30/Tips/blob/main/static/iii5.png)
 
 ### Common Usages
 

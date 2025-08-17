@@ -118,7 +118,6 @@ func consumer(inputCh chan int, resultCh chan Result) {
 
 نکته ای که هست ، بهتره گوروتین های آپ استریم در پایان چنل رو کلوز کنن ، و گوروتین های داون استریم یه حلقه با range بخونن و در صورت پایان از حلقه خارج شن
 
-![alt text](https://github.com/seyedmo30/Tips/blob/main/static/iii2.png)
 
 
 ## پترن Worker Pool
