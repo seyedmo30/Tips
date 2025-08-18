@@ -35,50 +35,89 @@
 most-once, at-least-once, or exactly-once
 
 این ها تنظیمات ندارن بلکه با تغییر کامیت یا اکنالج ، به این ها برسیم
-+ At-most-once Semantics
-در این حالت یا پیام به کانسومر یک بار میرسه ، یا نمیرسه ، در این حالت نباید کانسومر بعد از پردازش کامیت کند (یعنی بلافاصله بعد از دریافت auto commit کنه) همچنین تنظیمات پرودیوسر به ترتیب زیر است
-```
-Properties props = new Properties();
-props.put("acks", "0"); // No acknowledgment
-props.put("retries", "0"); // No retries
+
++ At-most-once Semantics - حداکثر یکبار
 
 
+پیام یا می‌رسه یا ممکنه گم بشه، ولی دوباره تحویل داده نمی‌شه.
+
+Producer configs:
+
+acks=0 یا acks=1 (یعنی producer منتظر تأیید کامل از همه replica ها نیست)
+
+retries=0 (بدون retry)
+
+enable.idempotence=false
+
+Consumer configs:
+
+enable.auto.commit=true (consumer اتوماتیک offset رو commit می‌کنه)
+
+commit قبل از پردازش پیام → اگر consumer crash کنه، پیام از دست میره.
+
+
+
 ```
+
 + At-least-once Semantics
 
-در این حالت حداقل یک بار پیام به کانسیومر میرسه ، ولی امکان داره بیش از یک بار هم برسه و 
+پیام از دست نمی‌ره، ولی ممکنه تکراری تحویل بشه.
 
-باید جلوی duplicate رو بگیریم وزمانی اتفاق می افته که برنامه قبل کامیت کردن کرش کنه
+Producer configs:
 
-```
-Properties props = new Properties();
-props.put("acks", "all"); // Wait for acknowledgment from all replicas
-props.put("retries", "3"); // Retry 3 times before failing
+acks=all (باید leader + همه replica ها تأیید بدن)
 
+retries=Integer.MAX_VALUE (retry نامحدود برای جلوگیری از گم‌شدن پیام)
 
-consumer.commitSync(); // Commit the offset after processing the message
+enable.idempotence=false (هنوز idempotence فعال نیست، پس ممکنه پیام تکراری بشه)
 
+Consumer configs:
 
-```
+enable.auto.commit=false (خودمون offset رو commit می‌کنیم)
+
+commit بعد از پردازش پیام → تضمین می‌کنه چیزی گم نشه، ولی ممکنه یک پیام دوبار پردازش بشه.
+
+✅ نتیجه: هیچ پیامی گم نمی‌شه، ولی باید پردازش idempotent باشه (مثلاً آپدیت بانکی یا تراکنش تکراری نشه).
+
 
 + Exactly-once Semantics (EOS)
 
-دقیقن به دست کانسیومر یه دونه میرسه
+پیام نه گم می‌شه، نه تکرار می‌شه.
+
+این از Kafka 0.11+ اضافه شد.
+
+Producer configs:
+
+enable.idempotence=true (تضمین می‌کنه producer پیام تکراری نده حتی با retry)
+
+acks=all (نیازمنده)
+
+retries=Integer.MAX_VALUE (نیازمنده)
+
+max.in.flight.requests.per.connection=1 (در نسخه‌های قدیمی‌تر برای جلوگیری از reorder)
+
+Transactional Producer:
+
+transactional.id=some-unique-id (لازم برای Transactional Producer)
+
+از API های initTransactions(), beginTransaction(), commitTransaction() استفاده بشه.
+
+Consumer configs:
+
+isolation.level=read_committed (فقط پیام‌هایی رو می‌خونه که commit شدن، نه aborted)
+
+commit offset باید داخل همون transaction با write باشه (با Kafka Streams یا transactional producer API).
+
+✅ نتیجه: دقیقا-once delivery end-to-end → نه پیام از دست می‌ره، نه تکراری میاد.
 
 
-```
-Properties props = new Properties();
-props.put("acks", "all"); // Wait for all replicas to confirm
-props.put("enable.idempotence", "true"); // Enable idempotence to avoid duplicates
-props.put("transactional.id", "transactional-producer-id"); // Set a unique transactional ID for the producer
+| Semantics     | Producer Configs                                                       | Consumer Configs                                        | رفتار                             |
+| ------------- | ---------------------------------------------------------------------- | ------------------------------------------------------- | --------------------------------- |
+| At-most-once  | `acks=0/1`, `retries=0`, `enable.idempotence=false`                    | `enable.auto.commit=true` (commit قبل از پردازش)        | ممکنه پیام گم شه، تکراری نداره    |
+| At-least-once | `acks=all`, `retries=∞`, `enable.idempotence=false`                    | `enable.auto.commit=false`, commit بعد از پردازش        | پیام گم نمی‌شه، ممکنه تکراری باشه |
+| Exactly-once  | `acks=all`, `retries=∞`, `enable.idempotence=true`, `transactional.id` | `isolation.level=read_committed`, transactional offsets | نه گم می‌شه، نه تکراری            |
 
 
-
-
-Properties consumerProps = new Properties();
-consumerProps.put("isolation.level", "read_committed"); // Read only committed transactions
-
-```
 # kafka
 
 data pipelines - distributed event store -  Kafka is not a traditional message queue -  Kafka is a distributed messaging system -  RabbitMQ is a message broker, while Kafka is a distributed streaming platform. One of the primary differences between the two is that Kafka is pull-based, while RabbitMQ is push-based -Kafka offers much higher performance than message brokers like RabbitMQ - bus using a pub-sub model of stream-processing
@@ -159,6 +198,14 @@ stream پیام هایی که متعلق به یک دسته خاصی هستند 
 یک گروپ آیدی اگر ۷ روز استفاده نشود حذف میشود پس ترسی از ساخت گروپ آیدی های زیاد و بی استفاده نداشته باشیم
 
 همچنین اگر بخواهیم با شروع کانسوم کردن ‍‍‍‍‍**‍LastOffset** رو ست کنیم ، امکان نداره ، تنا راه اینه که گروپ آیدی جدید بسازیم و **LastOffset** رو بزاریم -۲
+
+
+**سوال** آیا میشه از گروپ آیدی استفاده نکرد؟
+
+جواب : بله هم سرعت بالا تری داره چون نیاز نیست محاسبه کنیم تا کجا خونده اما ۲ بدی داره اول اینکه هر چی توی تاپیک باشه می خونه و دوم اینکه تنها از یه پارتیشن می تونه بخونه ، و کانسومر بدون گروه نمیتونه تمام پارتیشن ها رو بخونه
+
+
+
 
 #### standalon (single ) consumer :
 
