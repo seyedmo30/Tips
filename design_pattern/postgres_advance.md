@@ -10,6 +10,58 @@
 
 یه اصطلاحی هست تحت عنوان  tuning هست که می تونه به سرعت کوییری ها کمک کنه
 
+
+## نوشتن کوییری های پیشرفته
+
+به نظرم به هوش مصنوعی بگیم سوال بپرسه بهتره ولی حتما grouup by ها رو بگیم , join , having 
+
+مثال
+
+```sql
+
+SELECT
+    c.name,
+    SUM(o.total_amount) AS total_spend           // این جا اگریگیت ها مهم هستن
+FROM
+    customers c
+JOIN
+    orders o ON c.customer_id = o.customer_id
+GROUP BY
+    c.customer_id, c.name                        // همیشه جدولی که ایتماش کمه و اونی که کلید خارجی داده  تو گروپ آیدی میاد
+HAVING
+    SUM(o.total_amount) > 500                    // دقیقا مثل where هست برای گروپ
+ORDER BY
+    total_spend DESC;                            // نزولی یعنی بیشترن تعداد یا جدید ترین تاریخ
+
+```
+
+### Customers Table
+| `customer_id` | `name`          | `email`               |
+|--------------|-----------------|-----------------------|
+| 1            | Alice Smith     | alice@example.com     |
+| 2            | Bob Johnson     | bob@example.com       |
+| 3            | Charlie Brown   | charlie@example.com   |
+
+### Orders Table
+| `order_id` | `customer_id` | `order_date` | `total_amount` |
+|------------|---------------|--------------|----------------|
+| 101        | 1             | 2023-10-01   | 200.00         |
+| 102        | 1             | 2023-10-05   | 350.00         |
+| 103        | 2             | 2023-10-10   | 600.00         |
+| 104        | 3             | 2023-10-12   | 100.00         |
+| 105        | 3             | 2023-10-15   | 150.00         |
+| 106        | 3             | 2023-10-20   | 300.00         |
+
+### Query Result
+| `name`          | `total_spend` |
+|-----------------|---------------|
+| Bob Johnson     | 600.00        |
+| Alice Smith     | 550.00        |
+
+
+
+
+
 ### explain analyze
 
 اگر یه کوییری ثابت اذییت کرد و سنگین شد از explain analize  استفاده میکنیم به این صورت که اول کوییری این دستور رو مینویسیم
@@ -407,55 +459,6 @@ Set synchronous_commit = OFF;  -- Not recommended without understanding the impl
 + بررسی ایندکس ها اینکه همه چیز رو الکی ایندکس کردیم همچنین نگاه به کانفیگ shared_buffers, work_mem, maintenance_work_mem
 
 + اگه همه چیز اوکی بود باید با افزایش مموری یا ssd و تکنیک های شاردینگ درستش کنیم
-
-## نوشتن کوییری های پیشرفته
-
-به نظرم به هوش مصنوعی بگیم سوال بپرسه بهتره ولی حتما grouup by ها رو بگیم , join , having 
-
-مثال
-
-```sql
-
-SELECT
-    c.name,
-    SUM(o.total_amount) AS total_spend           // این جا اگریگیت ها مهم هستن
-FROM
-    customers c
-JOIN
-    orders o ON c.customer_id = o.customer_id
-GROUP BY
-    c.customer_id, c.name                        // همیشه جدولی که ایتماش کمه و اونی که کلید خارجی داده  تو گروپ آیدی میاد
-HAVING
-    SUM(o.total_amount) > 500                    // دقیقا مثل where هست برای گروپ
-ORDER BY
-    total_spend DESC;                            // نزولی یعنی بیشترن تعداد یا جدید ترین تاریخ
-
-```
-
-### Customers Table
-| `customer_id` | `name`          | `email`               |
-|--------------|-----------------|-----------------------|
-| 1            | Alice Smith     | alice@example.com     |
-| 2            | Bob Johnson     | bob@example.com       |
-| 3            | Charlie Brown   | charlie@example.com   |
-
-### Orders Table
-| `order_id` | `customer_id` | `order_date` | `total_amount` |
-|------------|---------------|--------------|----------------|
-| 101        | 1             | 2023-10-01   | 200.00         |
-| 102        | 1             | 2023-10-05   | 350.00         |
-| 103        | 2             | 2023-10-10   | 600.00         |
-| 104        | 3             | 2023-10-12   | 100.00         |
-| 105        | 3             | 2023-10-15   | 150.00         |
-| 106        | 3             | 2023-10-20   | 300.00         |
-
-### Query Result
-| `name`          | `total_spend` |
-|-----------------|---------------|
-| Bob Johnson     | 600.00        |
-| Alice Smith     | 550.00        |
-
-
 
 
 ### Optimistic vs	Pessimistic locking
