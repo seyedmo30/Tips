@@ -57,8 +57,6 @@ commit قبل از پردازش پیام → اگر consumer crash کنه، پی
 
 
 
-```
-
 + At-least-once Semantics
 
 پیام از دست نمی‌ره، ولی ممکنه تکراری تحویل بشه.
