@@ -87,6 +87,11 @@ Select * from balance where id =4 for update
         ROLLBACK TO my_savepoint;
 
 ### Concurrency Control _ TRANSACTION ISOLATION LEVEL
+
+
+در PostgreSQL مهمه هست که READ UNCOMMITTED فرقی با READ COMMITTED نداره. یعنی Dirty Read پشتیبانی نمی‌شه.
+
+
 می توان سطح مشاهده داده همزمان چند ترنس اکشن را مدیریت کرد 
 
 +  READ UNCOMMITTED 
@@ -118,20 +123,24 @@ Select * from balance where id =4 for update
 
 #### Locking transaction
 
-این قابلیت جلوگیری میکند از تغییرات همزمان و ترناکشن ها بر روی چند شارد ، انواع مود ها : 
+FOR UPDATE → برای آپدیت قفل می‌ذاره.
 
-FOR UPDATE, FOR NO KEY UPDATE, FOR SHARE,  FOR KEY SHARE
+FOR NO KEY UPDATE → مثل بالا ولی روی primary key قفل نمی‌ذاره.
 
-توی ترنساکشن ها می تونیم در انتهای در خواست یه در اصطلاح برای خود ترنساکشن ها استفاده کنیم
+FOR SHARE → اجازه‌ی خواندن می‌ده ولی مانع آپدیت همزمان می‌شه.
 
-Select * from balance where id =4 for update 
+FOR KEY SHARE → حتی سبک‌تر، فقط جلوی تغییر کلید خارجی رو می‌گیره
 
-این به این معناست کهکه حتی اگر یه ترنساکشن دیگه خواست موجودی بگیره ، واسته تا این ترنساکشن کامیت بشه
+``` sql
+BEGIN;
+SELECT *
+FROM accounts
+WHERE id = 123
+FOR UPDATE;
+UPDATE accounts SET balance = balance - 100 WHERE id = 123;
 
-
-        BEGIN; 
-        SELECT * FROM my_table WHERE id = 1 FOR UPDATE;
-        COMMIT;
+COMMIT;
+```
 
 #### Schema
 برای دسته بندی کردن  و مرتب سازی حجم بالای تیبل ها و فانکشن ها استفاده میشود، همچنین برای سطح دسترسی به یوزر ها می توان از اسکیما استفاده کرد
