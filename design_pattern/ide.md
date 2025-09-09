@@ -893,7 +893,7 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
         "command": "-change-case.changeCase"
     },
     {
-        "key": "alt+1 alt+k",
+        "key": "alt+q",
         "command": "workbench.files.action.collapseExplorerFolders"
     },
     {
@@ -973,7 +973,7 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
         "when": "folderMatchWithResourceFocus && searchViewletVisible"
     },
     {
-        "key": "shift+alt+f",
+        "key": "alt+2",
         "command": "filesExplorer.findInFolder",
         "when": "explorerResourceIsFolder && filesExplorerFocus && foldersViewVisible && !inputFocus"
     },
