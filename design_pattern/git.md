@@ -132,6 +132,41 @@ git reset --hard origin/dev
 #### MERGE VS REBASE
 مرج تاریخچه را نگه می دارد در حالی که ریبیس تاریخچه را می توان تغییر داد  و بازگشت و ریورت در مرج آسان تر است 
 
+اما زمانی که می خواهیم پول بزنیم همون اول می گه ریبیس رو فعال کن
+
+### git ssh
+
+چند تا نکته داره که باید بهشون دقت کرد
++ `~/.ssh/config` 
+
+```
+Host git.srxx.org
+    HostName 157.180.85.51
+    Port 22
+    ProxyCommand /usr/bin/nc -x 127.0.0.1:1080 %h %p
+    IdentityFile ~/.ssh/id_ed25519
+
+```
+
++ `~/.gitconfig`
+
+```
+[user]
+        name = mo30
+        email = mo30.developer@gmail.com
+        signingkey = BF170584807AC0AC
+[commit]
+        gpgsign = true
+[url "ssh://git@git.srxx.org/"]
+        insteadOf = https://git.srxx.org/
+```
+
++ ssh
+
+این رو باید chat gpt  بگه و مرحله به مرحله جلو رفت
+
+
+
 ###  core.fileMode false (chmod - permission)
 
 گاهی فایل ها هیچ تغییری نکردن ولی توی **change** ها میان ، در این صورت یا پرمیشن فایل ها تغییر کرده ، ویا سیستم عامل عوض شده ، در این صورت یا باید تک تک فایل ها رو به حالت قبلی برگردونید یا این کانفیگ رو ست کرد
