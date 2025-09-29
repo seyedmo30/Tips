@@ -17,3 +17,26 @@ protoc \
   src/presentation/grpc/proto/plannig.proto
 ```
 
+or
+
+از روت پروژه
+
+
+```
+.
+├── go.mod
+├── go.sum
+├── main.go
+└── proto
+    └── PublicLimitDepthsV3Api.proto
+
+
+protoc --go_out=. --go_opt=paths=source_relative proto/PublicLimitDepthsV3Api.proto
+
+```
+
+# websocket
+
+### Thread Safety for the Connection
+
+Thread Safety for the Connection: The websocket.Conn from the Gorilla WebSocket library is not fully thread-safe

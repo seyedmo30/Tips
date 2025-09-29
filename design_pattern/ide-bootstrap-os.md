@@ -52,6 +52,14 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
 #### ...... project/.vscode/launch.json 
 
 
+### clipboard  _> copyq
+
+```
+sudo apt-add-repository ppa:arindam/debugpoint
+sudo apt-get update
+sudo apt-get install copyq
+```
+
 برای تغییر pascal case to camel case  باید ابتدا پکیج زیر رو نصب کنید
 
 
@@ -990,3 +998,23 @@ bookmarks - برای علامت زدن روی کدی که مهمه در یه ف�
 
 
 ```
+
+# bootstrap os
+
+ 
+ ### music
++ Audacious
+
+موزیک پلیر خوب
+
+
++ sudo apt install playerctl
+
+میشه با این پکیج کوچیک hot key  اضافه کرد
+
+
+### clipboard
+
++ copyq
+
++ diodon

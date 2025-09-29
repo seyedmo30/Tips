@@ -228,6 +228,73 @@ func main() {
 
 توجه شود هدف این نیست که کار بر به هیچ وجه دسترسی نداشته باشد بلکه هدف این است که کاربر بداند سازمان رهی و ساختار پکیج طوری است که به صورت مستقیم نباید به داده دسترسی داشته باشد
 
+
+## Response Envelope
+
+فرض کنید یه **DTO** داریم و به صورت کلی توی پاسخ مثلا **status** , **code**  داریم و با توجه به هر فانکشن ، جواب خاص خودشو داره ، مطمعنیم که فلان سرویس تمام پاسخ هاش یه استاندارد  داره و تو جزییات ، جواب منحصر به فرد همون api  هست
+###  interface
+اینو پروتوباف خیلی زیبا پیاده کرده ، اون استراکت **wrapper** چندین فیلد ثابت داره که تایپ استرینگ یا اینت هستن اما فیلدی که متغییره ، اینترفیس هست که باید سیگنیچر **body**  داشته باشه و به ازای هر فانکشن باید یه ریسیور داشته باشه که اون رو تایپ اسرشن کنه ،
+
+```go
+
+
+func (x *PushDataV3ApiWrapper) GetPublicLimitDepths() *PublicLimitDepthsV3Api {
+	if x != nil {
+		if x, ok := x.Body.(*PushDataV3ApiWrapper_PublicLimitDepths); ok {
+			return x.PublicLimitDepths
+		}
+	}
+	return nil
+}
+
+func (x *PushDataV3ApiWrapper) GetPrivateOrders() *PrivateOrdersV3Api {
+	if x != nil {
+		if x, ok := x.Body.(*PushDataV3ApiWrapper_PrivateOrders); ok {
+			return x.PrivateOrders
+		}
+	}
+	return nil
+}
+
+```
+
+
+### generics
+
+این روش هم عالیه ، و راحت تر می تونیم unmarshal کنیم
+
+```go
+
+
+func ParseDepositHistory(jsonBytes []byte) (*APIResponse[DepositHistoryData], error) {
+    var resp APIResponse[DepositHistoryData]
+    err := json.Unmarshal(jsonBytes, &resp)
+    if err != nil {
+        return nil, err
+    }
+    return &resp, nil
+}
+type APIResponse[T any] struct {
+    Code string `json:"code"`
+    Data T      `json:"data"`
+}
+// Similarly, for another endpoint:
+type SomeOtherData struct {
+    FieldA string `json:"fieldA"`
+    FieldB int    `json:"fieldB"`
+}
+
+func ParseOther(jsonBytes []byte) (*APIResponse[SomeOtherData], error) {
+    var resp APIResponse[SomeOtherData]
+    err := json.Unmarshal(jsonBytes, &resp)
+    if err != nil {
+        return nil, err
+    }
+    return &resp, nil
+}
+```
+
+
 ## overriding (Shadow Method)
 
 میشه با استفاده از `type embedding` و پیاده سازی متد یک `اینترفیس` این تکنیک را انجام دهید
