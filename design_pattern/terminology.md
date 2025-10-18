@@ -323,3 +323,9 @@ Gmail, Outlook.com , Slack, Microsoft Teams , Trello, Asana
 
   برای استفاده از utf8 هست و تمامی حروف زبان های جهان و کاراکتر ها در این هست
  
+
+ ### get markdown from ai :
+
+گاهی نیاز داریم  تمام جواب رو مارک داون بگیریم تا یه کپی کنیم تو کانفلوینس و یا ... ، میشه بهش بگیم تو این فرمت جواب بده
+
+ ~~~{"variant":"standard","title":"<your title>","id":"xxxxx"} <your markdown content here> ~~~

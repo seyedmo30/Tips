@@ -12,6 +12,11 @@ Prettier - Code formatter --- ext install esbenp.prettier-vscode
 
 bookmarks - برای علامت زدن روی کدی که مهمه در یه فایل بزرگ
 
+
+RobertOstermann.inline-parameters-extended اسم پارام ها هم نشون داده میشه
+
+
+
 ## keymap shortcuts
 
 + go to definition (ctrl + shit + click)
@@ -1018,3 +1023,5 @@ sudo apt-get install copyq
 + copyq
 
 + diodon
+
+
