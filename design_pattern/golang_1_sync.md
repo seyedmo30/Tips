@@ -109,3 +109,67 @@ var wg sync.WaitGroup
 
 موارد استفاده مثل db connections , network connection , io memory
 
+### singleflight
+
+گاهی کلی درخواست تکراری و در زمان خیلی محدود به دیتابیس و یا حتی ردیس و یا تردپارتی میره که داده ی تکراری رو فچ کنه و مطمعنیم تو اون بازه پاسخ ها تکراری هستند ، در این صورت می تونیم به جای استفاده از کش و مدیریت کردن آن از پکیج زیر استفاده کنیم :
+
+`golang.org/x/sync/singleflight`
+
+همچنین ۲ تا متد داره :
+
++ Do
+
+برای انجام و دریافت نتیجه
+
++ DoChan
+
+دریافت در چنل
+
++ Forget
+
+نمی تونیم **ttl** یا پالیسی برای عمر موقت جواب بدیم و باید دستی خودمون بعد از مدت مورد نظر اون رو حذف کنیم تا  پاسخ ها بروز باشن
+
+
+‍
+```go
+
+import     "golang.org/x/sync/singleflight"
+
+var group singleflight.Group
+
+func getFromDatabase(userID int) (string, error) {
+    // Simulate a slow database call
+    log.Printf("DEBUG: Querying database for user %d... This only happens once!", userID)
+    time.Sleep(1 * time.Second)
+    return fmt.Sprintf("Data for user %d", userID), nil
+}
+
+func getUserData(userID int) (string, error) {
+    key := fmt.Sprintf("user_%d", userID)
+
+    value, err, _ := group.Do(key, func() (interface{}, error) {
+        return getFromDatabase(userID)
+    })
+
+    return value.(string), err
+}
+
+func main() {
+    var wg sync.WaitGroup
+    userID := 123
+
+    for i := 0; i < 10; i++ {
+        wg.Add(1)
+        go func(requestID int) {
+            defer wg.Done()
+            start := time.Now()
+            data, err := getUserData(userID)
+            elapsed := time.Since(start)
+
+            log.Printf("Request %d: Got '%s' (took %v)", requestID, data, elapsed)
+        }(i)
+    }
+
+    wg.Wait()
+}
+```
